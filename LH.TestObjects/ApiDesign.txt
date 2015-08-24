@@ -1,0 +1,19 @@
+﻿Comparator
+================================================
+var comparator = new ObjectComparator<Type>();
+comparator.LogIntoConsole();
+comparator.ErrorCallback(ComparisonContext); (Both prop infos, both values and a string message);
+comparator.Property(x => PropA.PropB.PropC).Ignore();
+comparator.Property(x => PropA.PropB.PropC).CustomCompare((exp, act) => exp.GetHashCode() == exp.GetHashCode());
+comparator.PropertiesOfType(predicate).Ignore();
+comparator.PropertiesMatching(x => predicate).???;
+
+comparator.Compare(expected, actual);
+
+
+
+
+Generator
+================================================
+- Same API as the comparator, just actions would be different?
+- The selection could be abstracted into a PropertySelector fluent interface
