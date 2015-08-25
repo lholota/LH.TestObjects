@@ -1,12 +1,12 @@
 ﻿Comparator
 ================================================
 var comparator = new ObjectComparator<Type>();
-comparator.LogIntoConsole();
-comparator.ErrorCallback(ComparisonContext); (Both prop infos, both values and a string message);
+comparator.Log.IntoConsole();
+comparator.Log.Callback(Context with a message);	// Both prop infos, both values and a string message
 comparator.Property(x => PropA.PropB.PropC).Ignore();
 comparator.Property(x => PropA.PropB.PropC).CustomCompare((exp, act) => exp.GetHashCode() == exp.GetHashCode());
-comparator.PropertiesOfType(predicate).Ignore();
-comparator.PropertiesMatching(x => predicate).???;
+comparator.PropertiesOfType(Predicate).Ignore();
+comparator.PropertiesMatching(Predicate).???;
 
 comparator.Compare(expected, actual);
 
