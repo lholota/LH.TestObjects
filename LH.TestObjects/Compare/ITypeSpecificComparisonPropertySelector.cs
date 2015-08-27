@@ -4,19 +4,26 @@ namespace LH.TestObjects.Compare
     using System.Linq.Expressions;
     using System.Reflection;
 
+    /// <summary>
+    /// Object allowing strongly typed property selection.
+    /// </summary>
+    /// <typeparam name="TUserType">The compared/generated type</typeparam>
     public interface ITypeSpecificComparisonPropertySelector<TUserType> : IGenericPropertySelector<TUserType>
     {
         /// <summary>
-        /// Hello, world.
+        /// Selects a property by an expression (for example x => x.MyProperty)
         /// </summary>
+        /// <typeparam name="TProp">Property type</typeparam>
+        /// <param name="propertyExpression">Expression defining the property (for example x => x.MyProperty or x => x.MyProperty.AnotherProperty)</param>
+        /// <returns>The <see cref="ITypeSpecificComparisonActions{TProp}"/> which allows you to apply property configuration.</returns>
         ITypeSpecificComparisonActions<TProp> Property<TProp>(Expression<Func<TUserType, TProp>> propertyExpression);
 
         /// <summary>
-        /// Hello, world.
+        /// Selects all properties of a given type and optionally matching a predicate expression.
         /// </summary>
-        /// <typeparam name="TProp"></typeparam>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
+        /// <typeparam name="TProp">Property type</typeparam>
+        /// <param name="predicate">Predicate used to filter the properties. The parameter is optional.</param>
+        /// <returns>The <see cref="ITypeSpecificComparisonActions{TProp}"/> which allows you to apply property configuration.</returns>
         ITypeSpecificComparisonActions<TProp> PropertiesOfType<TProp>(Func<PropertyInfo, bool> predicate = null);
     }
 }

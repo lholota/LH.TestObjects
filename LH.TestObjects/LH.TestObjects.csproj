@@ -45,6 +45,10 @@
     <Folder Include="Generate\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compare\ComparisonContext.cs" />
+    <Compile Include="Compare\ComparisonResult.cs" />
+    <Compile Include="Compare\IComparisonContext.cs" />
+    <Compile Include="Compare\IDifference.cs" />
     <Compile Include="Compare\ILoggingConfiguration.cs" />
     <Compile Include="Compare\ITypeSpecificComparisonActions.cs" />
     <Compile Include="Compare\ITypeSpecificComparisonPropertySelector.cs" />

@@ -3,23 +3,16 @@
     using System;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestDomain;
     using TestObjects.Compare;
 
     [TestFixture]
-    public class WhenLogging
+    public class WhenLogging : ComparatorTestsBase
     {
-        private ObjectComparator<SimpleDomain> comparator;
-        
-        [SetUp]
-        public void Init()
-        {
-            this.comparator = new ObjectComparator<SimpleDomain>();
-        }
-
         [Test]
         public void ThenShouldLogIntoConsoleWhenConfigured()
         {
+            // TODO: Create an internal Console mock call?
+            // Use moles?
             throw new NotImplementedException();
         }
 
@@ -27,9 +20,10 @@
         public void ThenShouldCallCallbackWhenConfigured()
         {
             var hasBeenCalled = false;
-            Action<object> callback = x => hasBeenCalled = true;
+            Action<IComparisonContext> callback = x => hasBeenCalled = true;
 
-            this.comparator.Log.Callback(callback);
+            this.Comparator.Log.Callback(callback);
+            this.Comparator.Compare(this.ObjA, this.ObjB);
 
             hasBeenCalled.Should().BeTrue();
         }
@@ -37,6 +31,37 @@
         [Test]
         public void ThenContextShouldHaveValuesWhenLoggingToCallback()
         {
+            var hasBeenCalled = false;
+            var stringPropChecked = false;
+
+            Action<IComparisonContext> callback = ctx =>
+            {
+                hasBeenCalled = true;
+
+                ctx.PropertyInfo.Should().NotBeNull();
+                ctx.ExpectedValue.Should().NotBeNull();
+                ctx.ActualValue.Should().NotBeNull();
+                ctx.LogMessage.Should().NotBeNull();
+
+                if (ctx.PropertyInfo.Name == "StringProperty")
+                {
+                    stringPropChecked = true;
+
+                    ctx.ExpectedValue.Should().Be(this.ObjA.StringProp);
+                    ctx.ActualValue.Should().Be(this.ObjB.StringProp);
+                    ctx.LogMessage.Should().NotBeNullOrEmpty();
+                }
+            };
+
+            this.Comparator.Log.Callback(callback);
+            this.Comparator.Compare(this.ObjA, this.ObjB);
+
+            hasBeenCalled.Should().BeTrue();
+            stringPropChecked.Should().BeTrue();
+
+            //x.Should().NotBeNull();
+            //x.PropertyInfo.Should().NotBeNull();
+
             throw new NotImplementedException();
         }
     }

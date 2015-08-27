@@ -58,8 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compare\ComparatorTestsBase.cs" />
+    <Compile Include="Compare\WhenComparingObjects.cs" />
+    <Compile Include="Compare\WhenIgnoringProperties.cs" />
     <Compile Include="Compare\WhenLogging.cs" />
+    <Compile Include="Compare\WhenSelectingProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertySelectorTestBase.cs" />
     <Compile Include="TestDomain\SimpleDomain.cs" />
   </ItemGroup>
   <ItemGroup>
