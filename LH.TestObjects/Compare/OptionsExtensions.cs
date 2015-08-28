@@ -13,7 +13,7 @@
         /// <param name="stringPropertySelection">The property selection the configuration will be applied on</param>
         /// <param name="comparisonType">The comparison type of <see cref="StringComparison"/></param>
         /// <returns>The property selection</returns>
-        public static ITypeSpecificComparisonActions<string> WithComparisonType(this ITypeSpecificComparisonActions<string> stringPropertySelection, StringComparison comparisonType)
+        public static IComparatorTypeSpecificSelectionActions<string> WithComparisonType(this IComparatorTypeSpecificSelectionActions<string> stringPropertySelection, StringComparison comparisonType)
         {
             throw new NotImplementedException();
         }

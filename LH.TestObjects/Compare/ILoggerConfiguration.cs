@@ -5,7 +5,7 @@
     /// <summary>
     /// Allows the fluent configuration of logging.
     /// </summary>
-    public interface ILoggingConfiguration
+    public interface ILoggerConfiguration
     {
         /// <summary>
         /// The comparator will log the messages into the standard console output.
