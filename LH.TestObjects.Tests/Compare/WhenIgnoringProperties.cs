@@ -10,10 +10,10 @@
         [Test]
         public void ThenShouldPassIfIgnoredPropertyValuesDiffer()
         {
-            var objA = new SimpleDomain();
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
+
             objA.StringProp = "AAA";
-            
-            var objB = new SimpleDomain();
             objB.StringProp = "BBB";
 
             this.Comparator.Property(x => x.StringProp).Ignore();

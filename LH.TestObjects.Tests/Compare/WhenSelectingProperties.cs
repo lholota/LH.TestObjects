@@ -1,7 +1,9 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
+    using System.Linq;
     using FluentAssertions;
     using NUnit.Framework;
+    using TestDomain;
 
     [TestFixture]
     public class WhenSelectingProperties : ComparatorTestsBase, IPropertySelectorTests
@@ -9,14 +11,17 @@
         [Test]
         public void ThenShouldPassWhenIgnoringPropertiesByPredicate()
         {
-            this.ObjA.StringProp2 = this.ObjB.StringProp2;
-            this.ObjA.IntProp = this.ObjB.IntProp;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
+
+            objA.StringProp = "AAA";
+            objB.StringProp = "BBB";
 
             this.Comparator
                 .PropertiesMatching(x => x.Name == "StringProp")
                 .Ignore();
 
-            var result = this.Comparator.Compare(this.ObjA, this.ObjB);
+            var result = this.Comparator.Compare(objA, objB);
 
             result.AreSame.Should().BeTrue();
         }
@@ -24,13 +29,16 @@
         [Test]
         public void ThenShouldPassWhenIgnoringPropertiesByType()
         {
-            this.ObjA.IntProp = this.ObjB.IntProp;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet2();
+
+            objA.IntProp = objB.IntProp;
 
             this.Comparator
                 .PropertiesOfType<string>()
                 .Ignore();
 
-            var result = this.Comparator.Compare(this.ObjA, this.ObjB);
+            var result = this.Comparator.Compare(objA, objB);
 
             result.AreSame.Should().BeTrue();
         }
@@ -38,14 +46,17 @@
         [Test]
         public void ThenShouldPassWhenIgnoringPropertiesByTypeAndPredicate()
         {
-            this.ObjA.StringProp2 = this.ObjB.StringProp2;
-            this.ObjA.IntProp = this.ObjB.IntProp;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
+
+            objA.StringProp = "AAA";
+            objB.StringProp = "BBB";
 
             this.Comparator
                 .PropertiesOfType<string>(x => x.Name == "StringProp")
                 .Ignore();
 
-            var result = this.Comparator.Compare(this.ObjA, this.ObjB);
+            var result = this.Comparator.Compare(objA, objB);
 
             result.AreSame.Should().BeTrue();
         }
@@ -53,22 +64,47 @@
         [Test]
         public void ThenShouldPassWhenIgnoringPropertiesByExpression()
         {
-            this.ObjA.StringProp2 = this.ObjB.StringProp2;
-            this.ObjA.IntProp = this.ObjB.IntProp;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
+
+            objA.StringProp = "AAA";
+            objB.StringProp = "BBB";
 
             this.Comparator
                 .Property(x => x.StringProp)
                 .Ignore();
 
-            var result = this.Comparator.Compare(this.ObjA, this.ObjB);
+            var result = this.Comparator.Compare(objA, objB);
             
             result.AreSame.Should().BeTrue();
         }
 
         [Test]
+        public void ThenShouldFailWhenIgnoringByExpressionAndBothStringPropsDiffer()
+        {
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet2();
+
+            objA.IntProp = objB.IntProp;
+
+            this.Comparator
+                .Property(x => x.StringProp)
+                .Ignore();
+
+            var result = this.Comparator.Compare(objA, objB);
+
+            result.AreSame.Should().BeFalse();
+            result.Differences.Should().NotBeNull();
+            result.Differences.Count().Should().Be(1);
+        }
+
+        [Test]
         public void ThenShouldPassWhenIgnoringMultiplePropertiesByExpression()
         {
-            this.ObjA.StringProp2 = this.ObjB.StringProp2;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet2();
+
+            objA.StringProp2 = objB.StringProp2;
 
             this.Comparator
                 .Property(x => x.StringProp)
@@ -78,7 +114,7 @@
                 .Property(x => x.IntProp)
                 .Ignore();
 
-            var result = this.Comparator.Compare(this.ObjA, this.ObjB);
+            var result = this.Comparator.Compare(objA, objB);
 
             result.AreSame.Should().BeTrue();
         }

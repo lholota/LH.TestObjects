@@ -28,7 +28,7 @@
         /// <param name="expected">The object containing the expected values.</param>
         /// <param name="actual">The actual object.</param>
         /// <returns><see cref="ComparisonResult"/> summarizing the differences between the provided objects.</returns>
-        public ComparisonResult Compare(TUserType expected, TUserType actual)
+        public IComparisonResult Compare(TUserType expected, TUserType actual)
         {
             throw new NotImplementedException();
         }

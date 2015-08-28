@@ -3,6 +3,7 @@
     using System;
     using FluentAssertions;
     using NUnit.Framework;
+    using TestDomain;
     using TestObjects.Compare;
 
     [TestFixture]
@@ -19,11 +20,14 @@
         [Test]
         public void ThenShouldCallCallbackWhenConfigured()
         {
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet2();
+
             var hasBeenCalled = false;
             Action<IComparisonContext> callback = x => hasBeenCalled = true;
 
             this.Comparator.Log.Callback(callback);
-            this.Comparator.Compare(this.ObjA, this.ObjB);
+            this.Comparator.Compare(objA, objB);
 
             hasBeenCalled.Should().BeTrue();
         }
@@ -33,6 +37,8 @@
         {
             var hasBeenCalled = false;
             var stringPropChecked = false;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet2();
 
             Action<IComparisonContext> callback = ctx =>
             {
@@ -47,14 +53,14 @@
                 {
                     stringPropChecked = true;
 
-                    ctx.ExpectedValue.Should().Be(this.ObjA.StringProp);
-                    ctx.ActualValue.Should().Be(this.ObjB.StringProp);
+                    ctx.ExpectedValue.Should().Be(objA.StringProp);
+                    ctx.ActualValue.Should().Be(objB.StringProp);
                     ctx.LogMessage.Should().NotBeNullOrEmpty();
                 }
             };
 
             this.Comparator.Log.Callback(callback);
-            this.Comparator.Compare(this.ObjA, this.ObjB);
+            this.Comparator.Compare(objA, objB);
 
             hasBeenCalled.Should().BeTrue();
             stringPropChecked.Should().BeTrue();

@@ -3,6 +3,7 @@
     using System.Linq;
     using FluentAssertions;
     using NUnit.Framework;
+    using TestDomain;
 
     [TestFixture]
     public class WhenComparingObjects : ComparatorTestsBase
@@ -10,11 +11,10 @@
         [Test]
         public void ThenShouldReturnSameIfPropertyValuesMatch()
         {
-            this.ObjA.IntProp = this.ObjB.IntProp;
-            this.ObjA.StringProp = this.ObjB.StringProp;
-            this.ObjA.StringProp2 = this.ObjB.StringProp2;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
 
-            var result = this.Comparator.Compare(this.ObjA, this.ObjB);
+            var result = this.Comparator.Compare(objA, objB);
 
             result.AreSame.Should().BeTrue();
         }
@@ -22,10 +22,13 @@
         [Test]
         public void ThenShouldReturnDifferentIfStringPropDiffers()
         {
-            this.ObjA.IntProp = this.ObjB.IntProp;
-            this.ObjA.StringProp2 = this.ObjB.StringProp2;
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet2();
 
-            var result = this.Comparator.Compare(this.ObjA, this.ObjB);
+            objA.IntProp = objB.IntProp;
+            objA.StringProp2 = objB.StringProp2;
+
+            var result = this.Comparator.Compare(objA, objB);
 
             result.AreSame.Should().BeFalse();
 
@@ -34,8 +37,8 @@
 
             var difference = result.Differences.Single();
             difference.LogMessage.Should().NotBeNullOrEmpty();
-            difference.ExpectedValue.Should().Be(this.ObjA.StringProp);
-            difference.ActualValue.Should().Be(this.ObjB.StringProp);
+            difference.ExpectedValue.Should().Be(objA.StringProp);
+            difference.ActualValue.Should().Be(objB.StringProp);
 
             difference.PropertyInfo.Should().NotBeNull();
             difference.PropertyInfo.Name.Should().Be("StringProp");
