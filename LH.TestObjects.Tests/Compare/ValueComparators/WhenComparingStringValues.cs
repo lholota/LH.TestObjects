@@ -3,11 +3,14 @@
     using System;
     using System.Linq;
     using FluentAssertions;
+    using NUnit.Framework;
     using TestDomain;
     using TestObjects.Compare;
 
+    [TestFixture]
     public class WhenComparingStringValues : ComparatorTestsBase
     {
+        [Test]
         public void ThenShouldFailIfValuesDifferByCase()
         {
             var objA = SimpleDomain.CreateObjectWithValueSet1();
@@ -21,6 +24,7 @@
             result.Differences.Single().PropertyInfo.Name.Should().Be("StringProp");
         }
 
+        [Test]
         public void ThenShouldPassIfValuesDifferByCaseAndOptionsSetToInsensitive()
         {
             var objA = SimpleDomain.CreateObjectWithValueSet1();
