@@ -42,7 +42,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Compare\Rules\" />
     <Folder Include="Generate\" />
   </ItemGroup>
   <ItemGroup>
