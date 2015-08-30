@@ -12,21 +12,21 @@
     /// <typeparam name="TUserType">Compared type</typeparam>
     public class ObjectComparator<TUserType> : IComparatorTypeSpecificPropertySelector<TUserType>
     {
-        private readonly IList<ComparatorPropertySelection> propertySelections; 
+        private readonly IList<ComparatorPropertyRule> propertyRules; 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectComparator{TUserType}" /> class.
         /// </summary>
         public ObjectComparator()
         {
-            this.propertySelections = new List<ComparatorPropertySelection>();
+            this.propertyRules = new List<ComparatorPropertyRule>();
             this.Log = new Logger();
         }
         
         /// <summary>
         /// Gets the logging configuration.
         /// </summary>
-        public ILoggerConfiguration Log { get; private set; }
+        public ILoggerConfiguration Log { get; }
 
         /// <summary>
         /// Compares two objects and returns a summary of the differences.
@@ -36,7 +36,7 @@
         /// <returns><see cref="ComparisonResult"/> summarizing the differences between the provided objects.</returns>
         public IComparisonResult Compare(TUserType expected, TUserType actual)
         {
-            var prioritizedSelections = this.propertySelections.Reverse().ToArray();
+            var prioritizedSelections = this.propertyRules.Reverse().ToArray();
             
             var recursivePropertyComparator = new RecursivePropertyComparator(this.Log, prioritizedSelections);
             recursivePropertyComparator.CompareRecursively(expected, actual);
@@ -47,41 +47,35 @@
         /// <inheritdoc/>
         public IGenericSelectionActions PropertiesMatching(Func<PropertyInfo, bool> predicate = null)
         {
-            var comparatorPropertySelection = new ComparatorPropertySelection
-            {
-                Predicate = predicate
-            };
+            var rule = new ComparatorPropertyRule();
+            rule.Selection.Predicate = predicate;
+            
+            this.propertyRules.Add(rule);
 
-            this.propertySelections.Add(comparatorPropertySelection);
-
-            return new ComparatorGenericSelectionActions(comparatorPropertySelection.Options);
+            return new ComparatorGenericSelectionActions(rule.Options);
         }
 
         /// <inheritdoc/>
         public IComparatorTypeSpecificSelectionActions<TProp> Property<TProp>(Expression<Func<TUserType, TProp>> propertyExpression)
         {
-            var comparatorPropertySelection = new ComparatorPropertySelection
-            {
-                PropertyExpression = propertyExpression,
-                PropertyType = typeof(TProp)
-            };
+            var rule = new ComparatorPropertyRule();
+            rule.Selection.PropertyExpression = propertyExpression;
+            rule.Selection.PropertyType = typeof(TProp);            
 
-            this.propertySelections.Add(comparatorPropertySelection);
+            this.propertyRules.Add(rule);
 
-            return new ComparatorTypeSpecificSelectionActions<TProp>(comparatorPropertySelection.Options);
+            return new ComparatorTypeSpecificSelectionActions<TProp>(rule.Options);
         }
 
         /// <inheritdoc/>
         public IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(Func<PropertyInfo, bool> predicate = null)
         {
-            var comparatorPropertySelection = new ComparatorPropertySelection
-            {
-                PropertyType = typeof(TProp)
-            };
+            var rule = new ComparatorPropertyRule();
+            rule.Selection.PropertyType = typeof(TProp);
+            
+            this.propertyRules.Add(rule);
 
-            this.propertySelections.Add(comparatorPropertySelection);
-
-            return new ComparatorTypeSpecificSelectionActions<TProp>(comparatorPropertySelection.Options);
+            return new ComparatorTypeSpecificSelectionActions<TProp>(rule.Options);
         }
     }
 }

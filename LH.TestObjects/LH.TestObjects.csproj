@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compare\ComparatorGenericSelectionActions.cs" />
-    <Compile Include="Compare\ComparatorPropertySelection.cs" />
+    <Compile Include="Compare\ComparatorPropertyRule.cs" />
     <Compile Include="Compare\ComparatorTypeSpecificSelectionActions.cs" />
     <Compile Include="Compare\ComparisonContext.cs" />
     <Compile Include="Compare\ComparisonResult.cs" />

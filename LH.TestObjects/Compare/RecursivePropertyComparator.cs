@@ -10,9 +10,9 @@
         private readonly static IEnumerable<IValueComparator> knownTypeComparators = GetKnownTypeComparators();
 
         private readonly ILoggerConfiguration log;
-        private readonly IEnumerable<ComparatorPropertySelection> propertySelections;
+        private readonly IEnumerable<ComparatorPropertyRule> propertySelections;
 
-        public RecursivePropertyComparator(ILoggerConfiguration log, IEnumerable<ComparatorPropertySelection> propertySelections)
+        public RecursivePropertyComparator(ILoggerConfiguration log, IEnumerable<ComparatorPropertyRule> propertySelections)
         {
             this.propertySelections = propertySelections;
             this.log = log;
@@ -72,7 +72,7 @@
         private bool IsPropertyIgnored(PropertyPathItem propertyPath)
         {
             var selection = this.propertySelections
-                .FirstOrDefault(x => x.IsMatch(propertyPath));
+                .FirstOrDefault(x => x.Selection.IsMatch(propertyPath));
 
             return selection != null && selection.Options.IsIgnored;
         }
