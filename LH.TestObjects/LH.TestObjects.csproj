@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Compare\Rules\" />
     <Folder Include="Generate\" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +61,7 @@
     <Compile Include="Compare\ObjectComparator.cs" />
     <Compile Include="Compare\OptionsExtensions.cs" />
     <Compile Include="Compare\PropertyOptions.cs" />
+    <Compile Include="Compare\PropertyPathItem.cs" />
     <Compile Include="Compare\RecursivePropertyComparator.cs" />
     <Compile Include="PropertySelection.cs" />
     <Compile Include="Compare\ValueComparators\IntegerComparator.cs" />

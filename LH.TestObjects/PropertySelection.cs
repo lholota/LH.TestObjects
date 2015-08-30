@@ -3,6 +3,7 @@
     using System;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Compare;
 
     internal class PropertySelection
     {
@@ -12,7 +13,7 @@
 
         public Type PropertyType { get; set; }
 
-        public bool IsMatch(PropertyInfo propertyInfo)
+        public bool IsMatch(PropertyPathItem propertyInfo)
         {
             throw new NotImplementedException();
         }

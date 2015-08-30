@@ -9,6 +9,20 @@
     public class WhenComparingObjects : ComparatorTestsBase
     {
         [Test]
+        public void ThenShouldReturnDifferentIfOneIsNull()
+        {
+            var obj = SimpleDomain.CreateObjectWithValueSet1();
+            var result = this.Comparator.Compare(obj, null);
+
+            result.AreSame.Should().BeFalse();
+            result.Differences.Should().NotBeNull();
+            result.Differences.Count().Should().Be(1);
+            result.Differences.Single().PropertyInfo.Should().BeNull();
+            result.Differences.Single().ActualValue.Should().BeNull();
+            result.Differences.Single().ExpectedValue.Should().NotBeNull();
+        }
+
+        [Test]
         public void ThenShouldReturnSameIfPropertyValuesMatch()
         {
             var objA = SimpleDomain.CreateObjectWithValueSet1();

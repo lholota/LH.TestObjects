@@ -3,15 +3,32 @@
     using System;
     using System.Reflection;
     
-    internal class ComparisonContext<TProp> : IComparisonContext
+    internal class ComparisonContext : IComparisonContext
     {
+        public ComparisonContext(PropertyPathItem propertyPath, object expected, object actual)
+        {
+            this.PropertyPathItem = propertyPath;
+            this.ExpectedValue = expected;
+            this.ActualValue = actual;
+        }
+
+        internal PropertyPathItem PropertyPathItem { get; private set; }
+
         public bool AreSame { get; internal set; }
-        
-        public TProp ExpectedValue { get; internal set; }
-        
-        public TProp ActualValue { get; internal set; }
-        
-        public PropertyInfo PropertyInfo { get; internal set; }
+
+        public object ExpectedValue { get; }
+
+        public object ActualValue { get; }
+
+        public PropertyInfo PropertyInfo
+        {
+            get { return this.PropertyPathItem.PropertyInfo; }
+        }
+
+        public string PropertyPath
+        {
+            get { return this.PropertyPathItem.GetPathString(); }
+        }
 
         public string LogMessage
         {
@@ -24,16 +41,6 @@
 
                 throw new NotImplementedException();
             }
-        }
-
-        object IDifference.ExpectedValue
-        {
-            get { return this.ExpectedValue; }
-        }
-
-        object IDifference.ActualValue
-        {
-            get { return this.ActualValue; }
         }
     }
 }

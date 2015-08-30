@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -35,8 +36,12 @@
         /// <returns><see cref="ComparisonResult"/> summarizing the differences between the provided objects.</returns>
         public IComparisonResult Compare(TUserType expected, TUserType actual)
         {
-            var recursivePropertyComparator = new RecursivePropertyComparator(this.Log, this.propertySelections);
-            return recursivePropertyComparator.CompareRecursively(expected, actual);
+            var prioritizedSelections = this.propertySelections.Reverse().ToArray();
+            
+            var recursivePropertyComparator = new RecursivePropertyComparator(this.Log, prioritizedSelections);
+            recursivePropertyComparator.CompareRecursively(expected, actual);
+
+            return recursivePropertyComparator.Result;
         }
 
         /// <inheritdoc/>
@@ -57,7 +62,8 @@
         {
             var comparatorPropertySelection = new ComparatorPropertySelection
             {
-                PropertyExpression = propertyExpression
+                PropertyExpression = propertyExpression,
+                PropertyType = typeof(TProp)
             };
 
             this.propertySelections.Add(comparatorPropertySelection);
