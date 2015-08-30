@@ -11,5 +11,7 @@
         public PropertySelection Selection { get; private set; }
 
         public PropertyOptions Options { get; private set; }
+
+        public int OrderIndex { get; set; }
     }
 }

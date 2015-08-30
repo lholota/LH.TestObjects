@@ -49,8 +49,8 @@
         {
             var rule = new ComparatorPropertyRule();
             rule.Selection.Predicate = predicate;
-            
-            this.propertyRules.Add(rule);
+
+            this.AddPropertyRule(rule);
 
             return new ComparatorGenericSelectionActions(rule.Options);
         }
@@ -60,9 +60,9 @@
         {
             var rule = new ComparatorPropertyRule();
             rule.Selection.PropertyExpression = propertyExpression;
-            rule.Selection.PropertyType = typeof(TProp);            
+            rule.Selection.PropertyType = typeof(TProp);
 
-            this.propertyRules.Add(rule);
+            this.AddPropertyRule(rule);
 
             return new ComparatorTypeSpecificSelectionActions<TProp>(rule.Options);
         }
@@ -73,9 +73,15 @@
             var rule = new ComparatorPropertyRule();
             rule.Selection.PropertyType = typeof(TProp);
             
-            this.propertyRules.Add(rule);
+            this.AddPropertyRule(rule);
 
             return new ComparatorTypeSpecificSelectionActions<TProp>(rule.Options);
+        }
+
+        private void AddPropertyRule(ComparatorPropertyRule rule)
+        {
+            rule.OrderIndex = this.propertyRules.Count;
+            this.propertyRules.Add(rule);
         }
     }
 }

@@ -44,7 +44,7 @@
             //    return;
             //}
 
-            if (!this.NullComparisonIsMatch(expected, actual))
+            if (!this.IsNullComparisonMatch(expected, actual))
             {
                 this.Result.DifferencesList.Add(context);
             }
@@ -71,13 +71,11 @@
 
         private bool IsPropertyIgnored(PropertyPathItem propertyPath)
         {
-            var selection = this.propertySelections
-                .FirstOrDefault(x => x.Selection.IsMatch(propertyPath));
-
-            return selection != null && selection.Options.IsIgnored;
+            return this.propertySelections
+                .Any(x => x.Selection.IsMatch(propertyPath) && x.Options.IsIgnored);
         }
 
-        private bool NullComparisonIsMatch(object expected, object actual)
+        private bool IsNullComparisonMatch(object expected, object actual)
         {
             return ReferenceEquals(expected, null) ^ ReferenceEquals(actual, null);
         }
