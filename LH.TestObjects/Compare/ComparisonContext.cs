@@ -1,6 +1,7 @@
 ﻿namespace LH.TestObjects.Compare
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     
     internal class ComparisonContext : IComparisonContext
@@ -11,8 +12,6 @@
             this.ExpectedValue = expected;
             this.ActualValue = actual;
         }
-
-        internal PropertyPathItem PropertyPathItem { get; }
 
         public bool AreSame { get; set; }
 
@@ -42,8 +41,11 @@
                 throw new NotImplementedException();
             }
         }
+
+        internal PropertyPathItem PropertyPathItem { get; }
     }
 
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Related types.")]
     internal class ComparisonContext<TProp> : ComparisonContext, IComparisonContext<TProp>
     {
         public ComparisonContext(ComparisonContext genericContext)

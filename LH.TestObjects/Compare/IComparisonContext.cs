@@ -8,7 +8,7 @@
     public interface IComparisonContext
     {
         /// <summary>
-        /// Gets a value indicating whether the value on the expected and the actual objects are equal.
+        /// Gets or sets a value indicating whether the value on the expected and the actual objects are equal.
         /// </summary>
         bool AreSame { get; set; }
 
@@ -33,10 +33,13 @@
         string LogMessage { get; }
     }
 
+    /// <inheritdoc />
     public interface IComparisonContext<out TProp> : IComparisonContext
     {
+        /// <inheritdoc />
         new TProp ExpectedValue { get; }
 
+        /// <inheritdoc />s
         new TProp ActualValue { get; }
     }
 }

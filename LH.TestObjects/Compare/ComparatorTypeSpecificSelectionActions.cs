@@ -6,7 +6,8 @@
     {
         public ComparatorTypeSpecificSelectionActions(PropertyOptions propertyOptions)
             : base(propertyOptions)
-        { }
+        {
+        }
 
         public IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Action<IComparisonContext<TProp>> comparisonFunc)
         {

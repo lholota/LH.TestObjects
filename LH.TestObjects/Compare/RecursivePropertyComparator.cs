@@ -8,7 +8,7 @@
 
     internal class RecursivePropertyComparator
     {
-        private readonly static IEnumerable<IValueComparator> knownTypeComparators = GetKnownTypeComparators();
+        private static readonly IEnumerable<IValueComparator> knownTypeComparators = GetKnownTypeComparators();
 
         private readonly ILoggerConfiguration log;
         private readonly IEnumerable<ComparatorPropertyRule> propertySelections;
@@ -26,6 +26,11 @@
             this.Result = new ComparisonResult();
 
             throw new NotImplementedException();
+        }
+
+        private static IEnumerable<IValueComparator> GetKnownTypeComparators()
+        {
+            yield return new StringValueComparator();
         }
 
         private void CompareRecursively(PropertyPathItem propertyPath, object expected, object actual)
@@ -108,11 +113,6 @@
         private bool IsNullComparisonMatch(object expected, object actual)
         {
             return ReferenceEquals(expected, null) ^ ReferenceEquals(actual, null);
-        }
-
-        private static IEnumerable<IValueComparator> GetKnownTypeComparators()
-        {
-            yield return new StringValueComparator();
         }
     }
 }
