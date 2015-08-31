@@ -52,7 +52,6 @@
     <Compile Include="Compare\ComparisonResult.cs" />
     <Compile Include="Compare\IComparisonContext.cs" />
     <Compile Include="Compare\IComparisonResult.cs" />
-    <Compile Include="Compare\IDifference.cs" />
     <Compile Include="Compare\ILoggerConfiguration.cs" />
     <Compile Include="Compare\IComparatorTypeSpecificSelectionActions.cs" />
     <Compile Include="Compare\IComparatorTypeSpecificPropertySelector.cs" />

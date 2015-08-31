@@ -5,9 +5,15 @@
 
     internal class PropertyPathItem
     {
-        public PropertyPathItem ParentProperty { get; set; }
+        public PropertyPathItem(PropertyInfo propertyInfo, PropertyPathItem parentPropertyPathItem)
+        {
+            this.ParentProperty = parentPropertyPathItem;
+            this.PropertyInfo = propertyInfo;
+        }
 
-        public PropertyInfo PropertyInfo { get; set; }
+        public PropertyPathItem ParentProperty { get; }
+
+        public PropertyInfo PropertyInfo { get; }
 
         public string GetPathString()
         {

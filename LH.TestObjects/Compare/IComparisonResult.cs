@@ -15,6 +15,6 @@
         /// <summary>
         /// Gets the list of differences found between the expected and the actual objects.
         /// </summary>
-        IEnumerable<IDifference> Differences { get; }
+        IEnumerable<IComparisonContext> Differences { get; }
     }
 }

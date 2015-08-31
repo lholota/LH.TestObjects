@@ -8,7 +8,7 @@
             : base(propertyOptions)
         { }
 
-        public IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Func<TProp, TProp, bool> comparisonFunc)
+        public IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Action<IComparisonContext> comparisonFunc)
         {
             // TODO: Use context instead of the two values?
             throw new NotImplementedException();

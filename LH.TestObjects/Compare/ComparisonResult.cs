@@ -7,7 +7,7 @@
     {
         internal ComparisonResult()
         {
-            this.DifferencesList = new List<IDifference>();
+            this.DifferencesList = new List<IComparisonContext>();
         }
 
         public bool AreSame
@@ -15,11 +15,11 @@
             get { return !this.DifferencesList.Any(); }
         }
 
-        public IEnumerable<IDifference> Differences
+        public IEnumerable<IComparisonContext> Differences
         {
             get { return this.DifferencesList; }
         }
 
-        internal IList<IDifference> DifferencesList { get; set; } 
+        internal IList<IComparisonContext> DifferencesList { get; set; } 
     }
 }

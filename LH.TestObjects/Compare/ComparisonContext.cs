@@ -12,9 +12,9 @@
             this.ActualValue = actual;
         }
 
-        internal PropertyPathItem PropertyPathItem { get; private set; }
+        internal PropertyPathItem PropertyPathItem { get; }
 
-        public bool AreSame { get; internal set; }
+        public bool AreSame { get; set; }
 
         public object ExpectedValue { get; }
 
