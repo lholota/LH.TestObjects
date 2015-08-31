@@ -6,6 +6,6 @@
     {
         public bool IsIgnored { get; set; }
 
-        public Action<IComparisonContext> CustomCompare { get; set; }
+        public Action<ComparisonContext> CustomCompare { get; set; }
     }
 }

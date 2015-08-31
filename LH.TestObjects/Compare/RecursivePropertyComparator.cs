@@ -55,6 +55,7 @@
                 return;
             }
 
+            // ReSharper disable once PossibleNullReferenceException
             if (expected.GetType() != actual.GetType())
             {
                 this.Result.DifferencesList.Add(context);
@@ -83,7 +84,7 @@
             }
         }
 
-        private Action<IComparisonContext> GetCustomComparator(PropertyPathItem propertyPath)
+        private Action<ComparisonContext> GetCustomComparator(PropertyPathItem propertyPath)
         {
             var matchingRule = this.propertySelections
                 .Where(x => x.Options.CustomCompare != null && x.Selection.IsMatch(propertyPath))

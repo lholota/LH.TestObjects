@@ -43,4 +43,19 @@
             }
         }
     }
+
+    internal class ComparisonContext<TProp> : ComparisonContext, IComparisonContext<TProp>
+    {
+        public ComparisonContext(ComparisonContext genericContext)
+            : base(genericContext.PropertyPathItem, genericContext.ExpectedValue, genericContext.ActualValue)
+        {
+            this.ExpectedValue = (TProp)genericContext.ExpectedValue;
+            this.ActualValue = (TProp)genericContext.ActualValue;
+            this.AreSame = genericContext.AreSame;
+        }
+
+        public new TProp ExpectedValue { get; }
+
+        public new TProp ActualValue { get; }
+    }
 }

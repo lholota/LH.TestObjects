@@ -31,5 +31,12 @@
         /// Gets the message summarizing the difference between the values or a successful comparison notification if the values are equals. This message is passed to the loggers.
         /// </summary>
         string LogMessage { get; }
-    }    
+    }
+
+    public interface IComparisonContext<out TProp> : IComparisonContext
+    {
+        new TProp ExpectedValue { get; }
+
+        new TProp ActualValue { get; }
+    }
 }

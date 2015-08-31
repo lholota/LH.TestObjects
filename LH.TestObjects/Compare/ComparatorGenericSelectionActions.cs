@@ -2,16 +2,16 @@
 {
     internal class ComparatorGenericSelectionActions : IGenericSelectionActions
     {
-        private readonly PropertyOptions options;
+        protected readonly PropertyOptions Options;
 
         public ComparatorGenericSelectionActions(PropertyOptions propertyOptions)
         {
-            this.options = propertyOptions;
+            this.Options = propertyOptions;
         }
 
         public void Ignore()
         {
-            this.options.IsIgnored = true;
+            this.Options.IsIgnored = true;
         }
     }
 }

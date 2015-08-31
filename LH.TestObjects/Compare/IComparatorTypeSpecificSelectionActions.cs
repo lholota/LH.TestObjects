@@ -8,6 +8,11 @@
     /// <typeparam name="TProp">Compared type</typeparam>
     public interface IComparatorTypeSpecificSelectionActions<out TProp> : IGenericSelectionActions
     {
-        IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Action<IComparisonContext> comparisoAction);
+        /// <summary>
+        /// Sets an override for the comparison logic.
+        /// </summary>
+        /// <param name="comparisonAction">Your comparison logic.</param>
+        /// <returns><see cref="IComparatorTypeSpecificSelectionActions{TProp}"/></returns>
+        IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Action<IComparisonContext<TProp>> comparisonAction);
     }
 }
