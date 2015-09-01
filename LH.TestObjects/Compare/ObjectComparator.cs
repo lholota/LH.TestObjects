@@ -21,6 +21,8 @@
         {
             this.propertyRules = new List<ComparatorPropertyRule>();
             this.Log = new Logger();
+
+            this.SetDefaults();
         }
         
         /// <summary>
@@ -82,6 +84,14 @@
         {
             rule.OrderIndex = this.propertyRules.Count;
             this.propertyRules.Add(rule);
+        }
+
+        private void SetDefaults()
+        {
+            this.Log.ToConsoleOutput();
+
+            // TODO: Add default level
+            //// this.Log.Level.Info();
         }
     }
 }

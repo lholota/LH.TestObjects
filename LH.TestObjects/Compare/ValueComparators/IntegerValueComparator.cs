@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    internal class IntegerComparator : IValueComparator
+    internal class IntegerValueComparator : IValueComparator
     {
         private readonly IEnumerable<Type> handledTypes = new[]
         {

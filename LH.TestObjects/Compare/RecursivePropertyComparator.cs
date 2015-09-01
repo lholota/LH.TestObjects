@@ -24,45 +24,55 @@
         public void CompareRecursively(object expected, object actual)
         {
             this.Result = new ComparisonResult();
-
-            throw new NotImplementedException();
+            this.CompareRecursively(PropertyPathItem.Root, expected, actual);
         }
 
         private static IEnumerable<IValueComparator> GetKnownTypeComparators()
         {
             yield return new StringValueComparator();
+            yield return new IntegerValueComparator();
         }
 
         private void CompareRecursively(PropertyPathItem propertyPath, object expected, object actual)
         {
-            // TODO: Logging
             var context = new ComparisonContext(propertyPath, expected, actual);
 
             if (this.IsPropertyIgnored(propertyPath))
             {
+                this.log.Log(LogLevel.Info, context, "The property {0} is ignored.", context.PropertyPathItem.GetPathString());
                 return;
             }
 
             var customComparator = this.GetCustomComparator(propertyPath);
             if (customComparator != null)
             {
+                this.log.Log(LogLevel.Info, context, "Custom comparator found for the property {0}.", context.PropertyPathItem.GetPathString());
                 customComparator.Invoke(context);
                 return;
             }
 
             if (!this.IsNullComparisonMatch(expected, actual))
             {
+                this.log.Log(LogLevel.Info, context, "One of the values is null and the other is not at {0}.", context.PropertyPathItem.GetPathString());
                 this.Result.DifferencesList.Add(context);
             }
             else if (ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
             {
-                // Both values are null, nothing to compare
+                this.log.Log(LogLevel.Info, context, "Both items are null at {0}.", propertyPath.GetPathString());
                 return;
             }
 
             // ReSharper disable once PossibleNullReferenceException
             if (expected.GetType() != actual.GetType())
             {
+                this.log.Log(
+                    LogLevel.Error,
+                    context,
+                    "The values have different types (expected: {0}, actual: {1}) at {2}",
+                    expected.GetType(),
+                    actual.GetType(),
+                    propertyPath.GetPathString());
+
                 this.Result.DifferencesList.Add(context);
             }
 
@@ -71,6 +81,13 @@
 
             if (knownTypeComparator != null)
             {
+                this.log.Log(
+                    LogLevel.Debug,
+                    context,
+                    "The property {0} is a knowntype, using the {1}.",
+                    propertyPath.GetPathString(),
+                    knownTypeComparator.GetType());
+
                 knownTypeComparator.Compare(context);
                 return;
             }

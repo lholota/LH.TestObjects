@@ -5,10 +5,16 @@
 
     internal class PropertyPathItem
     {
+        public static readonly PropertyPathItem Root = new PropertyPathItem();
+
         public PropertyPathItem(PropertyInfo propertyInfo, PropertyPathItem parentPropertyPathItem)
         {
             this.ParentProperty = parentPropertyPathItem;
             this.PropertyInfo = propertyInfo;
+        }
+
+        private PropertyPathItem()
+        {
         }
 
         public PropertyPathItem ParentProperty { get; }
@@ -17,14 +23,17 @@
 
         public string GetPathString()
         {
+            if (this == Root)
+            {
+                return string.Empty;
+            }
+
             var builder = new StringBuilder();
 
             if (this.ParentProperty != null)
             {
                 this.ParentProperty.WritePath(builder);
             }
-
-            builder.Append(this.PropertyInfo.Name);
 
             return builder.ToString();
         }
