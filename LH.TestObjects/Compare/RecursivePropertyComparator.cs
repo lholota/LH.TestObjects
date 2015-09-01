@@ -93,14 +93,14 @@
             }
 
             var properties = expected.GetType()
-                .GetRuntimeProperties(); // TODO: Will this work?
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public);
 
             foreach (var property in properties)
             {
                 var propertyPathItem = new PropertyPathItem(property, propertyPath);
 
-                var expectedPropValue = property.GetValue(expected);
-                var actualPropValue = property.GetValue(actual);
+                var expectedPropValue = property.GetValue(expected, null);
+                var actualPropValue = property.GetValue(actual, null);
 
                 this.CompareRecursively(propertyPathItem, expectedPropValue, actualPropValue);
             }
