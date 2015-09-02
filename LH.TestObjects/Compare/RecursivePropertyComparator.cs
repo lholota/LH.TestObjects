@@ -82,6 +82,12 @@
                     propertyPath.GetPathString(),
                     knownTypeComparator.GetType());
 
+                var knownTypeComparatorWithOptions = knownTypeComparator as IHasComparatorOptions;
+                if (knownTypeComparatorWithOptions != null)
+                {
+                    knownTypeComparatorWithOptions.Options = this.GetValueComparatorOptions(propertyPath);
+                }
+                
                 if (!knownTypeComparator.Compare(context))
                 {
                     this.AddDifference(DifferenceType.Value, propertyPath, context);
@@ -119,6 +125,21 @@
             return null;
         }
 
+        private object GetValueComparatorOptions(PropertyPathItem propertyPath)
+        {
+            var matchingRule = this.propertySelections
+                .Where(x => x.Options.ValueComparatorOptions != null && x.Selection.IsMatch(propertyPath))
+                .OrderByDescending(x => x.OrderIndex)
+                .FirstOrDefault();
+
+            if (matchingRule != null)
+            {
+                return matchingRule.Options.ValueComparatorOptions;
+            }
+
+            return null;
+        }
+
         private bool IsPropertyIgnored(PropertyPathItem propertyPath)
         {
             return this.propertySelections
@@ -132,8 +153,6 @@
 
             return bothNull || noneNull;
         }
-
-        // TODO: Add tests if prop values are the same object, the comparison should be stopped!
 
         private void AddDifference(DifferenceType diffType, PropertyPathItem propertyPath, IComparisonContext context)
         {

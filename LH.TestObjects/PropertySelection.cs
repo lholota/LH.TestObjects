@@ -25,9 +25,10 @@
 
             if (this.PropertyType != null)
             {
-                // TODO: Add SubClassofEx to cater for generics (???)
                 var propType = propertyPath.PropertyInfo.PropertyType;
-                if (this.IncludeInheritedTypes && !propType.IsSubclassOf(this.PropertyType))
+                if (this.IncludeInheritedTypes 
+                    && !propType.IsSubclassOf(this.PropertyType) 
+                    && propType != this.PropertyType)
                 {
                     return false;
                 }
@@ -38,7 +39,6 @@
                 }
             }
 
-            // TODO: Property path instead of PropertyInfo?
             if (this.Predicate != null && !this.Predicate.Invoke(propertyPath.PropertyInfo))
             {
                 return false;

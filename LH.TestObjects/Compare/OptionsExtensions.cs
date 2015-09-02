@@ -17,7 +17,7 @@
         public static IComparatorTypeSpecificSelectionActions<string> WithComparisonType(this IComparatorTypeSpecificSelectionActions<string> selectionActions, StringComparison comparisonType)
         {
             var actions = (ComparatorTypeSpecificSelectionActions<string>)selectionActions;
-            var options = EnsureOptions<StringValueComparatorOptions>(opt => actions.ComparatorOptions = opt);
+            var options = EnsureOptions<StringValueComparatorOptions>(opt => actions.Options.ValueComparatorOptions = opt);
 
             options.ComparisonType = comparisonType;
 

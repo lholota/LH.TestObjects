@@ -1,7 +1,7 @@
 ﻿namespace LH.TestObjects.Compare.ValueComparators
 {
-    internal interface IHasComparatorOptions<in TOptions>
+    internal interface IHasComparatorOptions
     {
-        TOptions Options { set; }
+        object Options { set; }
     }
 }

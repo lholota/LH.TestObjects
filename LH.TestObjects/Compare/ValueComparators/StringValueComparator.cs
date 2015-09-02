@@ -2,8 +2,13 @@
 {
     using System;
 
-    internal class StringValueComparator : IValueComparator, IHasComparatorOptions<StringValueComparatorOptions>
+    internal class StringValueComparator : IValueComparator, IHasComparatorOptions
     {
+        object IHasComparatorOptions.Options
+        {
+            set { this.Options = (StringValueComparatorOptions)value; }
+        }
+
         public StringValueComparatorOptions Options { get; set; }
 
         public bool CanHandle(Type type)
