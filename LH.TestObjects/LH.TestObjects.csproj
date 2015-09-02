@@ -52,12 +52,12 @@
     <Compile Include="Compare\ComparisonResult.cs" />
     <Compile Include="Compare\IComparisonContext.cs" />
     <Compile Include="Compare\IComparisonResult.cs" />
-    <Compile Include="Compare\ILoggerConfiguration.cs" />
+    <Compile Include="Compare\Logging\ILoggerConfiguration.cs" />
     <Compile Include="Compare\IComparatorTypeSpecificSelectionActions.cs" />
     <Compile Include="Compare\IComparatorTypeSpecificPropertySelector.cs" />
-    <Compile Include="Compare\LogEvent.cs" />
-    <Compile Include="Compare\Logger.cs" />
-    <Compile Include="Compare\LogLevel.cs" />
+    <Compile Include="Compare\Logging\LogEvent.cs" />
+    <Compile Include="Compare\Logging\Logger.cs" />
+    <Compile Include="Compare\Logging\LogLevel.cs" />
     <Compile Include="Compare\ObjectComparator.cs" />
     <Compile Include="Compare\OptionsExtensions.cs" />
     <Compile Include="Compare\PropertyOptions.cs" />

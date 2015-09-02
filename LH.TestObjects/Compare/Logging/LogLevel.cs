@@ -1,4 +1,4 @@
-namespace LH.TestObjects.Compare
+namespace LH.TestObjects.Compare.Logging
 {
     /// <summary>
     /// The logging level classification for the events.

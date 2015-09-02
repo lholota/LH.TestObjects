@@ -1,6 +1,7 @@
 ﻿namespace LH.TestObjects.Tests.ExpressionExtensions
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
     using FluentAssertions;
@@ -33,14 +34,19 @@
             propertyNames[1].Should().Be("FirstNested");
         }
 
+        
+        [SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
+        [SuppressMessage("ReSharper", "UnassignedGetOnlyAutoProperty")]
         private class DummyRootClass
         {
-            public DummyFirstNested FirstNested { get; set; }
+            public DummyFirstNested FirstNested { get; }
         }
 
+        [SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
+        [SuppressMessage("ReSharper", "UnassignedGetOnlyAutoProperty")]
         private class DummyFirstNested
         {
-            public int DummyProp { get; set; } 
+            public int DummyProp { get; } 
         }
     }
 }

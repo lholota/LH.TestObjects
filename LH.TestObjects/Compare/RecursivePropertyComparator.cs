@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Logging;
     using ValueComparators;
 
     internal class RecursivePropertyComparator

@@ -1,4 +1,4 @@
-﻿namespace LH.TestObjects.Compare
+﻿namespace LH.TestObjects.Compare.Logging
 {
     /// <summary>
     /// Event raised during a comparison to be logged.

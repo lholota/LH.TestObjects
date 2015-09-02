@@ -4,7 +4,7 @@
     using FluentAssertions;
     using NUnit.Framework;
     using TestDomain;
-    using TestObjects.Compare;
+    using TestObjects.Compare.Logging;
 
     [TestFixture]
     public class WhenLogging : ComparatorTestsBase

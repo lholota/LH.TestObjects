@@ -4,6 +4,7 @@
     using FluentAssertions;
     using NUnit.Framework;
     using TestObjects.Compare;
+    using TestObjects.Compare.Logging;
 
     [TestFixture]
     public class WhenLogging
@@ -22,7 +23,7 @@
         [SuppressMessage("ReSharper", "ConditionIsAlwaysTrueOrFalse")]
         public void ThenShouldLogIfLevelIsSameOrLower()
         {
-            bool hasBeenCalled = false;
+            var hasBeenCalled = false;
 
             var logger = new Logger();
             logger.SetLevel(LogLevel.Info);

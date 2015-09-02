@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Logging;
 
     /// <summary>
     /// This object allows you to compare two objects with a custom configuration.

@@ -8,7 +8,7 @@ namespace LH.TestObjects.Compare
     /// Object allowing strongly typed property selection.
     /// </summary>
     /// <typeparam name="TUserType">The compared/generated type</typeparam>
-    public interface IComparatorTypeSpecificPropertySelector<TUserType> : IGenericPropertySelector<TUserType>
+    public interface IComparatorTypeSpecificPropertySelector<TUserType> : IGenericPropertySelector
     {
         /// <summary>
         /// Selects a property by an expression (for example x => x.MyProperty)
