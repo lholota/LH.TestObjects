@@ -1,5 +1,6 @@
 ﻿namespace LH.TestObjects.Compare
 {
+    using System.Collections.Generic;
     using System.Reflection;
     using System.Text;
 

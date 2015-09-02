@@ -60,6 +60,7 @@
         {
             var rule = new ComparatorPropertyRule();
             rule.Selection.PropertyExpression = propertyExpression;
+            rule.Selection.IncludeInheritedTypes = false;
             rule.Selection.PropertyType = typeof(TProp);
 
             this.AddPropertyRule(rule);
@@ -68,9 +69,10 @@
         }
 
         /// <inheritdoc/>
-        public IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(Func<PropertyInfo, bool> predicate = null)
+        public IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(bool includeInheritedTypes = true, Func<PropertyInfo, bool> predicate = null)
         {
             var rule = new ComparatorPropertyRule();
+            rule.Selection.IncludeInheritedTypes = includeInheritedTypes;
             rule.Selection.PropertyType = typeof(TProp);
             
             this.AddPropertyRule(rule);

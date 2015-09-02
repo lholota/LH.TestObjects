@@ -64,6 +64,7 @@
     <Compile Include="Compare\PropertyPathItem.cs" />
     <Compile Include="Compare\RecursivePropertyComparator.cs" />
     <Compile Include="Compare\ValueComparators\IHasComparatorOptions.cs" />
+    <Compile Include="ExpressionExtensions.cs" />
     <Compile Include="PropertySelection.cs" />
     <Compile Include="Compare\ValueComparators\IntegerValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\StringValueComparator.cs" />
