@@ -74,6 +74,7 @@
             var rule = new ComparatorPropertyRule();
             rule.Selection.IncludeInheritedTypes = includeInheritedTypes;
             rule.Selection.PropertyType = typeof(TProp);
+            rule.Selection.Predicate = predicate;
             
             this.AddPropertyRule(rule);
 

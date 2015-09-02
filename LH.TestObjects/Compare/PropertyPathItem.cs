@@ -1,6 +1,5 @@
 ﻿namespace LH.TestObjects.Compare
 {
-    using System.Collections.Generic;
     using System.Reflection;
     using System.Text;
 
@@ -30,19 +29,29 @@
             }
 
             var builder = new StringBuilder();
-
-            if (this.ParentProperty != null && this.ParentProperty != Root)
-            {
-                this.ParentProperty.WritePath(builder);
-            }
+            this.WritePath(builder);
 
             return builder.ToString();
         }
 
         private void WritePath(StringBuilder builder)
         {
+            if (this == Root)
+            {
+                return;
+            }
+
+            if (this.ParentProperty != null && this.ParentProperty != Root)
+            {
+                this.ParentProperty.WritePath(builder);
+            }
+
+            if (builder.Length > 0)
+            {
+                builder.Append('.');
+            }
+
             builder.Append(this.PropertyInfo.Name);
-            builder.Append('.');
         }
     }
 }
