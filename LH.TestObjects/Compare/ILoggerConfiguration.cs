@@ -8,18 +8,11 @@
     public interface ILoggerConfiguration
     {
         /// <summary>
-        /// The comparator will log the messages into the standard console output.
-        /// </summary>
-        /// <param name="enabled">Sets if the console logging is enabled (true) or not (false).</param>
-        /// <returns><see cref="ILoggerConfiguration"/></returns>
-        ILoggerConfiguration ToConsoleOutput(bool enabled = true);
-
-        /// <summary>
         /// The log messages will be passed to the callback where you can apply any logging logic you require.
         /// </summary>
         /// <param name="callback">Your custom logging action.</param>
         /// <returns><see cref="ILoggerConfiguration"/></returns>
-        ILoggerConfiguration Callback(Action<IComparisonContext> callback);
+        ILoggerConfiguration Callback(Action<LogEvent> callback);
 
         /// <summary>
         /// Sets the minimum level of the messages which will be logged.

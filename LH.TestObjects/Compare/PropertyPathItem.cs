@@ -30,7 +30,7 @@
 
             var builder = new StringBuilder();
 
-            if (this.ParentProperty != null)
+            if (this.ParentProperty != null && this.ParentProperty != Root)
             {
                 this.ParentProperty.WritePath(builder);
             }

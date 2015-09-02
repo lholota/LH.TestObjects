@@ -13,12 +13,12 @@
 
         public bool Compare(IComparisonContext comparisonContext)
         {
-            throw new NotImplementedException();
-        }
-    }
+            var options = this.Options ?? StringValueComparatorOptions.Default;
 
-    internal interface IHasComparatorOptions<in TOptions>
-    {
-        TOptions Options { set; }
+            return string.Equals(
+                (string)comparisonContext.ExpectedValue,
+                (string)comparisonContext.ActualValue, 
+                options.ComparisonType);
+        }
     }
 }

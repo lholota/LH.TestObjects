@@ -26,11 +26,6 @@
         /// Gets the <see cref="PropertyInfo"/> of the compared property.
         /// </summary>
         PropertyInfo PropertyInfo { get; }
-
-        /// <summary>
-        /// Gets the message summarizing the difference between the values or a successful comparison notification if the values are equals. This message is passed to the loggers.
-        /// </summary>
-        string LogMessage { get; }
     }
 
     /// <inheritdoc />

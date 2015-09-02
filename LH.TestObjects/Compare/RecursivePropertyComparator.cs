@@ -46,7 +46,7 @@
             var customComparator = this.GetCustomComparator(propertyPath);
             if (customComparator != null)
             {
-                this.log.Log(LogLevel.Info, context, "Custom comparator found for the property {0}.", context.PropertyPathItem.GetPathString());
+                this.log.Log(LogLevel.Debug, context, "Custom comparator found for the property {0}.", context.PropertyPathItem.GetPathString());
                 customComparator.Invoke(context);
                 return;
             }
@@ -55,8 +55,10 @@
             {
                 this.log.Log(LogLevel.Info, context, "One of the values is null and the other is not at {0}.", context.PropertyPathItem.GetPathString());
                 this.Result.DifferencesList.Add(context);
+                return;
             }
-            else if (ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
+
+            if (ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
             {
                 this.log.Log(LogLevel.Info, context, "Both items are null at {0}.", propertyPath.GetPathString());
                 return;
@@ -65,15 +67,7 @@
             // ReSharper disable once PossibleNullReferenceException
             if (expected.GetType() != actual.GetType())
             {
-                this.log.Log(
-                    LogLevel.Error,
-                    context,
-                    "The values have different types (expected: {0}, actual: {1}) at {2}",
-                    expected.GetType(),
-                    actual.GetType(),
-                    propertyPath.GetPathString());
-
-                this.Result.DifferencesList.Add(context);
+                this.AddDifference(DifferenceType.Type, propertyPath, context);
             }
 
             var knownTypeComparator = knownTypeComparators
@@ -88,7 +82,11 @@
                     propertyPath.GetPathString(),
                     knownTypeComparator.GetType());
 
-                knownTypeComparator.Compare(context);
+                if (!knownTypeComparator.Compare(context))
+                {
+                    this.AddDifference(DifferenceType.Value, propertyPath, context);
+                }
+
                 return;
             }
 
@@ -129,7 +127,46 @@
 
         private bool IsNullComparisonMatch(object expected, object actual)
         {
-            return ReferenceEquals(expected, null) ^ ReferenceEquals(actual, null);
+            var bothNull = ReferenceEquals(expected, null) && ReferenceEquals(actual, null);
+            var noneNull = !ReferenceEquals(expected, null) && !ReferenceEquals(actual, null);
+
+            return bothNull || noneNull;
+        }
+
+        // TODO: Add tests if prop values are the same object, the comparison should be stopped!
+
+        private void AddDifference(DifferenceType diffType, PropertyPathItem propertyPath, IComparisonContext context)
+        {
+            switch (diffType)
+            {
+                case DifferenceType.Type:
+                    this.log.Log(
+                            LogLevel.Error,
+                            context,
+                            "The values have different types (expected: {0}, actual: {1}) at {2}",
+                            context.ExpectedValue.GetType(),
+                            context.ActualValue.GetType(),
+                            propertyPath.GetPathString());
+                    break;
+
+                default:
+                    this.log.Log(
+                        LogLevel.Error,
+                        context,
+                        "The property values do not match at {0}, expected is {1}, but the actual {2}.",
+                        propertyPath.GetPathString(),
+                        context.ExpectedValue ?? "[Null]",
+                        context.ActualValue ?? "[Null]");
+                    break;
+            }
+
+            this.Result.DifferencesList.Add(context);
+        }
+
+        private enum DifferenceType
+        {
+            Value,
+            Type
         }
     }
 }

@@ -23,7 +23,10 @@
 
         public bool Compare(IComparisonContext comparisonContext)
         {
-            throw new NotImplementedException();
+            var expected = (IComparable)comparisonContext.ExpectedValue;
+            var actual = (IComparable)comparisonContext.ActualValue;
+
+            return expected.CompareTo(actual) == 0;
         }
     }
 }

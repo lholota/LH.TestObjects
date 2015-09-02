@@ -10,21 +10,13 @@
     public class WhenLogging : ComparatorTestsBase
     {
         [Test]
-        public void ThenShouldLogIntoConsoleWhenConfigured()
-        {
-            // TODO: Create an internal Console mock call?
-            // Use moles?
-            throw new NotImplementedException();
-        }
-
-        [Test]
         public void ThenShouldCallCallbackWhenConfigured()
         {
             var objA = SimpleDomain.CreateObjectWithValueSet1();
             var objB = SimpleDomain.CreateObjectWithValueSet2();
 
             var hasBeenCalled = false;
-            Action<IComparisonContext> callback = x => hasBeenCalled = true;
+            Action<LogEvent> callback = x => hasBeenCalled = true;
 
             this.Comparator.Log.Callback(callback);
             this.Comparator.Compare(objA, objB);
@@ -40,22 +32,22 @@
             var objA = SimpleDomain.CreateObjectWithValueSet1();
             var objB = SimpleDomain.CreateObjectWithValueSet2();
 
-            Action<IComparisonContext> callback = ctx =>
+            Action<LogEvent> callback = ctx =>
             {
                 hasBeenCalled = true;
 
-                ctx.PropertyInfo.Should().NotBeNull();
-                ctx.ExpectedValue.Should().NotBeNull();
-                ctx.ActualValue.Should().NotBeNull();
-                ctx.LogMessage.Should().NotBeNull();
+                ctx.Message.Should().NotBeNullOrEmpty();
+                ctx.Context.Should().NotBeNull();
+                ctx.Context.PropertyInfo.Should().NotBeNull();
+                ctx.Context.ActualValue.Should().NotBeNull();
+                ctx.Context.ExpectedValue.Should().NotBeNull();
 
-                if (ctx.PropertyInfo.Name == "StringProperty")
+                if (ctx.Context.PropertyInfo.Name == nameof(objA.StringProp))
                 {
                     stringPropChecked = true;
 
-                    ctx.ExpectedValue.Should().Be(objA.StringProp);
-                    ctx.ActualValue.Should().Be(objB.StringProp);
-                    ctx.LogMessage.Should().NotBeNullOrEmpty();
+                    ctx.Context.ExpectedValue.Should().Be(objA.StringProp);
+                    ctx.Context.ActualValue.Should().Be(objB.StringProp);
                 }
             };
 
@@ -64,11 +56,6 @@
 
             hasBeenCalled.Should().BeTrue();
             stringPropChecked.Should().BeTrue();
-
-            //x.Should().NotBeNull();
-            //x.PropertyInfo.Should().NotBeNull();
-
-            throw new NotImplementedException();
         }
     }
 }

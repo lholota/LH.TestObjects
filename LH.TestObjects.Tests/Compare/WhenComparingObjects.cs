@@ -50,7 +50,6 @@
             result.Differences.Count().Should().Be(1);
 
             var difference = result.Differences.Single();
-            difference.LogMessage.Should().NotBeNullOrEmpty();
             difference.ExpectedValue.Should().Be(objA.StringProp);
             difference.ActualValue.Should().Be(objB.StringProp);
 

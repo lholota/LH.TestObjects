@@ -9,6 +9,8 @@
         {
         }
 
+        internal object ComparatorOptions { get; set; }
+
         public IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Action<IComparisonContext<TProp>> comparisonFunc)
         {
             this.Options.CustomCompare = context =>

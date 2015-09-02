@@ -55,6 +55,7 @@
     <Compile Include="Compare\ILoggerConfiguration.cs" />
     <Compile Include="Compare\IComparatorTypeSpecificSelectionActions.cs" />
     <Compile Include="Compare\IComparatorTypeSpecificPropertySelector.cs" />
+    <Compile Include="Compare\LogEvent.cs" />
     <Compile Include="Compare\Logger.cs" />
     <Compile Include="Compare\LogLevel.cs" />
     <Compile Include="Compare\ObjectComparator.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Compare\PropertyOptions.cs" />
     <Compile Include="Compare\PropertyPathItem.cs" />
     <Compile Include="Compare\RecursivePropertyComparator.cs" />
+    <Compile Include="Compare\ValueComparators\IHasComparatorOptions.cs" />
     <Compile Include="PropertySelection.cs" />
     <Compile Include="Compare\ValueComparators\IntegerValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\StringValueComparator.cs" />

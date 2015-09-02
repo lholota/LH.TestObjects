@@ -1,9 +1,8 @@
 ﻿namespace LH.TestObjects.Compare
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    
+
     internal class ComparisonContext : IComparisonContext
     {
         public ComparisonContext(PropertyPathItem propertyPath, object expected, object actual)
@@ -27,19 +26,6 @@
         public string PropertyPath
         {
             get { return this.PropertyPathItem.GetPathString(); }
-        }
-
-        public string LogMessage
-        {
-            get
-            {
-                if (this.AreSame)
-                {
-                    return null;
-                }
-
-                throw new NotImplementedException();
-            }
         }
 
         internal PropertyPathItem PropertyPathItem { get; }

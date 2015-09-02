@@ -4,17 +4,10 @@
 
     internal class Logger : ILoggerConfiguration
     {
-        private bool isConsoleEnabled;
         private LogLevel minimumLevel;
-        private Action<IComparisonContext> customLoggerCallback;
+        private Action<LogEvent> customLoggerCallback;
 
-        public ILoggerConfiguration ToConsoleOutput(bool enabled = true)
-        {
-            this.isConsoleEnabled = enabled;
-            return this;
-        }
-
-        public ILoggerConfiguration Callback(Action<IComparisonContext> callback)
+        public ILoggerConfiguration Callback(Action<LogEvent> callback)
         {
             this.customLoggerCallback = callback;
             return this;
@@ -32,15 +25,17 @@
             {
                 return;
             }
-
-            if (this.isConsoleEnabled)
-            {
-                throw new NotImplementedException();
-            }
-
+            
             if (this.customLoggerCallback != null)
             {
-                this.customLoggerCallback.Invoke(context); // TODO: Create a new object and the context with the message!
+                var logEvent = new LogEvent
+                {
+                    Level = level,
+                    Message = string.Format(message, args),
+                    Context = context
+                };
+
+                this.customLoggerCallback.Invoke(logEvent);
             }
         }
     }
