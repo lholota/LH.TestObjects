@@ -7,8 +7,7 @@
           <CodeCoverage>
             <ModulePaths>
               <Include>
-                <ModulePath>LH.TestObjects.dll</ModulePath>
-                <ModulePath>LH.TestObjects.Tests.dll</ModulePath>
+                <ModulePath>.*LH.*\.dll</ModulePath>
               </Include>
             </ModulePaths>
           </CodeCoverage>

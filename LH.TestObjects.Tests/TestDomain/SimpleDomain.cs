@@ -27,12 +27,5 @@
         public string StringProp2 { get; set; }
 
         public int IntProp { get; set; }
-
-        public void CopyValuesFrom(SimpleDomain otherDomain)
-        {
-            this.StringProp2 = otherDomain.StringProp2;
-            this.StringProp = otherDomain.StringProp;
-            this.IntProp = otherDomain.IntProp;
-        }
     }
 }
