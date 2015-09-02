@@ -1,4 +1,4 @@
-﻿namespace LH.TestObjects.Tests.Compare.Logger
+﻿namespace LH.TestObjects.Tests.Compare.Logging.Logger
 {
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;

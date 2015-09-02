@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compare\ComparatorTestsBase.cs" />
-    <Compile Include="Compare\Logger\WhenLogging.cs" />
+    <Compile Include="Compare\Logging\Logger\WhenLogging.cs" />
     <Compile Include="Compare\PropertyPathItem\WhenGettingPathString.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingIntegerValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingStringValues.cs" />
