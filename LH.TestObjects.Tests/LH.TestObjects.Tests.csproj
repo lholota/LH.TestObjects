@@ -85,6 +85,8 @@
     <Compile Include="Compare\WhenLogging.cs" />
     <Compile Include="Compare\WhenSelectingProperties.cs" />
     <Compile Include="Compare\WhenUsingCustomComparator.cs" />
+    <Compile Include="Domain\ComplexDomainWithInheritor.cs" />
+    <Compile Include="Domain\SimpleDomainInheritor.cs" />
     <Compile Include="ExpressionExtensions\WhenGettingPropertyNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertySelectorTestBase.cs" />

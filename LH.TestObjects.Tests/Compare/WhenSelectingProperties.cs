@@ -1,9 +1,11 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
+    using System;
     using System.Linq;
     using Domain;
     using FluentAssertions;
     using NUnit.Framework;
+    using TestObjects.Compare;
 
     [TestFixture]
     public class WhenSelectingProperties : ComparatorTestsBase, IPropertySelectorTests
@@ -116,6 +118,42 @@
 
             var result = this.Comparator.Compare(objA, objB);
 
+            result.AreSame.Should().BeTrue();
+        }
+
+        [Test]
+        public void ThenShouldFailWhenNotIgnoringInheritedTypes()
+        {
+            var objA = ComplexDomainWithInheritor.CreateObject();
+            var objB = ComplexDomainWithInheritor.CreateObject();
+
+            objA.Simple.StringProp = "AAA";
+            objB.Simple.StringProp = "BBB";
+
+            var comparator = new ObjectComparator<ComplexDomainWithInheritor>();
+            comparator
+                .PropertiesOfType<SimpleDomain>(false)
+                .Ignore();
+
+            var result = comparator.Compare(objA, objB);
+            result.AreSame.Should().BeFalse();
+        }
+
+        [Test]
+        public void ThenShouldSucceedWhenIgnoringInheritedTypes()
+        {
+            var objA = ComplexDomainWithInheritor.CreateObject();
+            var objB = ComplexDomainWithInheritor.CreateObject();
+
+            objA.Simple.StringProp = "AAA";
+            objB.Simple.StringProp = "BBB";
+
+            var comparator = new ObjectComparator<ComplexDomainWithInheritor>();
+            comparator
+                .PropertiesOfType<SimpleDomain>()
+                .Ignore();
+
+            var result = comparator.Compare(objA, objB);
             result.AreSame.Should().BeTrue();
         }
 

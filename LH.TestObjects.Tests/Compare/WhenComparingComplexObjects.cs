@@ -1,5 +1,6 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
+    using System;
     using System.Linq;
     using Domain;
     using FluentAssertions;
@@ -16,8 +17,20 @@
         {
             this.comparator = new ObjectComparator<ComplexDomain>();
         }
-        // nested selectors
         
+        // nested selectors
+
+        [Test]
+        public void ThenShouldPassIfValuesMatch()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void ThenShouldFailIfNestedObjectValueDiffers()
+        {
+            throw new NotImplementedException();
+        }
 
         [Test]
         public void ThenPropertyPathShouldBeCorrect()
