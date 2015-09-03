@@ -26,6 +26,11 @@
         /// Gets the <see cref="PropertyInfo"/> of the compared property.
         /// </summary>
         PropertyInfo PropertyInfo { get; }
+
+        /// <summary>
+        /// Gets the dot delimited path to the property.
+        /// </summary>
+        string PropertyPath { get; }
     }
 
     /// <inheritdoc />

@@ -1,7 +1,7 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
+    using Domain;
     using NUnit.Framework;
-    using TestDomain;
     using TestObjects.Compare;
 
     [TestFixture]

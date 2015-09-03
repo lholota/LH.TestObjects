@@ -1,9 +1,9 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
     using System;
+    using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestDomain;
     using TestObjects.Compare.Logging;
 
     [TestFixture]

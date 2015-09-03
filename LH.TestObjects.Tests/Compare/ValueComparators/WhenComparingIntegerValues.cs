@@ -1,9 +1,9 @@
 ﻿namespace LH.TestObjects.Tests.Compare.ValueComparators
 {
     using System.Linq;
+    using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestDomain;
 
     [TestFixture]
     public class WhenComparingIntegerValues : ComparatorTestsBase

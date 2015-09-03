@@ -1,9 +1,9 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
     using System.Linq;
+    using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestDomain;
 
     [TestFixture]
     public class WhenSelectingProperties : ComparatorTestsBase, IPropertySelectorTests
@@ -116,6 +116,27 @@
 
             var result = this.Comparator.Compare(objA, objB);
 
+            result.AreSame.Should().BeTrue();
+        }
+
+        [Test]
+        public void ThenShouldUseLastMatchingRule()
+        {
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
+
+            objA.StringProp = "AAA";
+            objB.StringProp = "BBB";
+
+            this.Comparator
+                .Property(x => x.StringProp)
+                .CustomCompare(x => Assert.Fail());
+
+            this.Comparator
+                .Property(x => x.StringProp)
+                .CustomCompare(x => x.AreSame = true);
+
+            var result = this.Comparator.Compare(objA, objB);
             result.AreSame.Should().BeTrue();
         }
     }

@@ -1,8 +1,8 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
+    using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestDomain;
 
     [TestFixture]
     public class WhenIgnoringProperties : ComparatorTestsBase

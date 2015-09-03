@@ -1,4 +1,4 @@
-﻿namespace LH.TestObjects.Tests.TestDomain
+﻿namespace LH.TestObjects.Tests.Domain
 {
     public class SimpleDomain
     {

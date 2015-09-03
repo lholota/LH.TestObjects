@@ -2,9 +2,9 @@
 {
     using System;
     using System.Linq;
+    using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestDomain;
     using TestObjects.Compare;
 
     [TestFixture]
