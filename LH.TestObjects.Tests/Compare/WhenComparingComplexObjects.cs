@@ -1,6 +1,5 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
-    using System;
     using System.Linq;
     using Domain;
     using FluentAssertions;
@@ -18,18 +17,29 @@
             this.comparator = new ObjectComparator<ComplexDomain>();
         }
         
-        // nested selectors
-
         [Test]
         public void ThenShouldPassIfValuesMatch()
         {
-            throw new NotImplementedException();
+            var objA = ComplexDomain.CreateObjectWithValueSet1();
+            var objB = ComplexDomain.CreateObjectWithValueSet1();
+
+            var result = this.comparator.Compare(objA, objB);
+            result.AreSame.Should().BeTrue();
         }
 
         [Test]
         public void ThenShouldFailIfNestedObjectValueDiffers()
         {
-            throw new NotImplementedException();
+            var objA = ComplexDomain.CreateObjectWithValueSet1();
+            var objB = ComplexDomain.CreateObjectWithValueSet1();
+
+            objA.Simple.StringProp = "AAA";
+            objB.Simple.StringProp = "BBB";
+
+            var result = this.comparator.Compare(objA, objB);
+            result.AreSame.Should().BeFalse();
+            result.Differences.Should().NotBeNull();
+            result.Differences.Count().Should().Be(1);
         }
 
         [Test]

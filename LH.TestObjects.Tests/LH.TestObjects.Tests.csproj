@@ -83,6 +83,7 @@
     <Compile Include="Compare\WhenComparingObjects.cs" />
     <Compile Include="Compare\WhenIgnoringProperties.cs" />
     <Compile Include="Compare\WhenLogging.cs" />
+    <Compile Include="Compare\WhenSelectingComplexProperties.cs" />
     <Compile Include="Compare\WhenSelectingProperties.cs" />
     <Compile Include="Compare\WhenUsingCustomComparator.cs" />
     <Compile Include="Domain\ComplexDomainWithInheritor.cs" />

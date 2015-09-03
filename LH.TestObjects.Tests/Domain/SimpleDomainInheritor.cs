@@ -2,7 +2,7 @@
 {
     public class SimpleDomainInheritor : SimpleDomain
     {
-        public static SimpleDomainInheritor CreateObjectWithValueSet1()
+        public static new SimpleDomainInheritor CreateObjectWithValueSet1()
         {
             return new SimpleDomainInheritor
             {
