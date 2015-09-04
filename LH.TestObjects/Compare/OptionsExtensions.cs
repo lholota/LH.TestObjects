@@ -14,12 +14,38 @@
         /// <param name="selectionActions">The property selection the configuration will be applied on</param>
         /// <param name="comparisonType">The comparison type of <see cref="StringComparison"/></param>
         /// <returns>The property selection</returns>
-        public static IComparatorTypeSpecificSelectionActions<string> WithComparisonType(this IComparatorTypeSpecificSelectionActions<string> selectionActions, StringComparison comparisonType)
+        public static IComparatorTypeSpecificSelectionActions<string> WithComparisonType(
+            this IComparatorTypeSpecificSelectionActions<string> selectionActions, 
+            StringComparison comparisonType)
         {
             var actions = (ComparatorTypeSpecificSelectionActions<string>)selectionActions;
             var options = EnsureOptions<StringValueComparatorOptions>(opt => actions.Options.ValueComparatorOptions = opt);
 
             options.ComparisonType = comparisonType;
+
+            return actions;
+        }
+
+        public static IComparatorTypeSpecificSelectionActions<float> WithEpsilon(
+            this IComparatorTypeSpecificSelectionActions<float> selectionActions, 
+            float epsilon)
+        {
+            var actions = (ComparatorTypeSpecificSelectionActions<float>)selectionActions;
+            var options = EnsureOptions<FloatValueComparatorOptions>(opt => actions.Options.ValueComparatorOptions = opt);
+
+            options.FloatEpsilon = epsilon;
+
+            return actions;
+        }
+
+        public static IComparatorTypeSpecificSelectionActions<double> WithEpsilon(
+            this IComparatorTypeSpecificSelectionActions<double> selectionActions,
+            float epsilon)
+        {
+            var actions = (ComparatorTypeSpecificSelectionActions<double>)selectionActions;
+            var options = EnsureOptions<FloatValueComparatorOptions>(opt => actions.Options.ValueComparatorOptions = opt);
+
+            options.DoubleEpsilon = epsilon;
 
             return actions;
         }

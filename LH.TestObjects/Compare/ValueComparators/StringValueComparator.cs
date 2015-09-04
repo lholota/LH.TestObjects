@@ -18,7 +18,7 @@
 
         public bool Compare(IComparisonContext comparisonContext)
         {
-            var options = this.Options ?? StringValueComparatorOptions.Default;
+            var options = this.Options ?? new StringValueComparatorOptions();
 
             return string.Equals(
                 (string)comparisonContext.ExpectedValue,

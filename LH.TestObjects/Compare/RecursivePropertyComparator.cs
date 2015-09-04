@@ -32,6 +32,7 @@
         {
             yield return new StringValueComparator();
             yield return new IntegerValueComparator();
+            yield return new FloatValueComparator();
         }
 
         private void CompareRecursively(PropertyPathItem propertyPath, object expected, object actual)

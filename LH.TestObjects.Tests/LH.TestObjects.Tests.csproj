@@ -77,6 +77,7 @@
     <Compile Include="Compare\ComparatorTestsBase.cs" />
     <Compile Include="Compare\Logging\Logger\WhenLogging.cs" />
     <Compile Include="Compare\PropertyPathItem\WhenGettingPathString.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingFloatValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingIntegerValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingStringValues.cs" />
     <Compile Include="Compare\WhenComparingComplexObjects.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Compare\WhenSelectingProperties.cs" />
     <Compile Include="Compare\WhenUsingCustomComparator.cs" />
     <Compile Include="Domain\ComplexDomainWithInheritor.cs" />
+    <Compile Include="Domain\FloatDomain.cs" />
     <Compile Include="Domain\SimpleDomainInheritor.cs" />
     <Compile Include="ExpressionExtensions\WhenGettingPropertyNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
