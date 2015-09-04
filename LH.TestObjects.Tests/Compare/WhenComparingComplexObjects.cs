@@ -62,6 +62,32 @@
         }
 
         [Test]
+        public void ThenShouldFailIfOneValueIsNull()
+        {
+            var objA = ComplexDomain.CreateObjectWithValueSet1();
+            var objB = ComplexDomain.CreateObjectWithValueSet1();
+
+            objB.Simple = null;
+
+            var result = this.comparator.Compare(objA, objB);
+            result.AreSame.Should().BeFalse();
+            result.Differences.Count().Should().Be(1);
+        }
+
+        [Test]
+        public void ThenShouldPassIfBothValuesAreNull()
+        {
+            var objA = ComplexDomain.CreateObjectWithValueSet1();
+            var objB = ComplexDomain.CreateObjectWithValueSet1();
+
+            objA.Simple = null;
+            objB.Simple = null;
+
+            var result = this.comparator.Compare(objA, objB);
+            result.AreSame.Should().BeTrue();
+        }
+
+        [Test]
         public void ThenPropertyPathShouldBeCorrect()
         {
             var objA = ComplexDomain.CreateObjectWithValueSet1();
