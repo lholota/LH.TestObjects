@@ -43,6 +43,25 @@
         }
 
         [Test]
+        public void ThenShouldFailIfValuesAreOfDifferentTypes()
+        {
+            var objA = ComplexDomain.CreateObjectWithValueSet1();
+            var objB = ComplexDomain.CreateObjectWithValueSet1();
+
+            objB.Simple = new SimpleDomainInheritor
+            {
+                StringProp = objB.Simple.StringProp,
+                StringProp2 = objB.Simple.StringProp2,
+                IntProp = objB.Simple.IntProp
+            };
+
+            var result = this.comparator.Compare(objA, objB);
+
+            result.AreSame.Should().BeFalse();
+            result.Differences.Count().Should().Be(1);
+        }
+
+        [Test]
         public void ThenPropertyPathShouldBeCorrect()
         {
             var objA = ComplexDomain.CreateObjectWithValueSet1();
