@@ -45,11 +45,13 @@
     <Folder Include="Generate\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compare\AddDifferenceDelegate.cs" />
     <Compile Include="Compare\ComparatorGenericSelectionActions.cs" />
     <Compile Include="Compare\ComparatorPropertyRule.cs" />
     <Compile Include="Compare\ComparatorTypeSpecificSelectionActions.cs" />
     <Compile Include="Compare\ComparisonContext.cs" />
     <Compile Include="Compare\ComparisonResult.cs" />
+    <Compile Include="Compare\DifferenceType.cs" />
     <Compile Include="Compare\IComparisonContext.cs" />
     <Compile Include="Compare\IComparisonResult.cs" />
     <Compile Include="Compare\Logging\ILoggerConfiguration.cs" />

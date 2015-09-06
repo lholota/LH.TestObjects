@@ -16,14 +16,17 @@
             return type == typeof(string);
         }
 
-        public bool Compare(IComparisonContext comparisonContext)
+        public void Compare(IComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
         {
             var options = this.Options ?? new StringValueComparatorOptions();
 
-            return string.Equals(
+            if (!string.Equals(
                 (string)comparisonContext.ExpectedValue,
-                (string)comparisonContext.ActualValue, 
-                options.ComparisonType);
+                (string)comparisonContext.ActualValue,
+                options.ComparisonType))
+            {
+                addDifferenceCall.Invoke(DifferenceType.Value, comparisonContext);
+            }
         }
     }
 }

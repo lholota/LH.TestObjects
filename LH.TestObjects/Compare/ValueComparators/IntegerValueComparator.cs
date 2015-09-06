@@ -21,12 +21,15 @@
             return this.handledTypes.Contains(type);
         }
 
-        public bool Compare(IComparisonContext comparisonContext)
+        public void Compare(IComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
         {
             var expected = (IComparable)comparisonContext.ExpectedValue;
             var actual = (IComparable)comparisonContext.ActualValue;
 
-            return expected.CompareTo(actual) == 0;
+            if (expected.CompareTo(actual) != 0)
+            {
+                addDifferenceCall.Invoke(DifferenceType.Value, comparisonContext);
+            }
         }
     }
 }

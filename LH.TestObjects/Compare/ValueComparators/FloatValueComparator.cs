@@ -18,22 +18,30 @@
                    || type == typeof(double);
         }
 
-        public bool Compare(IComparisonContext comparisonContext)
+        public void Compare(IComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
         {
+            bool areEqual;
             var options = this.Options ?? new FloatValueComparatorOptions();
 
             if (comparisonContext.PropertyInfo.PropertyType == typeof(float))
             {
-                return this.CompareFloats(
+                areEqual = this.CompareFloats(
                     (float)comparisonContext.ExpectedValue,
                     (float)comparisonContext.ActualValue,
                     options.FloatEpsilon);
             }
+            else
+            {
+                areEqual = this.CompareDoubles(
+                    (double)comparisonContext.ExpectedValue,
+                    (double)comparisonContext.ActualValue,
+                    options.DoubleEpsilon);
+            }
 
-            return this.CompareDoubles(
-                (double)comparisonContext.ExpectedValue,
-                (double)comparisonContext.ActualValue,
-                options.DoubleEpsilon);
+            if (!areEqual)
+            {
+                addDifferenceCall.Invoke(DifferenceType.Value, comparisonContext);
+            }
         }
 
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator", Justification = "ByDesign")]

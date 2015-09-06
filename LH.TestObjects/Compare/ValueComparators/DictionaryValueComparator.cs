@@ -10,7 +10,7 @@
             return typeof(IDictionary).IsAssignableFrom(type);
         }
 
-        public bool Compare(IComparisonContext comparisonContext)
+        public void Compare(IComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
         {
             var actual = (IDictionary)comparisonContext.ActualValue;
             var expected = (IDictionary)comparisonContext.ExpectedValue;

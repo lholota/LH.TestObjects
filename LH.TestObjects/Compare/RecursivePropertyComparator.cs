@@ -69,7 +69,7 @@
             // ReSharper disable once PossibleNullReferenceException
             if (expected.GetType() != actual.GetType())
             {
-                this.AddDifference(DifferenceType.Type, propertyPath, context);
+                this.AddDifference(DifferenceType.Type, context);
             }
 
             var knownTypeComparator = knownTypeComparators
@@ -89,12 +89,8 @@
                 {
                     knownTypeComparatorWithOptions.Options = this.GetValueComparatorOptions(propertyPath);
                 }
-                
-                if (!knownTypeComparator.Compare(context))
-                {
-                    this.AddDifference(DifferenceType.Value, propertyPath, context);
-                }
 
+                knownTypeComparator.Compare(context, this.AddDifference);
                 return;
             }
 
@@ -156,38 +152,39 @@
             return bothNull || noneNull;
         }
 
-        private void AddDifference(DifferenceType diffType, PropertyPathItem propertyPath, IComparisonContext context)
+        private void AddDifference(DifferenceType diffType, IComparisonContext context, string message = null)
         {
-            switch (diffType)
+            if (!string.IsNullOrEmpty(message))
             {
-                case DifferenceType.Type:
-                    this.log.Log(
+                this.log.Log(LogLevel.Error, context, message);
+            }
+            else
+            {
+                switch (diffType)
+                {
+                    case DifferenceType.Type:
+                        this.log.Log(
                             LogLevel.Error,
                             context,
                             "The values have different types (expected: {0}, actual: {1}) at {2}",
                             context.ExpectedValue.GetType(),
                             context.ActualValue.GetType(),
-                            propertyPath.GetPathString());
-                    break;
+                            context.PropertyPath);
+                        break;
 
-                default:
-                    this.log.Log(
-                        LogLevel.Error,
-                        context,
-                        "The property values do not match at {0}, expected is {1}, but the actual {2}.",
-                        propertyPath.GetPathString(),
-                        context.ExpectedValue ?? "[Null]",
-                        context.ActualValue ?? "[Null]");
-                    break;
+                    default:
+                        this.log.Log(
+                            LogLevel.Error,
+                            context,
+                            "The property values do not match at {0}, expected is {1}, but the actual {2}.",
+                            context.PropertyPath,
+                            context.ExpectedValue ?? "[Null]",
+                            context.ActualValue ?? "[Null]");
+                        break;
+                }
             }
 
             this.Result.DifferencesList.Add(context);
-        }
-
-        private enum DifferenceType
-        {
-            Value,
-            Type
         }
     }
 }
