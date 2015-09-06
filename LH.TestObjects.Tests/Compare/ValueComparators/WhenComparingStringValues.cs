@@ -10,15 +10,45 @@
     [TestFixture]
     public class WhenComparingStringValues : ComparatorTestsBase
     {
+        private SimpleDomain objA;
+        private SimpleDomain objB;
+
+        public override void Setup()
+        {
+            base.Setup();
+
+            this.objA = SimpleDomain.CreateObjectWithValueSet1();
+            this.objB = SimpleDomain.CreateObjectWithValueSet1();
+        }
+
+        [Test]
+        public void ThenShouldPassWhenValuesAreSame()
+        {
+            var result = this.Comparator.Compare(this.objA, this.objB);
+
+            result.AreSame.Should().BeTrue();
+        }
+
+        [Test]
+        public void ThenShouldFailIfValuesDiffer()
+        {
+            this.objA.StringProp = "AAA";
+            this.objB.StringProp = "BBB";
+
+            var result = this.Comparator.Compare(this.objA, this.objB);
+
+            result.AreSame.Should().BeFalse();
+            result.Differences.Should().NotBeNull();
+            result.Differences.Single().PropertyPath.Should().Be("StringProp");
+        }
+
         [Test]
         public void ThenShouldFailIfValuesDifferByCase()
         {
-            var objA = SimpleDomain.CreateObjectWithValueSet1();
-            var objB = SimpleDomain.CreateObjectWithValueSet1();
+            this.objA.StringProp = "AAA";
+            this.objB.StringProp = "aaa";
 
-            objA.StringProp = objB.StringProp.ToLowerInvariant();
-
-            var result = this.Comparator.Compare(objA, objB);
+            var result = this.Comparator.Compare(this.objA, this.objB);
 
             result.AreSame.Should().BeFalse();
             result.Differences.Single().PropertyInfo.Name.Should().Be("StringProp");
@@ -27,15 +57,13 @@
         [Test]
         public void ThenShouldPassIfValuesDifferByCaseAndOptionsSetToInsensitive()
         {
-            var objA = SimpleDomain.CreateObjectWithValueSet1();
-            var objB = SimpleDomain.CreateObjectWithValueSet1();
-
-            objA.StringProp = objB.StringProp.ToLowerInvariant();
+            this.objA.StringProp = "AAA";
+            this.objB.StringProp = "aaa";
 
             this.Comparator.Property(x => x.StringProp)
                 .WithComparisonType(StringComparison.OrdinalIgnoreCase);
 
-            var result = this.Comparator.Compare(objA, objB);
+            var result = this.Comparator.Compare(this.objA, this.objB);
 
             result.AreSame.Should().BeTrue();
         }
