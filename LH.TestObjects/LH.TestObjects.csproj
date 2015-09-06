@@ -63,6 +63,7 @@
     <Compile Include="Compare\PropertyOptions.cs" />
     <Compile Include="Compare\PropertyPathItem.cs" />
     <Compile Include="Compare\RecursivePropertyComparator.cs" />
+    <Compile Include="Compare\ValueComparators\DictionaryValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\FloatValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\FloatValueComparatorOptions.cs" />
     <Compile Include="Compare\ValueComparators\IHasComparatorOptions.cs" />
