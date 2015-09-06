@@ -26,6 +26,12 @@
             return actions;
         }
 
+        /// <summary>
+        /// Defines the allowed deviation when comparing float values. Default value is float.MinValue.
+        /// </summary>
+        /// <param name="selectionActions">Property selection on which the configuration action should be applied.</param>
+        /// <param name="epsilon">The allowed deviation</param>
+        /// <returns><see cref="IComparatorTypeSpecificSelectionActions{TProp}"/></returns>
         public static IComparatorTypeSpecificSelectionActions<float> WithEpsilon(
             this IComparatorTypeSpecificSelectionActions<float> selectionActions, 
             float epsilon)
@@ -38,6 +44,12 @@
             return actions;
         }
 
+        /// <summary>
+        /// Defines the allowed deviation when comparing double values. Default value is double.MinValue.
+        /// </summary>
+        /// <param name="selectionActions">Property selection on which the configuration action should be applied.</param>
+        /// <param name="epsilon">The allowed deviation</param>
+        /// <returns><see cref="IComparatorTypeSpecificSelectionActions{TProp}"/></returns>
         public static IComparatorTypeSpecificSelectionActions<double> WithEpsilon(
             this IComparatorTypeSpecificSelectionActions<double> selectionActions,
             float epsilon)

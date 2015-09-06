@@ -34,11 +34,9 @@
                 (double)comparisonContext.ExpectedValue,
                 (double)comparisonContext.ActualValue,
                 options.DoubleEpsilon);
-
-            throw new NotImplementedException();
         }
 
-        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
+        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator", Justification = "ByDesign")]
         private bool CompareFloats(float expected, float actual, float epsilon)
         {
             var absDiff = Math.Abs(expected - actual);
@@ -51,7 +49,7 @@
             return absDiff < epsilon;
         }
 
-        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
+        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator", Justification = "ByDesign")]
         private bool CompareDoubles(double expected, double actual, double epsilon)
         {
             var absDiff = Math.Abs(expected - actual);
