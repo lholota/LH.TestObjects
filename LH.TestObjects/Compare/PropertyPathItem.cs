@@ -5,12 +5,17 @@
 
     internal class PropertyPathItem
     {
-        public static readonly PropertyPathItem Root = new PropertyPathItem();
+        public PropertyPathItem(System.Type type)
+        {
+            this.IsRoot = true;
+            this.Type = type;
+        }
 
         public PropertyPathItem(PropertyInfo propertyInfo, PropertyPathItem parentPropertyPathItem)
         {
             this.ParentProperty = parentPropertyPathItem;
             this.PropertyInfo = propertyInfo;
+            this.Type = propertyInfo.PropertyType;
         }
 
         public PropertyPathItem(string collectionItemDescription, PropertyPathItem parentPropertyPathItem)
@@ -19,9 +24,7 @@
             this.ParentProperty = parentPropertyPathItem;
         }
 
-        private PropertyPathItem()
-        {
-        }
+        public bool IsRoot { get; }
 
         public string CollectionItemDescription { get; }
 
@@ -29,9 +32,11 @@
 
         public PropertyInfo PropertyInfo { get; }
 
+        public System.Type Type { get; }
+
         public string GetPathString()
         {
-            if (this == Root)
+            if (this.IsRoot)
             {
                 return string.Empty;
             }
@@ -44,12 +49,12 @@
 
         private void WritePath(StringBuilder builder)
         {
-            if (this == Root)
+            if (this.IsRoot)
             {
                 return;
             }
 
-            if (this.ParentProperty != null && this.ParentProperty != Root)
+            if (this.ParentProperty != null && !this.ParentProperty.IsRoot)
             {
                 this.ParentProperty.WritePath(builder);
             }

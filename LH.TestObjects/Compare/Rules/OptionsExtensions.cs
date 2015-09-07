@@ -1,7 +1,12 @@
-﻿namespace LH.TestObjects.Compare
+﻿// ReSharper disable CheckNamespace
+
+// The namespace is different by design so the user does not have to import additional 
+// namespaces when using the option extension methods
+
+namespace LH.TestObjects.Compare
 {
     using System;
-    using ValueComparators;
+    using ValueComparators.KnownTypes;
 
     /// <summary>
     /// Contains extension methods to configure comparison for specific types

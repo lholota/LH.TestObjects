@@ -1,48 +1,83 @@
 ﻿namespace LH.TestObjects.Compare
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
+    using System.Collections.Generic;
+    using Logging;
+    using Rules;
 
     internal class ComparisonContext : IComparisonContext
-    {
-        public ComparisonContext(PropertyPathItem propertyPath, object expected, object actual)
+    {       
+        public ComparisonContext(ILogger log, IEnumerable<PropertySelectionRule> customRules)
         {
-            this.PropertyPathItem = propertyPath;
-            this.ExpectedValue = expected;
-            this.ActualValue = actual;
+            this.Result = new ComparisonResult();
+            this.Rules = new RulesCollection(customRules);
+            this.Log = log;
         }
 
-        public object ExpectedValue { get; }
+        public ILogger Log { get; }
 
-        public object ActualValue { get; }
+        public ComparisonResult Result { get; }
 
-        public PropertyInfo PropertyInfo
+        public RulesCollection Rules { get; }
+
+        public void CompareItem(object expected, object actual, PropertyPathItem propertyPath)
         {
-            get { return this.PropertyPathItem.PropertyInfo; }
+            var valueComparison = new ValueComparison(propertyPath, expected, actual);
+            var comparator = this.Rules.GetComparator(valueComparison);
+
+            if (this.Rules.IsIgnored(propertyPath))
+            {
+                this.Log.Log(LogLevel.Info, valueComparison, "{0}: The property is ignored", valueComparison.PropertyPath);
+            }
+            else if (!this.IsNullComparisonMatch(expected, actual))
+            {
+                this.AddDifference(valueComparison);
+            }
+            else if(ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
+            {
+            }
+            // ReSharper disable once PossibleNullReferenceException
+            else if(expected.GetType() != actual.GetType())
+            {
+                var message = string.Format(
+                    "The types do not match, the expected type is {0} but the actual one is {1}.",
+                    expected.GetType(),
+                    actual.GetType()
+                    );
+
+                this.AddDifference(valueComparison, message);
+            }
+            else
+            {
+                comparator.Compare(this, valueComparison);
+            }
         }
 
-        public string PropertyPath
+        public void AddDifference(IValueComparison valueComparison, string message = null)
         {
-            get { return this.PropertyPathItem.GetPathString(); }
+            if (!string.IsNullOrEmpty(message))
+            {
+                this.Log.Log(LogLevel.Error, valueComparison, message);
+            }
+            else
+            {
+                this.Log.Log(
+                            LogLevel.Error,
+                            valueComparison,
+                            "{0}: The property values do not match, expected is {1}, but the actual {2}.",
+                            valueComparison.PropertyPath,
+                            valueComparison.ExpectedValue ?? "[Null]",
+                            valueComparison.ActualValue ?? "[Null]");
+            }
+
+            this.Result.DifferencesList.Add(valueComparison);
         }
 
-        internal PropertyPathItem PropertyPathItem { get; }
-    }
-
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Related types.")]
-    internal class ComparisonContext<TProp> : ComparisonContext, IComparisonContext<TProp>
-    {
-        public ComparisonContext(ComparisonContext genericContext)
-            : base(genericContext.PropertyPathItem, genericContext.ExpectedValue, genericContext.ActualValue)
+        private bool IsNullComparisonMatch(object expected, object actual)
         {
-            this.ExpectedValue = (TProp)genericContext.ExpectedValue;
-            this.ActualValue = (TProp)genericContext.ActualValue;
+            var bothNull = ReferenceEquals(expected, null) && ReferenceEquals(actual, null);
+            var noneNull = !ReferenceEquals(expected, null) && !ReferenceEquals(actual, null);
+
+            return bothNull || noneNull;
         }
-
-        public bool AreSame { get; set; }
-
-        public new TProp ExpectedValue { get; }
-
-        public new TProp ActualValue { get; }
     }
 }

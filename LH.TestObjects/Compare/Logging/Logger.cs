@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class Logger : ILoggerConfiguration
+    internal class Logger : ILogger
     {
         private LogLevel minimumLevel;
         private Action<LogEvent> customLoggerCallback;
@@ -19,7 +19,7 @@
             return this;
         }
 
-        public void Log(LogLevel level, IComparisonContext context, string message, params object[] args)
+        public void Log(LogLevel level, IValueComparison comparison, string message, params object[] args)
         {
             if (level < this.minimumLevel)
             {
@@ -32,7 +32,7 @@
                 {
                     Level = level,
                     Message = string.Format(message, args),
-                    Context = context
+                    Comparison = comparison
                 };
 
                 this.customLoggerCallback.Invoke(logEvent);

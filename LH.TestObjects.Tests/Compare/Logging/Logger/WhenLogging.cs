@@ -40,14 +40,14 @@
         [Test]
         public void ThenLogEventShouldHavePropertiesSet()
         {
-            var context = new ComparisonContext(null, null, null);
+            var context = new ValueComparison(null, null, null);
 
             var logger = new Logger();
             logger.Callback(x =>
             {
                 x.Message.Should().Be("Hello, world!");
                 x.Level.Should().Be(LogLevel.Error);
-                x.Context.Should().NotBeNull();
+                x.Comparison.Should().NotBeNull();
             });
 
             logger.Log(LogLevel.Error, context, "Hello, {0}!", "world");
@@ -55,7 +55,7 @@
 
         private static void Log(Logger logger, LogLevel level)
         {
-            logger.Log(level, new ComparisonContext(null, null, null), "Message");
+            logger.Log(level, new ValueComparison(null, null, null), "Message");
         }
     }
 }

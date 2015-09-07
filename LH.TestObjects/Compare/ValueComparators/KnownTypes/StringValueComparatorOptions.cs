@@ -1,4 +1,4 @@
-﻿namespace LH.TestObjects.Compare.ValueComparators
+﻿namespace LH.TestObjects.Compare.ValueComparators.KnownTypes
 {
     using System;
 

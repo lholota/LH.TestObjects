@@ -20,14 +20,5 @@
         /// <param name="level">The minimum level of the logged events. Events will lower level will be ignored.</param>
         /// <returns><see cref="ILoggerConfiguration"/></returns>
         ILoggerConfiguration SetLevel(LogLevel level);
-
-        /// <summary>
-        /// Log a message with the Info level.
-        /// </summary>
-        /// <param name="level">Level of the logged event</param>
-        /// <param name="context">Context of the currently performed comparison</param>
-        /// <param name="message">Message or message format</param>
-        /// <param name="args">Parameters to be applied in the string.Format</param>
-        void Log(LogLevel level, IComparisonContext context, string message, params object[] args);
     }
 }

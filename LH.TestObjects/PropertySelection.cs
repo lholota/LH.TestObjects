@@ -18,7 +18,7 @@
 
         public bool IsMatch(PropertyPathItem propertyPath)
         {
-            if (propertyPath == PropertyPathItem.Root)
+            if (propertyPath.IsRoot)
             {
                 return false;
             }
@@ -60,7 +60,7 @@
         {
             foreach (var propertyName in propertyNames)
             {
-                if (propertyPath == PropertyPathItem.Root || propertyPath.PropertyInfo.Name != propertyName)
+                if (propertyPath.IsRoot || propertyPath.PropertyInfo.Name != propertyName)
                 {
                     return false;
                 }

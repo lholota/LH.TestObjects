@@ -13,6 +13,6 @@
         /// </summary>
         /// <param name="comparisonAction">Your comparison logic.</param>
         /// <returns><see cref="IComparatorTypeSpecificSelectionActions{TProp}"/></returns>
-        IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Action<IComparisonContext<TProp>> comparisonAction);
+        IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Func<IValueComparison<TProp>, bool> comparisonAction);
     }
 }

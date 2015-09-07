@@ -1,5 +1,7 @@
 ﻿namespace LH.TestObjects.Compare
 {
+    using Rules;
+
     internal class ComparatorGenericSelectionActions : IGenericSelectionActions
     {
         private readonly PropertyOptions options;

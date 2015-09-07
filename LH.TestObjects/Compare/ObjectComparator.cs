@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using Logging;
+    using Rules;
 
     /// <summary>
     /// This object allows you to compare two objects with a custom configuration.
@@ -13,21 +13,25 @@
     /// <typeparam name="TUserType">Compared type</typeparam>
     public class ObjectComparator<TUserType> : IComparatorTypeSpecificPropertySelector<TUserType>
     {
-        private readonly IList<ComparatorPropertyRule> propertyRules; 
+        private readonly ILogger log;
+        private readonly IList<PropertySelectionRule> propertyRules; 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectComparator{TUserType}" /> class.
         /// </summary>
         public ObjectComparator()
         {
-            this.propertyRules = new List<ComparatorPropertyRule>();
-            this.Log = new Logger();
+            this.propertyRules = new List<PropertySelectionRule>();
+            this.log = new Logger();
         }
-        
+
         /// <summary>
         /// Gets the logging configuration.
         /// </summary>
-        public ILoggerConfiguration Log { get; }
+        public ILoggerConfiguration Log
+        {
+            get { return this.log; }
+        }
 
         /// <summary>
         /// Compares two objects and returns a summary of the differences.
@@ -37,18 +41,18 @@
         /// <returns><see cref="ComparisonResult"/> summarizing the differences between the provided objects.</returns>
         public IComparisonResult Compare(TUserType expected, TUserType actual)
         {
-            var prioritizedSelections = this.propertyRules.Reverse().ToArray();
-            
-            var recursivePropertyComparator = new RecursivePropertyComparator(this.Log, prioritizedSelections);
-            recursivePropertyComparator.CompareRecursively(expected, actual);
+            var rootPropertyPath = new PropertyPathItem(typeof(TUserType));
+            var context = new ComparisonContext(this.log, this.propertyRules);
 
-            return recursivePropertyComparator.Result;
+            context.CompareItem(expected, actual, rootPropertyPath);
+
+            return context.Result;
         }
 
         /// <inheritdoc/>
         public IGenericSelectionActions PropertiesMatching(Func<PropertyInfo, bool> predicate = null)
         {
-            var rule = new ComparatorPropertyRule();
+            var rule = new PropertySelectionRule();
             rule.Selection.Predicate = predicate;
 
             this.AddPropertyRule(rule);
@@ -59,7 +63,7 @@
         /// <inheritdoc/>
         public IComparatorTypeSpecificSelectionActions<TProp> Property<TProp>(Expression<Func<TUserType, TProp>> propertyExpression)
         {
-            var rule = new ComparatorPropertyRule();
+            var rule = new PropertySelectionRule();
             rule.Selection.PropertyExpression = propertyExpression;
             rule.Selection.IncludeInheritedTypes = false;
             rule.Selection.PropertyType = typeof(TProp);
@@ -72,7 +76,7 @@
         /// <inheritdoc/>
         public IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(bool includeInheritedTypes = true, Func<PropertyInfo, bool> predicate = null)
         {
-            var rule = new ComparatorPropertyRule();
+            var rule = new PropertySelectionRule();
             rule.Selection.IncludeInheritedTypes = includeInheritedTypes;
             rule.Selection.PropertyType = typeof(TProp);
             rule.Selection.Predicate = predicate;
@@ -82,7 +86,7 @@
             return new ComparatorTypeSpecificSelectionActions<TProp>(rule.Options);
         }
 
-        private void AddPropertyRule(ComparatorPropertyRule rule)
+        private void AddPropertyRule(PropertySelectionRule rule)
         {
             rule.OrderIndex = this.propertyRules.Count;
             this.propertyRules.Add(rule);

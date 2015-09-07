@@ -1,4 +1,4 @@
-﻿namespace LH.TestObjects.Compare.ValueComparators
+﻿namespace LH.TestObjects.Compare.ValueComparators.KnownTypes
 {
     using System;
     using System.Collections.Generic;
@@ -21,14 +21,14 @@
             return this.handledTypes.Contains(type);
         }
 
-        public void Compare(ComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
+        public void Compare(ComparisonContext comparisonContext, ValueComparison valueComparison)
         {
-            var expected = (IComparable)comparisonContext.ExpectedValue;
-            var actual = (IComparable)comparisonContext.ActualValue;
+            var expected = (IComparable)valueComparison.ExpectedValue;
+            var actual = (IComparable)valueComparison.ActualValue;
 
             if (expected.CompareTo(actual) != 0)
             {
-                addDifferenceCall.Invoke(DifferenceType.Value, comparisonContext);
+                comparisonContext.AddDifference(valueComparison);
             }
         }
     }

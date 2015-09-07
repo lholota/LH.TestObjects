@@ -1,6 +1,7 @@
 ﻿namespace LH.TestObjects.Compare
 {
     using System;
+    using Rules;
 
     internal class ComparatorTypeSpecificSelectionActions<TProp> : ComparatorGenericSelectionActions, IComparatorTypeSpecificSelectionActions<TProp>
     {
@@ -9,12 +10,12 @@
         {
         }
 
-        public IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Action<IComparisonContext<TProp>> comparisonFunc)
+        public IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Func<IValueComparison<TProp>, bool> comparisonAction)
         {
-            this.Options.CustomCompare = context =>
+            this.Options.CustomCompare = valueComparison =>
             {
-                var typeSpecificContext = new ComparisonContext<TProp>(context);
-                comparisonFunc.Invoke(typeSpecificContext);
+                var adapter = new ValueComparisonAdapter<TProp>(valueComparison);
+                return comparisonAction.Invoke(adapter);
             };
 
             return this;

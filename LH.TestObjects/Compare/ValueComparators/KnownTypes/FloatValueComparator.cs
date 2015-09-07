@@ -1,46 +1,39 @@
-﻿namespace LH.TestObjects.Compare.ValueComparators
+﻿namespace LH.TestObjects.Compare.ValueComparators.KnownTypes
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    internal class FloatValueComparator : IValueComparator, IHasComparatorOptions
+    internal class FloatValueComparator : IValueComparator
     {
-        object IHasComparatorOptions.Options
-        {
-            set { this.Options = (FloatValueComparatorOptions)value; }
-        }
-
-        public FloatValueComparatorOptions Options { get; set; }
-
         public bool CanHandle(Type type)
         {
             return type == typeof(float)
                    || type == typeof(double);
         }
 
-        public void Compare(ComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
+        public void Compare(ComparisonContext context, ValueComparison valueComparison)
         {
             bool areEqual;
-            var options = this.Options ?? new FloatValueComparatorOptions();
+            var options = context.Rules.GetOptions<FloatValueComparatorOptions>(valueComparison);
 
-            if (comparisonContext.PropertyInfo.PropertyType == typeof(float))
+            if (valueComparison.PropertyInfo.PropertyType == typeof(float))
             {
                 areEqual = this.CompareFloats(
-                    (float)comparisonContext.ExpectedValue,
-                    (float)comparisonContext.ActualValue,
+                    (float)valueComparison.ExpectedValue,
+                    (float)valueComparison.ActualValue,
                     options.FloatEpsilon);
             }
             else
             {
                 areEqual = this.CompareDoubles(
-                    (double)comparisonContext.ExpectedValue,
-                    (double)comparisonContext.ActualValue,
+                    (double)valueComparison.ExpectedValue,
+                    (double)valueComparison.ActualValue,
                     options.DoubleEpsilon);
             }
 
             if (!areEqual)
             {
-                addDifferenceCall.Invoke(DifferenceType.Value, comparisonContext);
+                context.AddDifference(valueComparison);
             }
         }
 

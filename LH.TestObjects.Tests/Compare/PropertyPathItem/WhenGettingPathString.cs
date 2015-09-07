@@ -12,12 +12,14 @@
         [Test]
         public void ThenShouldReturnPropertyNameIfDoesNotHaveParent()
         {
-            var propInfo = typeof(SimpleDomain).GetProperties()
+            var root = new PropertyPathItem(typeof(string));
+
+            var stringPropInfo = typeof(SimpleDomain).GetProperties()
                 .First(x => x.Name == "StringProp");
 
-            var item = new PropertyPathItem(propInfo, PropertyPathItem.Root);
+            var stringPropPath = new PropertyPathItem(stringPropInfo, root);
 
-            item.GetPathString().Should().Be("StringProp");
+            stringPropPath.GetPathString().Should().Be("StringProp");
         }
 
         [Test]
@@ -29,7 +31,7 @@
             var intPropInfo = typeof(SimpleDomain).GetProperties()
                 .First(x => x.Name == "IntProp");
 
-            var item1 = new PropertyPathItem(stringPropInfo, PropertyPathItem.Root);
+            var item1 = new PropertyPathItem(stringPropInfo, new PropertyPathItem(typeof(string)));
             var item2 = new PropertyPathItem(intPropInfo, item1);
             var item3 = new PropertyPathItem(stringPropInfo, item2);
 

@@ -83,5 +83,18 @@
             var result = this.Comparator.Compare(objA, objB);
             result.AreSame.Should().BeTrue();
         }
+
+        [Test]
+        public void ThenShouldLogIfValuesDiffer()
+        {
+            var logCallCount = 0;
+            this.Comparator.Log.Callback(x => logCallCount++);
+
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet2();
+
+            this.Comparator.Compare(objA, objB);
+            logCallCount.Should().Be(3);
+        }
     }
 }

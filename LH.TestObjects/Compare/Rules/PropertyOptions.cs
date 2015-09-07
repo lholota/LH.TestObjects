@@ -1,4 +1,4 @@
-﻿namespace LH.TestObjects.Compare
+﻿namespace LH.TestObjects.Compare.Rules
 {
     using System;
 
@@ -6,7 +6,7 @@
     {
         public bool IsIgnored { get; set; }
 
-        public Action<ComparisonContext> CustomCompare { get; set; }
+        public Func<IValueComparison, bool> CustomCompare { get; set; }
 
         public object ValueComparatorOptions { get; set; }
     }

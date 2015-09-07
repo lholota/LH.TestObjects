@@ -37,17 +37,17 @@
                 hasBeenCalled = true;
 
                 ctx.Message.Should().NotBeNullOrEmpty();
-                ctx.Context.Should().NotBeNull();
-                ctx.Context.PropertyInfo.Should().NotBeNull();
-                ctx.Context.ActualValue.Should().NotBeNull();
-                ctx.Context.ExpectedValue.Should().NotBeNull();
+                ctx.Comparison.Should().NotBeNull();
+                ctx.Comparison.PropertyInfo.Should().NotBeNull();
+                ctx.Comparison.ActualValue.Should().NotBeNull();
+                ctx.Comparison.ExpectedValue.Should().NotBeNull();
 
-                if (ctx.Context.PropertyInfo.Name == nameof(objA.StringProp))
+                if (ctx.Comparison.PropertyInfo.Name == nameof(objA.StringProp))
                 {
                     stringPropChecked = true;
 
-                    ctx.Context.ExpectedValue.Should().Be(objA.StringProp);
-                    ctx.Context.ActualValue.Should().Be(objB.StringProp);
+                    ctx.Comparison.ExpectedValue.Should().Be(objA.StringProp);
+                    ctx.Comparison.ActualValue.Should().Be(objB.StringProp);
                 }
             };
 

@@ -18,6 +18,6 @@
         /// <summary>
         /// Gets the summary of the comparison during which the event was raised.
         /// </summary>
-        public IComparisonContext Context { get; internal set; }
+        public IValueComparison Comparison { get; internal set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
-    using System;
     using System.Linq;
     using Domain;
     using FluentAssertions;
@@ -168,7 +167,11 @@
 
             this.Comparator
                 .Property(x => x.StringProp)
-                .CustomCompare(x => Assert.Fail());
+                .CustomCompare(x =>
+                {
+                    Assert.Fail();
+                    return false;
+                });
 
             this.Comparator
                 .Property(x => x.StringProp)

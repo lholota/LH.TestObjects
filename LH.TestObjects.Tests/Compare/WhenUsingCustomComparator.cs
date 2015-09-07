@@ -33,7 +33,7 @@
             var objB = SimpleDomain.CreateObjectWithValueSet1();
 
             objA.StringProp = "AAA";
-            objB.StringProp = "BBB";
+            objB.StringProp = "AAA";
 
             this.Comparator
                 .Property(x => x.StringProp)

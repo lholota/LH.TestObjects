@@ -6,6 +6,6 @@
     {
         bool CanHandle(Type type);
 
-        void Compare(ComparisonContext comparisonContext, AddDifferenceDelegate addDifference);
+        void Compare(ComparisonContext context, ValueComparison comparison);
     }
 }
