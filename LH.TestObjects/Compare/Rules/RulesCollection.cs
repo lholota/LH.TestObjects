@@ -24,7 +24,7 @@
         {
             var rule = this.orderedRules
                 .OfType<PropertySelectionRule>()
-                .FirstOrDefault(x => x.IsMatch(comparison.PropertyPathItem) && x.Options.ValueComparatorOptions != null);
+                .FirstOrDefault(x => x.IsMatch(comparison) && x.Options.ValueComparatorOptions != null);
 
             if (rule != null)
             {
@@ -37,7 +37,7 @@
         internal IValueComparator GetComparator(ValueComparison valueComparison)
         {
             var rule = this.orderedRules
-                .First(x => x.IsMatch(valueComparison.PropertyPathItem) && x.CanCompare);
+                .First(x => x.IsMatch(valueComparison) && x.CanCompare);
 
             if (rule == null)
             {
@@ -51,11 +51,11 @@
             return rule.Comparator;
         }
 
-        internal bool IsIgnored(PropertyPathItem propertyPath)
+        internal bool IsIgnored(ValueComparison valueComparison)
         {
             return this.orderedRules
                 .OfType<PropertySelectionRule>()
-                .Any(x => x.IsMatch(propertyPath) && x.Options.IsIgnored);
+                .Any(x => x.IsMatch(valueComparison) && x.Options.IsIgnored);
         }
 
         private void AddDefaultRules(List<RuleBase> rules)

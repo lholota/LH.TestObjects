@@ -41,10 +41,8 @@
         /// <returns><see cref="ComparisonResult"/> summarizing the differences between the provided objects.</returns>
         public IComparisonResult Compare(TUserType expected, TUserType actual)
         {
-            var rootPropertyPath = new PropertyPathItem(typeof(TUserType));
             var context = new ComparisonContext(this.log, this.propertyRules);
-
-            context.CompareItem(expected, actual, rootPropertyPath);
+            context.CompareItem(expected, actual, PropertyPathItem.Root);
 
             return context.Result;
         }

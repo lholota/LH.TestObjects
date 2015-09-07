@@ -24,7 +24,7 @@
             var valueComparison = new ValueComparison(propertyPath, expected, actual);
             var comparator = this.Rules.GetComparator(valueComparison);
 
-            if (this.Rules.IsIgnored(propertyPath))
+            if (this.Rules.IsIgnored(valueComparison))
             {
                 this.Log.Log(LogLevel.Info, valueComparison, "{0}: The property is ignored", valueComparison.PropertyPath);
             }

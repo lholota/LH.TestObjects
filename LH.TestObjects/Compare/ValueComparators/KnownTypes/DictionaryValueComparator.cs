@@ -16,12 +16,22 @@
             var actual = (IDictionary)valueComparison.ActualValue;
             var expected = (IDictionary)valueComparison.ExpectedValue;
 
-            if (!this.AreKeysEqual(expected, actual, comparisonContext, valueComparison))
+            if (this.AreKeysEqual(expected, actual, comparisonContext, valueComparison))
             {
-                return;
-            }
+                foreach (var key in expected.Keys)
+                {
+                    var actualValue = actual[key];
+                    var expectedValue = expected[key];
 
-            throw new NotImplementedException();
+                    // TODO: Why is this immediately picked up by the recursive comparator
+                    // TODO: Create a valid use case test for the recursive comparator
+                    // TODO: Both values null in the dictionary
+                    // TODO: Comple objects in the dictionary
+
+                    var propertyPath = new PropertyPathItem(key.ToString(), valueComparison.PropertyPathItem);
+                    comparisonContext.CompareItem(expectedValue, actualValue, propertyPath);
+                }
+            }
         }
 
         private bool AreKeysEqual(IDictionary expected, IDictionary actual, IComparisonContext comparisonContext, ValueComparison valueComparison)

@@ -16,9 +16,9 @@
             get { return this.ValueComparator; }
         }
 
-        public override bool IsMatch(PropertyPathItem propertyPath)
+        public override bool IsMatch(ValueComparison valueComparison)
         {
-            return this.Comparator.CanHandle(propertyPath.Type);
+            return this.Comparator.CanHandle(valueComparison.Type);
         }
     }
 }

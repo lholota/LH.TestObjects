@@ -12,7 +12,12 @@
 
         public void Compare(ComparisonContext context, ValueComparison comparison)
         {
-            var properties = comparison.PropertyPathItem.Type
+            if (comparison.Type == null)
+            {
+                throw new ArgumentException("Could not determine type to reflect.", "comparison");
+            }
+
+            var properties = comparison.Type
                .GetProperties(BindingFlags.Instance | BindingFlags.Public);
 
             foreach (var property in properties)

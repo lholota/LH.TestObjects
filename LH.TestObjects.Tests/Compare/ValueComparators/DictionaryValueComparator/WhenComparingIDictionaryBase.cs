@@ -45,26 +45,12 @@
         [Test]
         public void ThenShouldFailIfExtraKey()
         {
-            this.objB.Add("Key3", "Value");
+            this.objB.Add("Key3", new SimpleDomain());
 
             var result = this.comparator.Compare(this.objA, this.objB);
 
             result.AreSame.Should().BeFalse();
             result.Differences.Single().PropertyPath.Should().Be("[Key3]");
-        }
-
-        [Test]
-        public void ThenShouldFailIfValuesDiffer()
-        {
-            this.objA["Key1"] = "AAA";
-            this.objB["Key1"] = "BBB";
-
-            var result = this.comparator.Compare(this.objA, this.objB);
-
-            result.AreSame.Should().BeFalse();
-
-            var difference = result.Differences.Single();
-            difference.PropertyPath.Should().Be("[Key1]");
         }
 
         [Test]
@@ -84,27 +70,24 @@
             var domainA = new DictionaryDomain<T> { DictProp = this.CreateDictionary() };
             var domainB = new DictionaryDomain<T> { DictProp = this.CreateDictionary() };
 
-            domainA.DictProp["Key1"] = "AAA";
-            domainB.DictProp["Key1"] = "BBB";
+            domainA.DictProp["Key1"] = new SimpleDomain {StringProp = "AAA"};
+            domainB.DictProp["Key1"] = new SimpleDomain {StringProp = "BBB"};
 
             var domainComparator = new ObjectComparator<DictionaryDomain<T>>();
             var result = domainComparator.Compare(domainA, domainB);
 
             result.AreSame.Should().BeFalse();
-            result.Differences.Single().PropertyPath.Should().Be("DictProp[Key1]");
+            result.Differences.Single().PropertyPath.Should().Be("DictProp[Key1].StringProp");
         }
 
         [Test]
         public void ThenShouldFailWhenNestedObjectsInValuesDiffer()
         {
-            var domainA = SimpleDomain.CreateObjectWithValueSet1();
-            var domainB = SimpleDomain.CreateObjectWithValueSet1();
+            var domainA = (SimpleDomain)this.objA["Key1"];
+            var domainB = (SimpleDomain)this.objB["Key1"];
 
             domainA.StringProp = "AAA";
             domainB.StringProp = "BBB";
-
-            this.objA["Key1"] = domainA;
-            this.objB["Key1"] = domainB;
 
             var result = this.comparator.Compare(this.objA, this.objB);
             result.AreSame.Should().BeFalse();
@@ -114,8 +97,8 @@
         protected T CreateDictionary()
         {
             var result = new T();
-            result.Add("Key1", "Value1");
-            result.Add("Key2", "Value2");
+            result.Add("Key1", SimpleDomain.CreateObjectWithValueSet1());
+            result.Add("Key2", SimpleDomain.CreateObjectWithValueSet2());
 
             return result;
         }

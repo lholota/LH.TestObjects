@@ -24,9 +24,9 @@
             }
         }
 
-        public override bool IsMatch(PropertyPathItem propertyPath)
+        public override bool IsMatch(ValueComparison valueComparison)
         {
-            return this.Selection.IsMatch(propertyPath);
+            return this.Selection.IsMatch(valueComparison.PropertyPathItem);
         }
     }
 }

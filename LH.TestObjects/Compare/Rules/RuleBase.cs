@@ -17,6 +17,6 @@
 
         public abstract IValueComparator Comparator { get; }
 
-        public abstract bool IsMatch(PropertyPathItem propertyPath);
+        public abstract bool IsMatch(ValueComparison valueComparison);
     }
 }

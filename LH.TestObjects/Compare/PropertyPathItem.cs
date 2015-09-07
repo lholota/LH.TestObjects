@@ -5,23 +5,23 @@
 
     internal class PropertyPathItem
     {
-        public PropertyPathItem(System.Type type)
-        {
-            this.IsRoot = true;
-            this.Type = type;
-        }
+        public static readonly PropertyPathItem Root = new PropertyPathItem();
 
         public PropertyPathItem(PropertyInfo propertyInfo, PropertyPathItem parentPropertyPathItem)
         {
             this.ParentProperty = parentPropertyPathItem;
             this.PropertyInfo = propertyInfo;
-            this.Type = propertyInfo.PropertyType;
         }
 
         public PropertyPathItem(string collectionItemDescription, PropertyPathItem parentPropertyPathItem)
         {
             this.CollectionItemDescription = collectionItemDescription;
             this.ParentProperty = parentPropertyPathItem;
+        }
+
+        private PropertyPathItem()
+        {
+            this.IsRoot = true;
         }
 
         public bool IsRoot { get; }
@@ -31,8 +31,6 @@
         public PropertyPathItem ParentProperty { get; }
 
         public PropertyInfo PropertyInfo { get; }
-
-        public System.Type Type { get; }
 
         public string GetPathString()
         {
