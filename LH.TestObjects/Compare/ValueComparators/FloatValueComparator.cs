@@ -18,7 +18,7 @@
                    || type == typeof(double);
         }
 
-        public void Compare(IComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
+        public void Compare(ComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
         {
             bool areEqual;
             var options = this.Options ?? new FloatValueComparatorOptions();

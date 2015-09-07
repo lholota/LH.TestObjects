@@ -16,7 +16,7 @@
             return type == typeof(string);
         }
 
-        public void Compare(IComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
+        public void Compare(ComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
         {
             var options = this.Options ?? new StringValueComparatorOptions();
 

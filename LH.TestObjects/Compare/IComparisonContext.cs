@@ -6,12 +6,7 @@
     /// Contains the values and other information used for the values comparison.
     /// </summary>
     public interface IComparisonContext
-    {
-        /// <summary>
-        /// Gets or sets a value indicating whether the value on the expected and the actual objects are equal.
-        /// </summary>
-        bool AreSame { get; set; }
-
+    {      
         /// <summary>
         /// Gets the property value of the expected object.
         /// </summary>
@@ -36,6 +31,11 @@
     /// <inheritdoc />
     public interface IComparisonContext<out TProp> : IComparisonContext
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether the value on the expected and the actual objects are equal.
+        /// </summary>
+        bool AreSame { get; set; }
+
         /// <inheritdoc />
         new TProp ExpectedValue { get; }
 

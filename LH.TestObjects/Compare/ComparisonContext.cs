@@ -12,8 +12,6 @@
             this.ActualValue = actual;
         }
 
-        public bool AreSame { get; set; }
-
         public object ExpectedValue { get; }
 
         public object ActualValue { get; }
@@ -39,8 +37,9 @@
         {
             this.ExpectedValue = (TProp)genericContext.ExpectedValue;
             this.ActualValue = (TProp)genericContext.ActualValue;
-            this.AreSame = genericContext.AreSame;
         }
+
+        public bool AreSame { get; set; }
 
         public new TProp ExpectedValue { get; }
 

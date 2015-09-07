@@ -33,6 +33,7 @@
             yield return new StringValueComparator();
             yield return new IntegerValueComparator();
             yield return new FloatValueComparator();
+            yield return new DictionaryValueComparator();
         }
 
         private void CompareRecursively(PropertyPathItem propertyPath, object expected, object actual)
@@ -50,6 +51,9 @@
             {
                 this.log.Log(LogLevel.Debug, context, "Custom comparator found for the property {0}.", context.PropertyPathItem.GetPathString());
                 customComparator.Invoke(context);
+
+                // TODO: Log a difference when the values are not the same !!!
+
                 return;
             }
 

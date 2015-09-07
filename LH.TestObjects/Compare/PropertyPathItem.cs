@@ -13,9 +13,17 @@
             this.PropertyInfo = propertyInfo;
         }
 
+        public PropertyPathItem(string collectionItemDescription, PropertyPathItem parentPropertyPathItem)
+        {
+            this.CollectionItemDescription = collectionItemDescription;
+            this.ParentProperty = parentPropertyPathItem;
+        }
+
         private PropertyPathItem()
         {
         }
+
+        public string CollectionItemDescription { get; }
 
         public PropertyPathItem ParentProperty { get; }
 
@@ -46,12 +54,19 @@
                 this.ParentProperty.WritePath(builder);
             }
 
-            if (builder.Length > 0)
+            if (this.PropertyInfo != null)
             {
-                builder.Append('.');
-            }
+                if (builder.Length > 0)
+                {
+                    builder.Append('.');
+                }
 
-            builder.Append(this.PropertyInfo.Name);
+                builder.Append(this.PropertyInfo.Name);
+            }
+            else
+            {
+                builder.AppendFormat("[{0}]", this.CollectionItemDescription);
+            }
         }
     }
 }

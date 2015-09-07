@@ -21,7 +21,7 @@
             return this.handledTypes.Contains(type);
         }
 
-        public void Compare(IComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
+        public void Compare(ComparisonContext comparisonContext, AddDifferenceDelegate addDifferenceCall)
         {
             var expected = (IComparable)comparisonContext.ExpectedValue;
             var actual = (IComparable)comparisonContext.ActualValue;

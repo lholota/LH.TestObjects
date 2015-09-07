@@ -15,8 +15,6 @@
         private T objB;
         private ObjectComparator<T> comparator;
 
-        // TODO Check the values are compared recursively!!!
-
         [SetUp]
         public void Setup()
         {
@@ -42,6 +40,17 @@
 
             result.AreSame.Should().BeFalse();
             result.Differences.Single().PropertyPath.Should().Be("[Key2]");
+        }
+
+        [Test]
+        public void ThenShouldFailIfExtraKey()
+        {
+            this.objB.Add("Key3", "Value");
+
+            var result = this.comparator.Compare(this.objA, this.objB);
+
+            result.AreSame.Should().BeFalse();
+            result.Differences.Single().PropertyPath.Should().Be("[Key3]");
         }
 
         [Test]

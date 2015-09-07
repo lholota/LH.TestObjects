@@ -13,7 +13,8 @@
         {
             this.Options.CustomCompare = context =>
             {
-                comparisonFunc.Invoke(new ComparisonContext<TProp>(context));
+                var typeSpecificContext = new ComparisonContext<TProp>(context);
+                comparisonFunc.Invoke(typeSpecificContext);
             };
 
             return this;
