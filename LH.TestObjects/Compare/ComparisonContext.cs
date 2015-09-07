@@ -32,17 +32,16 @@
             {
                 this.AddDifference(valueComparison);
             }
-            else if(ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
+            else if (ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
             {
             }
             // ReSharper disable once PossibleNullReferenceException
-            else if(expected.GetType() != actual.GetType())
+            else if (expected.GetType() != actual.GetType())
             {
                 var message = string.Format(
                     "The types do not match, the expected type is {0} but the actual one is {1}.",
                     expected.GetType(),
-                    actual.GetType()
-                    );
+                    actual.GetType());
 
                 this.AddDifference(valueComparison, message);
             }
