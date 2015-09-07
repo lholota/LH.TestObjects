@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using System.Linq;
 
     internal class DictionaryValueComparator : IValueComparator
     {
@@ -23,53 +24,53 @@
             throw new NotImplementedException();
         }
 
-        private bool AreKeysEqual(IDictionary expected, IDictionary actual, IComparisonContext comparisonContext, IValueComparison valueComparison)
+        private bool AreKeysEqual(IDictionary expected, IDictionary actual, IComparisonContext comparisonContext, ValueComparison valueComparison)
         {
-            ////var notInExpected = actual.Keys
-            ////    .Cast<object>()
-            ////    .Where(x => !expected.Contains(x));
+            var notInExpected = actual.Keys
+                .Cast<object>()
+                .Where(x => !expected.Contains(x));
 
-            ////var notInActual = expected.Keys
-            ////    .Cast<object>()
-            ////    .Where(x => !actual.Contains(x));
+            var notInActual = expected.Keys
+                .Cast<object>()
+                .Where(x => !actual.Contains(x));
 
-            ////var result = true;
+            var result = true;
 
-            ////foreach (var key in notInActual)
-            ////{
-            ////    var message = string.Format(
-            ////            "The dictionaries at {0} differ, the key '{1}' is missing in the actual value.",
-            ////            valueComparison.PropertyPath,
-            ////            key);
+            foreach (var key in notInActual)
+            {
+                var message = string.Format(
+                        "The dictionaries at {0} differ, the key '{1}' is missing in the actual value.",
+                        valueComparison.PropertyPath,
+                        key);
 
-            ////    comparisonContext.AddDifference(this.CreateContext(context, key.ToString()), message);
-            ////    result = false;
-            ////}
+                var keyComparison = this.CreateKeyNamedComparison(valueComparison, key.ToString());
+                comparisonContext.AddDifference(keyComparison, message);
+                result = false;
+            }
 
-            ////foreach (var key in notInExpected)
-            ////{
-            ////    var message = string.Format(
-            ////            "The dictionaries at {0} differ, there is an extra key '{1}' in the actual value.",
-            ////            context.PropertyPath,
-            ////            key);
+            foreach (var key in notInExpected)
+            {
+                var message = string.Format(
+                        "The dictionaries at {0} differ, there is an extra key '{1}' in the actual value.",
+                        valueComparison.PropertyPath,
+                        key);
 
-            ////    addDifferenceCall.Invoke(DifferenceType.Value, this.CreateContext(context, key.ToString()), message);
-            ////    result = false;
-            ////}
+                var keyComparison = this.CreateKeyNamedComparison(valueComparison, key.ToString());
+                comparisonContext.AddDifference(keyComparison, message);
+                result = false;
+            }
 
-            //// return result;
-            throw new NotImplementedException();
+            return result;
         }
 
-        ////private IValueComparison CreateContext(ComparisonContext context, string key)
-        ////{
-        ////    var parentItem = context.PropertyPathItem;
-        ////    var itemPropPath = new PropertyPathItem(key, parentItem);
+        private ValueComparison CreateKeyNamedComparison(ValueComparison comparison, string key)
+        {
+            var itemPropPath = new PropertyPathItem(key, comparison.PropertyPathItem);
 
-        ////    return new ComparisonContext(
-        ////        itemPropPath,
-        ////        context.ExpectedValue,
-        ////        context.ActualValue);
-        ////}
+            return new ValueComparison(
+                itemPropPath,
+                comparison.ExpectedValue,
+                comparison.ActualValue);
+        }
     }
 }
