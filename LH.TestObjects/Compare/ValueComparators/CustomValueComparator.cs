@@ -25,6 +25,7 @@
                 {
                     comparison.Message = "Custom comparator returned false";
                 }
+
                 context.AddDifference(comparison);
             }
 

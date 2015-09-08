@@ -175,7 +175,7 @@
 
             this.Comparator
                 .Property(x => x.StringProp)
-                .CustomCompare(x => x.AreSame = true);
+                .CustomCompare(x => true);
 
             var result = this.Comparator.Compare(objA, objB);
             result.AreSame.Should().BeTrue();

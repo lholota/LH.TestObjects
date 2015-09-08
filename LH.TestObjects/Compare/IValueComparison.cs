@@ -41,11 +41,6 @@
     /// <inheritdoc />
     public interface IValueComparison<out TProp> : IValueComparison
     {
-        /// <summary>
-        /// Gets or sets a value indicating whether the value on the expected and the actual objects are equal.
-        /// </summary>
-        bool AreSame { get; set; }
-
         /// <inheritdoc />
         new TProp ExpectedValue { get; }
 
@@ -53,7 +48,7 @@
         new TProp ActualValue { get; }
 
         /// <summary>
-        /// Gets the summary of the difference.
+        /// Gets or sets the summary of the difference.
         /// </summary>
         new string Message { get; set; }
 

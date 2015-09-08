@@ -61,10 +61,11 @@
         {
             if (string.IsNullOrEmpty(valueComparison.Message))
             {
-                valueComparison.Message = string.Format("{0}: The property values do not match, expected is {1}, but the actual {2}.",
-                        valueComparison.PropertyPath,
-                        valueComparison.ExpectedValue ?? "[Null]",
-                        valueComparison.ActualValue ?? "[Null]");
+                valueComparison.Message = string.Format(
+                    "{0}: The property values do not match, expected is {1}, but the actual {2}.",
+                    valueComparison.PropertyPath,
+                    valueComparison.ExpectedValue ?? "[Null]",
+                    valueComparison.ActualValue ?? "[Null]");
             }
 
             this.Log.Log(LogLevel.Error, valueComparison);
