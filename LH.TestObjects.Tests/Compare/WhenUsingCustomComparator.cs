@@ -33,8 +33,8 @@
             var objA = SimpleDomain.CreateObjectWithValueSet1();
             var objB = SimpleDomain.CreateObjectWithValueSet1();
 
-            objA.StringProp = "AAA";
-            objB.StringProp = "AAA";
+            objA.StringProp = "AAA".EnsureUniqueInstance();
+            objB.StringProp = "AAA".EnsureUniqueInstance();
 
             this.Comparator
                 .Property(x => x.StringProp)
@@ -77,8 +77,8 @@
             var objA = SimpleDomain.CreateObjectWithValueSet1();
             var objB = SimpleDomain.CreateObjectWithValueSet1();
 
-            objA.StringProp = "AAA";
-            objB.StringProp = "AAA";
+            objA.StringProp = "AAA".EnsureUniqueInstance();
+            objB.StringProp = "AAA".EnsureUniqueInstance();
 
             this.Comparator
                 .Property(x => x.StringProp)

@@ -38,6 +38,9 @@
             else if (ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
             {
             }
+            else if (ReferenceEquals(expected, actual))
+            {
+            }
             // ReSharper disable once PossibleNullReferenceException
             else if (expected.GetType() != actual.GetType())
             {

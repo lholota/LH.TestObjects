@@ -103,5 +103,18 @@
             result.Differences.Count().Should().Be(1);
             result.Differences.Single().PropertyPath.Should().Be("Simple.StringProp");
         }
+
+        [Test]
+        public void ThenShouldNotCompareNestedPropertiesIfInstancesAreReferenceEqual()
+        {
+            var genericDomainComparator = new ObjectComparator<GenericDomain<ThrowingDomain>>();
+
+            var throwing = new ThrowingDomain();
+            var objA = new GenericDomain<ThrowingDomain> { GenericProp = throwing };
+            var objB = new GenericDomain<ThrowingDomain> { GenericProp = throwing };
+
+            var result = genericDomainComparator.Compare(objA, objB);
+            result.AreSame.Should().BeTrue();
+        }
     }
 }
