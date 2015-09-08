@@ -87,6 +87,7 @@
     <Compile Include="Compare\WhenComparingComplexObjects.cs" />
     <Compile Include="Compare\WhenComparingObjects.cs" />
     <Compile Include="Compare\WhenComparingStructs.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingUsingReferenceEquals.cs" />
     <Compile Include="Compare\WhenIgnoringProperties.cs" />
     <Compile Include="Compare\WhenLogging.cs" />
     <Compile Include="Compare\WhenSelectingComplexProperties.cs" />

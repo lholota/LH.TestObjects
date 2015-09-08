@@ -9,5 +9,7 @@
         public Func<ValueComparison, ComparisonContext, bool> CustomCompare { get; set; }
 
         public object ValueComparatorOptions { get; set; }
+
+        public bool UseReferenceEquals { get; set; }
     }
 }

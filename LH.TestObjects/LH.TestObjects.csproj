@@ -72,6 +72,7 @@
     <Compile Include="Compare\ValueComparators\KnownTypes\FloatValueComparatorOptions.cs" />
     <Compile Include="Compare\ValueComparators\IHasComparatorOptions.cs" />
     <Compile Include="Compare\ValueComparators\RecursivePropertyComparator.cs" />
+    <Compile Include="Compare\ValueComparators\ReferenceEqualsValueComparator.cs" />
     <Compile Include="Compare\ValueComparison.cs" />
     <Compile Include="Compare\ValueComparisonAdapter.cs" />
     <Compile Include="ExpressionExtensions.cs" />

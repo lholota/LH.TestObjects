@@ -13,13 +13,22 @@
 
         public override bool CanCompare
         {
-            get { return this.Options.CustomCompare != null; }
+            get
+            {
+                return this.Options.CustomCompare != null
+                    || this.Options.UseReferenceEquals;
+            }
         }
 
         public override IValueComparator Comparator
         {
             get
             {
+                if (this.Options.UseReferenceEquals)
+                {
+                    return new ReferenceEqualsValueComparator(); 
+                }
+
                 return new CustomValueComparator(this.Options.CustomCompare);
             }
         }

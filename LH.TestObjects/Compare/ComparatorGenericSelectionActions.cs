@@ -20,5 +20,10 @@
         {
             this.options.IsIgnored = true;
         }
+
+        public void UseReferenceEquals()
+        {
+            this.options.UseReferenceEquals = true;
+        }
     }
 }
