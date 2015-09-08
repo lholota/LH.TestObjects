@@ -4,7 +4,7 @@
     using Logging;
     using Rules;
 
-    internal class ComparisonContext : IComparisonContext
+    internal class ComparisonContext
     {       
         public ComparisonContext(ILogger log, IEnumerable<PropertySelectionRule> customRules)
         {
@@ -19,8 +19,10 @@
 
         public RulesCollection Rules { get; }
 
-        public void CompareItem(object expected, object actual, PropertyPathItem propertyPath)
+        public bool CompareItem(object expected, object actual, PropertyPathItem propertyPath)
         {
+            var areSame = true;
+
             var valueComparison = new ValueComparison(propertyPath, expected, actual);
             var comparator = this.Rules.GetComparator(valueComparison);
 
@@ -31,6 +33,7 @@
             else if (!this.IsNullComparisonMatch(expected, actual))
             {
                 this.AddDifference(valueComparison);
+                areSame = false;
             }
             else if (ReferenceEquals(expected, null) && ReferenceEquals(actual, null))
             {
@@ -44,11 +47,14 @@
                     actual.GetType());
 
                 this.AddDifference(valueComparison, message);
+                areSame = false;
             }
             else
             {
-                comparator.Compare(this, valueComparison);
+                areSame = comparator.Compare(this, valueComparison);
             }
+
+            return areSame;
         }
 
         public void AddDifference(IValueComparison valueComparison, string message = null)

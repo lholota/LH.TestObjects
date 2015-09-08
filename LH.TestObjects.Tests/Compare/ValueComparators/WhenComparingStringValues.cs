@@ -51,7 +51,7 @@
             var result = this.Comparator.Compare(this.objA, this.objB);
 
             result.AreSame.Should().BeFalse();
-            result.Differences.Single().PropertyInfo.Name.Should().Be("StringProp");
+            result.Differences.Single().PropertyName.Should().Be("StringProp");
         }
 
         [Test]

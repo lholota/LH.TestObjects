@@ -12,9 +12,9 @@
 
         public IComparatorTypeSpecificSelectionActions<TProp> CustomCompare(Func<IValueComparison<TProp>, bool> comparisonAction)
         {
-            this.Options.CustomCompare = valueComparison =>
+            this.Options.CustomCompare = (valueComparison, context) =>
             {
-                var adapter = new ValueComparisonAdapter<TProp>(valueComparison);
+                var adapter = new ValueComparisonAdapter<TProp>(valueComparison, context);
                 return comparisonAction.Invoke(adapter);
             };
 

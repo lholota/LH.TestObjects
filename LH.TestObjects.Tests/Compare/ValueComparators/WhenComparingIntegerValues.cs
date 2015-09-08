@@ -22,7 +22,7 @@
             result.AreSame.Should().BeFalse();
             result.Differences.Should().NotBeNull();
             result.Differences.Count().Should().Be(1);
-            result.Differences.Single().PropertyInfo.Name.Should().Be("IntProp");
+            result.Differences.Single().PropertyName.Should().Be("IntProp");
         }
 
         [Test]

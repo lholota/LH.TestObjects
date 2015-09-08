@@ -11,30 +11,34 @@
             return typeof(IDictionary).IsAssignableFrom(type);
         }
 
-        public void Compare(ComparisonContext comparisonContext, ValueComparison valueComparison)
+        public bool Compare(ComparisonContext comparisonContext, ValueComparison valueComparison)
         {
             var actual = (IDictionary)valueComparison.ActualValue;
             var expected = (IDictionary)valueComparison.ExpectedValue;
 
-            if (this.AreKeysEqual(expected, actual, comparisonContext, valueComparison))
+            if (!this.AreKeysEqual(expected, actual, comparisonContext, valueComparison))
             {
-                foreach (var key in expected.Keys)
-                {
-                    var actualValue = actual[key];
-                    var expectedValue = expected[key];
-
-                    // TODO: Why is this immediately picked up by the recursive comparator
-                    // TODO: Create a valid use case test for the recursive comparator
-                    // TODO: Both values null in the dictionary
-                    // TODO: Comple objects in the dictionary
-
-                    var propertyPath = new PropertyPathItem(key.ToString(), valueComparison.PropertyPathItem);
-                    comparisonContext.CompareItem(expectedValue, actualValue, propertyPath);
-                }
+                return false;
             }
+
+            foreach (var key in expected.Keys)
+            {
+                var actualValue = actual[key];
+                var expectedValue = expected[key];
+
+                // TODO: Why is this immediately picked up by the recursive comparator
+                // TODO: Create a valid use case test for the recursive comparator
+                // TODO: Both values null in the dictionary
+                // TODO: Comple objects in the dictionary
+
+                var propertyPath = new PropertyPathItem(key.ToString(), valueComparison.PropertyPathItem);
+                comparisonContext.CompareItem(expectedValue, actualValue, propertyPath);
+            }
+
+            return true;
         }
 
-        private bool AreKeysEqual(IDictionary expected, IDictionary actual, IComparisonContext comparisonContext, ValueComparison valueComparison)
+        private bool AreKeysEqual(IDictionary expected, IDictionary actual, ComparisonContext comparisonContext, ValueComparison valueComparison)
         {
             var notInExpected = actual.Keys
                 .Cast<object>()

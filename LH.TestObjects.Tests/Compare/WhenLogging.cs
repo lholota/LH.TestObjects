@@ -38,11 +38,11 @@
 
                 ctx.Message.Should().NotBeNullOrEmpty();
                 ctx.Comparison.Should().NotBeNull();
-                ctx.Comparison.PropertyInfo.Should().NotBeNull();
+                ctx.Comparison.PropertyName.Should().NotBeNullOrEmpty();
                 ctx.Comparison.ActualValue.Should().NotBeNull();
                 ctx.Comparison.ExpectedValue.Should().NotBeNull();
 
-                if (ctx.Comparison.PropertyInfo.Name == nameof(objA.StringProp))
+                if (ctx.Comparison.PropertyName == nameof(objA.StringProp))
                 {
                     stringPropChecked = true;
 

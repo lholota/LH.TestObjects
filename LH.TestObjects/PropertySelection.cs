@@ -3,12 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
-    using System.Reflection;
     using Compare;
 
     internal class PropertySelection
     {
-        public Func<PropertyInfo, bool> Predicate { get; set; }
+        public Func<IValueComparison, bool> Predicate { get; set; }
 
         public Expression PropertyExpression { get; set; }
 
@@ -16,16 +15,16 @@
 
         public bool IncludeInheritedTypes { get; set; }
 
-        public bool IsMatch(PropertyPathItem propertyPath)
+        public bool IsMatch(ValueComparison valueComparison)
         {
-            if (propertyPath.IsRoot)
+            if (valueComparison.PropertyPathItem.IsRoot)
             {
                 return false;
             }
 
             if (this.PropertyType != null)
             {
-                var propType = propertyPath.PropertyInfo.PropertyType;
+                var propType = valueComparison.PropertyType;
                 if (this.IncludeInheritedTypes 
                     && !propType.IsSubclassOf(this.PropertyType) 
                     && propType != this.PropertyType)
@@ -39,7 +38,8 @@
                 }
             }
 
-            if (this.Predicate != null && !this.Predicate.Invoke(propertyPath.PropertyInfo))
+            // TODO: What to do when PropInfo is null ???
+            if (this.Predicate != null && !this.Predicate.Invoke(valueComparison))
             {
                 return false;
             }
@@ -47,7 +47,7 @@
             if (this.PropertyExpression != null)
             {
                 var propertyNames = this.PropertyExpression.GetPropertyNames();
-                if (!this.IsPropertyPathMatch(propertyPath, propertyNames))
+                if (!this.IsPropertyPathMatch(valueComparison.PropertyPathItem, propertyNames))
                 {
                     return false;
                 }

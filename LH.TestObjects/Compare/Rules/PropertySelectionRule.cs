@@ -26,7 +26,7 @@
 
         public override bool IsMatch(ValueComparison valueComparison)
         {
-            return this.Selection.IsMatch(valueComparison.PropertyPathItem);
+            return this.Selection.IsMatch(valueComparison);
         }
     }
 }

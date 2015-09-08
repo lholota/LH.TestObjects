@@ -20,7 +20,12 @@
         /// <summary>
         /// Gets the <see cref="PropertyInfo"/> of the compared property.
         /// </summary>
-        PropertyInfo PropertyInfo { get; }
+        System.Type PropertyType { get; }
+
+        /// <summary>
+        /// Gets the name of the property.
+        /// </summary>
+        string PropertyName { get; }
 
         /// <summary>
         /// Gets the dot delimited path to the property.
@@ -41,5 +46,14 @@
 
         /// <inheritdoc />s
         new TProp ActualValue { get; }
+
+        /// <summary>
+        /// This is used to compare any nested values during a custom comparison
+        /// </summary>
+        /// <param name="expected">The expected value.</param>
+        /// <param name="actual">The actual value.</param>
+        /// <param name="propertyName">The property name which is used to match rules and log path where the difference occurred.</param>
+        /// <returns>Returns true if the objects are same or false when they are not.</returns>
+        bool CompareItem(object expected, object actual, string propertyName);
     }
 }

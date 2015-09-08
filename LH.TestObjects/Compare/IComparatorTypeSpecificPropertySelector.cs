@@ -2,7 +2,6 @@ namespace LH.TestObjects.Compare
 {
     using System;
     using System.Linq.Expressions;
-    using System.Reflection;
 
     /// <summary>
     /// Object allowing strongly typed property selection.
@@ -25,6 +24,6 @@ namespace LH.TestObjects.Compare
         /// <param name="includeInheritedTypes">Sets whether types inherited from {TProp} will be included in the selection (true) or not (false).</param>
         /// <param name="predicate">Predicate used to filter the properties. The parameter is optional.</param>
         /// <returns>The <see cref="IComparatorTypeSpecificSelectionActions{TProp}"/> which allows you to apply property configuration.</returns>
-        IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(bool includeInheritedTypes = true, Func<PropertyInfo, bool> predicate = null);
+        IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(bool includeInheritedTypes = true, Func<IValueComparison, bool> predicate = null);
     }
 }

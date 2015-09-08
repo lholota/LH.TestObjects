@@ -18,7 +18,7 @@
 
         public override bool IsMatch(ValueComparison valueComparison)
         {
-            return this.Comparator.CanHandle(valueComparison.Type);
+            return this.Comparator.CanHandle(valueComparison.PropertyType);
         }
     }
 }

@@ -7,16 +7,20 @@
     {
         public static readonly PropertyPathItem Root = new PropertyPathItem();
 
+        private readonly bool descriptionIsCollectionItem;
+
         public PropertyPathItem(PropertyInfo propertyInfo, PropertyPathItem parentPropertyPathItem)
         {
             this.ParentProperty = parentPropertyPathItem;
+            this.ItemDescription = propertyInfo.Name;
             this.PropertyInfo = propertyInfo;
         }
 
-        public PropertyPathItem(string collectionItemDescription, PropertyPathItem parentPropertyPathItem)
+        public PropertyPathItem(string itemDescription, PropertyPathItem parentPropertyPathItem, bool descriptionIsCollectionItem = true)
         {
-            this.CollectionItemDescription = collectionItemDescription;
+            this.descriptionIsCollectionItem = descriptionIsCollectionItem;
             this.ParentProperty = parentPropertyPathItem;
+            this.ItemDescription = itemDescription;
         }
 
         private PropertyPathItem()
@@ -26,7 +30,7 @@
 
         public bool IsRoot { get; }
 
-        public string CollectionItemDescription { get; }
+        public string ItemDescription { get; }
 
         public PropertyPathItem ParentProperty { get; }
 
@@ -57,18 +61,18 @@
                 this.ParentProperty.WritePath(builder);
             }
 
-            if (this.PropertyInfo != null)
+            if (this.descriptionIsCollectionItem)
+            {
+                builder.AppendFormat("[{0}]", this.ItemDescription);
+            }
+            else
             {
                 if (builder.Length > 0)
                 {
                     builder.Append('.');
                 }
 
-                builder.Append(this.PropertyInfo.Name);
-            }
-            else
-            {
-                builder.AppendFormat("[{0}]", this.CollectionItemDescription);
+                builder.Append(this.ItemDescription);
             }
         }
     }

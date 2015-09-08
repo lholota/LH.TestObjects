@@ -4,9 +4,9 @@
 
     internal class CustomValueComparator : IValueComparator
     {
-        private readonly Func<IValueComparison, bool> customCompare;
+        private readonly Func<ValueComparison, ComparisonContext, bool> customCompare;
 
-        public CustomValueComparator(Func<IValueComparison, bool> customCompare)
+        public CustomValueComparator(Func<ValueComparison, ComparisonContext, bool> customCompare)
         {
             this.customCompare = customCompare;
         }
@@ -16,12 +16,15 @@
             return true;
         }
 
-        public void Compare(ComparisonContext context, ValueComparison comparison)
+        public bool Compare(ComparisonContext context, ValueComparison comparison)
         {
-            if (!this.customCompare.Invoke(comparison))
+            var areSame = this.customCompare.Invoke(comparison, context);
+            if (!areSame)
             {
                 context.AddDifference(comparison, "Custom comparator returned false");
             }
+
+            return areSame;
         }
     }
 }

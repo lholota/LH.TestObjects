@@ -1,14 +1,17 @@
 namespace LH.TestObjects.Compare
 {
+    using System;
     using System.Reflection;
 
     internal class ValueComparisonAdapter<TProp> : IValueComparison<TProp>
     {
-        private readonly IValueComparison comparison;
+        private readonly ValueComparison comparison;
+        private readonly ComparisonContext context;
 
-        public ValueComparisonAdapter(IValueComparison comparison)
+        public ValueComparisonAdapter(ValueComparison comparison, ComparisonContext context)
         {
             this.comparison = comparison;
+            this.context = context;
         }
 
         public bool AreSame { get; set; }
@@ -26,6 +29,22 @@ namespace LH.TestObjects.Compare
         object IValueComparison.ActualValue
         {
             get { return this.comparison.ActualValue; }
+        }
+
+        public Type PropertyType
+        {
+            get { return this.comparison.PropertyType; }
+        }
+
+        public string PropertyName
+        {
+            get { return this.comparison.PropertyName; }
+        }
+
+        public bool CompareItem(object expected, object actual, string propertyName)
+        {
+            var propertyPath = new PropertyPathItem(propertyName, this.comparison.PropertyPathItem, false);
+            return this.context.CompareItem(expected, actual, propertyPath);
         }
 
         public TProp ActualValue

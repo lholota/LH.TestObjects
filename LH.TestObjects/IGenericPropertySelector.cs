@@ -1,7 +1,7 @@
 ﻿namespace LH.TestObjects
 {
     using System;
-    using System.Reflection;
+    using Compare;
 
     /// <summary>
     /// Object allowing the property selection without the knowledge of their type.
@@ -13,6 +13,6 @@
         /// </summary>
         /// <param name="predicate">Predicate to filter the properties</param>
         /// <returns><see cref="IGenericSelectionActions"/> - configuration actions.</returns>
-        IGenericSelectionActions PropertiesMatching(Func<PropertyInfo, bool> predicate = null);
+        IGenericSelectionActions PropertiesMatching(Func<IValueComparison, bool> predicate = null);
     }
 }

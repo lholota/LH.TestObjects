@@ -11,7 +11,7 @@
                    || type == typeof(double);
         }
 
-        public void Compare(ComparisonContext context, ValueComparison valueComparison)
+        public bool Compare(ComparisonContext context, ValueComparison valueComparison)
         {
             bool areEqual;
             var options = context.Rules.GetOptions<FloatValueComparatorOptions>(valueComparison);
@@ -35,6 +35,8 @@
             {
                 context.AddDifference(valueComparison);
             }
+
+            return areEqual;
         }
 
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator", Justification = "ByDesign")]

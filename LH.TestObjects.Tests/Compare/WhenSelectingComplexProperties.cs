@@ -27,7 +27,7 @@
             objB.Simple.StringProp = "BBB";
 
             this.comparator
-                .PropertiesMatching(x => x.Name == "StringProp")
+                .PropertiesMatching(x => x.PropertyName == "StringProp")
                 .Ignore();
 
             var result = this.comparator.Compare(objA, objB);
@@ -63,7 +63,7 @@
 
             this.comparator
                 .PropertiesOfType<string>(
-                    predicate: x => x.Name == nameof(objA.Simple.StringProp)
+                    predicate: x => x.PropertyName == nameof(objA.Simple.StringProp)
                 )
                 .Ignore();
 

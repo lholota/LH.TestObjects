@@ -15,7 +15,7 @@
 
         public object ActualValue { get; }
 
-        public System.Type Type
+        public System.Type PropertyType
         {
             get
             {
@@ -38,14 +38,19 @@
             }
         }
 
-        public PropertyInfo PropertyInfo
+        public string PropertyName
         {
-            get { return this.PropertyPathItem.PropertyInfo; }
+            get { return this.PropertyPathItem.ItemDescription; }
         }
 
         public string PropertyPath
         {
             get { return this.PropertyPathItem.GetPathString(); }
+        }
+
+        internal PropertyInfo PropertyInfo
+        {
+            get { return this.PropertyPathItem.PropertyInfo; }
         }
 
         internal PropertyPathItem PropertyPathItem { get; }

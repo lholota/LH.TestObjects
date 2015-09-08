@@ -6,7 +6,7 @@
     {
         public bool IsIgnored { get; set; }
 
-        public Func<IValueComparison, bool> CustomCompare { get; set; }
+        public Func<ValueComparison, ComparisonContext, bool> CustomCompare { get; set; }
 
         public object ValueComparatorOptions { get; set; }
     }

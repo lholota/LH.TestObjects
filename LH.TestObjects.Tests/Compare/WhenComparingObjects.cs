@@ -17,7 +17,7 @@
             result.AreSame.Should().BeFalse();
             result.Differences.Should().NotBeNull();
             result.Differences.Count().Should().Be(1);
-            result.Differences.Single().PropertyInfo.Should().BeNull();
+            result.Differences.Single().PropertyName.Should().BeNullOrEmpty();
             result.Differences.Single().ActualValue.Should().BeNull();
             result.Differences.Single().ExpectedValue.Should().NotBeNull();
         }
@@ -52,10 +52,8 @@
             var difference = result.Differences.Single();
             difference.ExpectedValue.Should().Be(objA.StringProp);
             difference.ActualValue.Should().Be(objB.StringProp);
-
-            difference.PropertyInfo.Should().NotBeNull();
-            difference.PropertyInfo.Name.Should().Be("StringProp");
-            difference.PropertyInfo.PropertyType.Should().Be(typeof (string));
+            difference.PropertyName.Should().Be("StringProp");
+            difference.PropertyType.Should().Be(typeof (string));
         }
 
         [Test]

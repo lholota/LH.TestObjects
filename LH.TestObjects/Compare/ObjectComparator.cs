@@ -48,7 +48,7 @@
         }
 
         /// <inheritdoc/>
-        public IGenericSelectionActions PropertiesMatching(Func<PropertyInfo, bool> predicate = null)
+        public IGenericSelectionActions PropertiesMatching(Func<IValueComparison, bool> predicate = null)
         {
             var rule = new PropertySelectionRule();
             rule.Selection.Predicate = predicate;
@@ -72,7 +72,7 @@
         }
 
         /// <inheritdoc/>
-        public IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(bool includeInheritedTypes = true, Func<PropertyInfo, bool> predicate = null)
+        public IComparatorTypeSpecificSelectionActions<TProp> PropertiesOfType<TProp>(bool includeInheritedTypes = true, Func<IValueComparison, bool> predicate = null)
         {
             var rule = new PropertySelectionRule();
             rule.Selection.IncludeInheritedTypes = includeInheritedTypes;

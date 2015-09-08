@@ -11,17 +11,20 @@
             return type == typeof(string);
         }
 
-        public void Compare(ComparisonContext context, ValueComparison valueComparison)
+        public bool Compare(ComparisonContext context, ValueComparison valueComparison)
         {
             var options = context.Rules.GetOptions<StringValueComparatorOptions>(valueComparison);
-
-            if (!string.Equals(
+            var areEqual = string.Equals(
                 (string)valueComparison.ExpectedValue,
                 (string)valueComparison.ActualValue,
-                options.ComparisonType))
+                options.ComparisonType);
+
+            if (!areEqual)
             {
                 context.AddDifference(valueComparison);
             }
+
+            return areEqual;
         }
     }
 }
