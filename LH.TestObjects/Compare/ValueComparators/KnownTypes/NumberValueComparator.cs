@@ -4,10 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    internal class IntegerValueComparator : IValueComparator
+    internal class NumberValueComparator : IValueComparator
     {
         private readonly IEnumerable<Type> handledTypes = new[]
         {
+            typeof(decimal),
             typeof(short),
             typeof(ushort),
             typeof(int),
@@ -18,7 +19,7 @@
 
         public bool CanHandle(Type type)
         {
-            return this.handledTypes.Contains(type);
+            return this.handledTypes.Contains(type) || type.IsEnum;
         }
 
         public bool Compare(ComparisonContext comparisonContext, ValueComparison valueComparison)

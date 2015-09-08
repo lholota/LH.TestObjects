@@ -1,9 +1,7 @@
 ﻿namespace LH.TestObjects.Tests.Domain
 {
-    public class FloatDomain
+    public class GenericDomain<T>
     {
-        public float FloatProp { get; set; }
-
-        public double DoubleProp { get; set; }
+        public T GenericProp { get; set; }
     }
 }

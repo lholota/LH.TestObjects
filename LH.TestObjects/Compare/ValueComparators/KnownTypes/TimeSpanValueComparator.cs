@@ -13,8 +13,7 @@
         {
             var areEqual = TimeSpan.Equals(
                 (TimeSpan)comparison.ExpectedValue,
-                (TimeSpan)comparison.ActualValue
-                );
+                (TimeSpan)comparison.ActualValue);
 
             if (!areEqual)
             {
