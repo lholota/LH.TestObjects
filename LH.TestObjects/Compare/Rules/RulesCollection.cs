@@ -65,6 +65,7 @@
             this.AddValueComparator<NumberValueComparator>(rules);
             this.AddValueComparator<FloatValueComparator>(rules);
             this.AddValueComparator<TimeSpanValueComparator>(rules);
+            this.AddValueComparator<DateTimeValueComparator>(rules);
             this.AddValueComparator<DictionaryValueComparator>(rules);
         }
 

@@ -67,6 +67,7 @@
     <Compile Include="Compare\Rules\RulesCollection.cs" />
     <Compile Include="Compare\Rules\ValueComparatorRule.cs" />
     <Compile Include="Compare\ValueComparators\CustomValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\DateTimeValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\KnownTypes\DictionaryValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\KnownTypes\FloatValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\KnownTypes\FloatValueComparatorOptions.cs" />
