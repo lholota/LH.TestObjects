@@ -52,23 +52,21 @@
 
             foreach (var key in notInActual)
             {
-                var keyComparison = this.CreateKeyNamedComparison(valueComparison, key.ToString());
-                keyComparison.Message = string.Format(
-                        "The dictionaries at {0} differ, the key '{1}' is missing in the actual value.",
-                        valueComparison.PropertyPath,
-                        key);
-
+                var keyComparison = this.CreateKeyNamedComparison(
+                    valueComparison,
+                    key.ToString(),
+                    "The dictionaries differ, the key '{0}' is missing in the actual value.");
+                
                 comparisonContext.AddDifference(keyComparison);
                 result = false;
             }
 
             foreach (var key in notInExpected)
             {        
-                var keyComparison = this.CreateKeyNamedComparison(valueComparison, key.ToString());
-                keyComparison.Message = string.Format(
-                    "The dictionaries at {0} differ, there is an extra key '{1}' in the actual value.",
-                    valueComparison.PropertyPath,
-                    key);
+                var keyComparison = this.CreateKeyNamedComparison(
+                    valueComparison, 
+                    key.ToString(), 
+                    "The dictionaries differ, there is an extra key '{0}' in the actual value.");
 
                 comparisonContext.AddDifference(keyComparison);
                 result = false;
@@ -77,14 +75,17 @@
             return result;
         }
 
-        private ValueComparison CreateKeyNamedComparison(ValueComparison comparison, string key)
+        private ValueComparison CreateKeyNamedComparison(ValueComparison comparison, string key, string messageFormat)
         {
             var itemPropPath = new PropertyPathItem(key, comparison.PropertyPathItem);
 
-            return new ValueComparison(
+            var result = new ValueComparison(
                 itemPropPath,
                 comparison.ExpectedValue,
                 comparison.ActualValue);
+
+            result.Message = string.Format(messageFormat, key);
+            return result;
         }
     }
 }
