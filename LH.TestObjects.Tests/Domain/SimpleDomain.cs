@@ -6,8 +6,8 @@
         {
             return new SimpleDomain
             {
-                StringProp = "AAA",
-                StringProp2 = "AAA",
+                StringProp = "AAA".EnsureUniqueInstance(),
+                StringProp2 = "AAA".EnsureUniqueInstance(),
                 IntProp = 1
             };            
         }
@@ -16,8 +16,8 @@
         {
             return new SimpleDomain
             {
-                StringProp = "BBB",
-                StringProp2 = "BBB",
+                StringProp = "BBB".EnsureUniqueInstance(),
+                StringProp2 = "BBB".EnsureUniqueInstance(),
                 IntProp = 2
             };
         }

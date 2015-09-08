@@ -11,6 +11,8 @@
             this.ActualValue = actual;
         }
 
+        public bool AreSame { get; set; }
+
         public object ExpectedValue { get; }
 
         public object ActualValue { get; }
@@ -56,5 +58,36 @@
         }
 
         internal PropertyPathItem PropertyPathItem { get; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != typeof(ValueComparison))
+            {
+                return false;
+            }
+
+            var other = (ValueComparison)obj;
+            return ReferenceEquals(this.ActualValue, other.ActualValue)
+                   && ReferenceEquals(this.ExpectedValue, other.ExpectedValue);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (ReferenceEquals(this.ActualValue, null) ? 1 : this.ActualValue.GetHashCode())
+                   ^ (ReferenceEquals(this.ExpectedValue, null) ? 2 : this.ExpectedValue.GetHashCode());
+            }
+        }
     }
 }

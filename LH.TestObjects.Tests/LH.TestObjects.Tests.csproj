@@ -88,6 +88,7 @@
     <Compile Include="Compare\ValueComparators\WhenComparingStringValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingTimeSpan.cs" />
     <Compile Include="Compare\WhenComparingComplexObjects.cs" />
+    <Compile Include="Compare\WhenComparingHierarchy.cs" />
     <Compile Include="Compare\WhenComparingObjects.cs" />
     <Compile Include="Compare\WhenComparingPrimitiveTypes.cs" />
     <Compile Include="Compare\WhenComparingStructs.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Domain\ComplexDomainWithInheritor.cs" />
     <Compile Include="Domain\DictionaryDomain.cs" />
     <Compile Include="Domain\FloatDomain.cs" />
+    <Compile Include="Domain\HierarchyDomain.cs" />
     <Compile Include="Domain\SimpleDomainInheritor.cs" />
     <Compile Include="Domain\StructDomain.cs" />
     <Compile Include="Domain\ThrowingDomain.cs" />
