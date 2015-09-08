@@ -11,7 +11,7 @@
         [Test]
         public void ThenShouldPassWhenComparingTwoEqualStrings()
         {
-            var comparator = new ObjectComparator<string>();
+            var comparator = Extensions.CreateComparator<string>();
             var result = comparator.Compare("AAA", "AAA");
 
             result.AreSame.Should().BeTrue();
@@ -20,7 +20,7 @@
         [Test]
         public void ThenShouldFailWhenComparingTwoDifferentStrings()
         {
-            var comparator = new ObjectComparator<string>();
+            var comparator = Extensions.CreateComparator<string>();
             var result = comparator.Compare("AAA", "BBB");
 
             result.AreSame.Should().BeFalse();

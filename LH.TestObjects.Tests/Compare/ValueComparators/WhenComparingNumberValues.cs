@@ -5,7 +5,6 @@
     using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestObjects.Compare;
 
     [TestFixture]
     public class WhenComparingNumberValues
@@ -40,7 +39,7 @@
         {
             Console.WriteLine(typeof(T));
 
-            var comparator = new ObjectComparator<GenericDomain<T>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<T>>();
 
             var objA = new GenericDomain<T> { GenericProp = value };
             var objB = new GenericDomain<T> { GenericProp = value };
@@ -54,7 +53,7 @@
         {
             Console.WriteLine(typeof(T));
 
-            var comparator = new ObjectComparator<GenericDomain<T>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<T>>();
 
             var objA = new GenericDomain<T> { GenericProp = expected };
             var objB = new GenericDomain<T> { GenericProp = actual };

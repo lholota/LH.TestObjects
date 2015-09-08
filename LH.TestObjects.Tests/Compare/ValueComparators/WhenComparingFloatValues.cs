@@ -12,7 +12,7 @@
         [Test]
         public void ThenShouldFailIfFloatValuesDifferByMoreThanEpsilon()
         {
-            var comparator = new ObjectComparator<GenericDomain<float>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<float>>();
 
             var objA = new GenericDomain<float> { GenericProp = 0 };
             var objB = new GenericDomain<float> { GenericProp = 1 };
@@ -25,7 +25,7 @@
         [Test]
         public void ThenShouldPassIfFloatValuesDifferByLessThanEpsilon()
         {
-            var comparator = new ObjectComparator<GenericDomain<float>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<float>>();
 
             comparator
                 .PropertiesOfType<float>()
@@ -41,7 +41,7 @@
         [Test]
         public void ThenShouldPassIfFloatValuesAreSame()
         {
-            var comparator = new ObjectComparator<GenericDomain<float>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<float>>();
 
             var value = 0.00000001f;
             var objA = new GenericDomain<float> { GenericProp = value };
@@ -54,7 +54,7 @@
         [Test]
         public void ThenShouldFailIfDoubleValuesDifferByMoreThanEpsilon()
         {
-            var comparator = new ObjectComparator<GenericDomain<double>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<double>>();
 
             var objA = new GenericDomain<double> { GenericProp = 0 };
             var objB = new GenericDomain<double> { GenericProp = 1 };
@@ -67,7 +67,7 @@
         [Test]
         public void ThenShouldPassIfDoubleValuesDifferByLessThanEpsilon()
         {
-            var comparator = new ObjectComparator<GenericDomain<double>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<double>>();
 
             comparator
                 .PropertiesOfType<double>()
@@ -83,7 +83,7 @@
         [Test]
         public void ThenShouldPassIfDoubleValuesAreSame()
         {
-            var comparator = new ObjectComparator<GenericDomain<double>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<double>>();
 
             var value = 0.00000001;
             var objA = new GenericDomain<double> { GenericProp = value };

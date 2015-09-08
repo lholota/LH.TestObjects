@@ -12,7 +12,7 @@
         [SetUp]
         public virtual void Setup()
         {
-            this.Comparator = new ObjectComparator<SimpleDomain>();
+            this.Comparator = Extensions.CreateComparator<SimpleDomain>();
         }
     }
 }

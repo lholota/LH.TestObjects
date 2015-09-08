@@ -4,25 +4,32 @@
     using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestObjects.Compare;
 
     [TestFixture]
     public class WhenUsingCustomComparator : ComparatorTestsBase
     {
+        private SimpleDomain objA;
+        private SimpleDomain objB;
+
+        public override void Setup()
+        {
+            base.Setup();
+
+            this.objA = SimpleDomain.CreateObjectWithValueSet1();
+            this.objB = SimpleDomain.CreateObjectWithValueSet1();
+        }
+
         [Test]
         public void ThenShouldPassWhenComparisonAlwaysReturnsTrueAndObjectsAreDifferent()
         {
-            var objA = SimpleDomain.CreateObjectWithValueSet1();
-            var objB = SimpleDomain.CreateObjectWithValueSet1();
-
-            objA.StringProp = "AAA";
-            objB.StringProp = "BBB";
+            this.objA.StringProp = "AAA";
+            this.objB.StringProp = "BBB";
 
             this.Comparator
                 .Property(x => x.StringProp)
                 .CustomCompare(x => true);
 
-            var result = this.Comparator.Compare(objA, objB);
+            var result = this.Comparator.Compare(this.objA, this.objB);
 
             result.AreSame.Should().BeTrue();
         }
@@ -30,17 +37,14 @@
         [Test]
         public void ThenShouldFailWhenCustomComparatorAlwaysReturnsFalse()
         {
-            var objA = SimpleDomain.CreateObjectWithValueSet1();
-            var objB = SimpleDomain.CreateObjectWithValueSet1();
-
-            objA.StringProp = "AAA".EnsureUniqueInstance();
-            objB.StringProp = "AAA".EnsureUniqueInstance();
+            this.objA.StringProp = "AAA".EnsureUniqueInstance();
+            this.objB.StringProp = "AAA".EnsureUniqueInstance();
 
             this.Comparator
                 .Property(x => x.StringProp)
                 .CustomCompare(x => false);
 
-            var result = this.Comparator.Compare(objA, objB);
+            var result = this.Comparator.Compare(this.objA, this.objB);
 
             result.AreSame.Should().BeFalse();
             result.Differences.Should().NotBeNull();
@@ -51,18 +55,18 @@
         [Test]
         public void ThenShouldFailWhenUserCallsNestedObjectComparisonAndValuesDiffer()
         {
-            var objA = ComplexDomain.CreateObjectWithValueSet1();
-            var objB = ComplexDomain.CreateObjectWithValueSet1();
+            var complexA = ComplexDomain.CreateObjectWithValueSet1();
+            var complexB = ComplexDomain.CreateObjectWithValueSet1();
 
-            objA.Simple.StringProp = "AAA";
-            objB.Simple.StringProp = "BBB";
+            complexA.Simple.StringProp = "AAA";
+            complexB.Simple.StringProp = "BBB";
 
-            var comparator = new ObjectComparator<ComplexDomain>();
+            var comparator = Extensions.CreateComparator<ComplexDomain>();
             comparator
                 .Property(x => x.Simple)
                 .CustomCompare(x => x.CompareItem(x.ExpectedValue.StringProp, x.ActualValue.StringProp, "StringProp"));
 
-            var result = comparator.Compare(objA, objB);
+            var result = comparator.Compare(complexA, complexB);
             result.AreSame.Should().BeFalse();
             result.Differences.Count().Should().Be(2);
             result.Differences.Single(x => x.PropertyName == "Simple").PropertyPath.Should().Be("Simple");
@@ -74,11 +78,8 @@
         {
             const string customMessage = "MyMessage";
 
-            var objA = SimpleDomain.CreateObjectWithValueSet1();
-            var objB = SimpleDomain.CreateObjectWithValueSet1();
-
-            objA.StringProp = "AAA".EnsureUniqueInstance();
-            objB.StringProp = "AAA".EnsureUniqueInstance();
+            this.objA.StringProp = "AAA".EnsureUniqueInstance();
+            this.objB.StringProp = "AAA".EnsureUniqueInstance();
 
             this.Comparator
                 .Property(x => x.StringProp)
@@ -88,7 +89,7 @@
                     return false;
                 });
 
-            var result = this.Comparator.Compare(objA, objB);
+            var result = this.Comparator.Compare(this.objA, this.objB);
 
             result.AreSame.Should().BeFalse();
             result.Differences.Single().Message.Should().Be(customMessage);

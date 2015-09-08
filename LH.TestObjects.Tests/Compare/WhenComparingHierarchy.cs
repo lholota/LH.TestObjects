@@ -14,7 +14,7 @@
             var objA = this.CreateReferenceLoop();
             var objB = this.CreateReferenceLoop();
 
-            var comparator = new ObjectComparator<HierarchyDomain>();
+            var comparator = Extensions.CreateComparator<HierarchyDomain>();
             var result = comparator.Compare(objA, objB);
             result.AreSame.Should().BeTrue();
         }

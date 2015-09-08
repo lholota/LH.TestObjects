@@ -129,7 +129,7 @@
             objA.Simple.StringProp = "AAA";
             objB.Simple.StringProp = "BBB";
 
-            var comparator = new ObjectComparator<ComplexDomainWithInheritor>();
+            var comparator = Extensions.CreateComparator<ComplexDomainWithInheritor>();
             comparator
                 .PropertiesOfType<SimpleDomain>(false)
                 .Ignore();
@@ -147,7 +147,7 @@
             objA.Simple.StringProp = "AAA";
             objB.Simple.StringProp = "BBB";
 
-            var comparator = new ObjectComparator<ComplexDomainWithInheritor>();
+            var comparator = Extensions.CreateComparator<ComplexDomainWithInheritor>();
             comparator
                 .PropertiesOfType<SimpleDomain>()
                 .Ignore();

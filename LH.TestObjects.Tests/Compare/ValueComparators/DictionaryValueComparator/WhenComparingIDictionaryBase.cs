@@ -20,7 +20,7 @@
         {
             this.objA = this.CreateDictionary();
             this.objB = this.CreateDictionary();
-            this.comparator = new ObjectComparator<T>();
+            this.comparator = Extensions.CreateComparator<T>();
         }
 
         [Test]
@@ -73,7 +73,7 @@
             domainA.DictProp["Key1"] = new SimpleDomain {StringProp = "AAA"};
             domainB.DictProp["Key1"] = new SimpleDomain {StringProp = "BBB"};
 
-            var domainComparator = new ObjectComparator<DictionaryDomain<T>>();
+            var domainComparator = Extensions.CreateComparator<DictionaryDomain<T>>();
             var result = domainComparator.Compare(domainA, domainB);
 
             result.AreSame.Should().BeFalse();

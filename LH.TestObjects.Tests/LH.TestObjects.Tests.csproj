@@ -76,7 +76,7 @@
   <ItemGroup>
     <Compile Include="Compare\ComparatorTestsBase.cs" />
     <Compile Include="Compare\Logging\Logger\WhenLogging.cs" />
-    <Compile Include="Compare\PropertyPathItem\WhenGettingPathString.cs" />
+    <Compile Include="Compare\PropertyPathItem\WhenPropertyPathItemGettingPathString.cs" />
     <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingHashtables.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingDateTimeValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingHashTables.cs" />
@@ -93,6 +93,7 @@
     <Compile Include="Compare\WhenComparingPrimitiveTypes.cs" />
     <Compile Include="Compare\WhenComparingStructs.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingUsingReferenceEquals.cs" />
+    <Compile Include="Compare\WhenComparingValueComparison.cs" />
     <Compile Include="Compare\WhenIgnoringProperties.cs" />
     <Compile Include="Compare\WhenLogging.cs" />
     <Compile Include="Compare\WhenSelectingComplexProperties.cs" />

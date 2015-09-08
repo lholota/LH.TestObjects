@@ -14,7 +14,7 @@
         [SetUp]
         public void Setup()
         {
-            this.comparator = new ObjectComparator<ComplexDomain>();
+            this.comparator = Extensions.CreateComparator<ComplexDomain>();
         }
         
         [Test]
@@ -107,7 +107,7 @@
         [Test]
         public void ThenShouldNotCompareNestedPropertiesIfInstancesAreReferenceEqual()
         {
-            var genericDomainComparator = new ObjectComparator<GenericDomain<ThrowingDomain>>();
+            var genericDomainComparator = Extensions.CreateComparator<GenericDomain<ThrowingDomain>>();
 
             var throwing = new ThrowingDomain();
             var objA = new GenericDomain<ThrowingDomain> { GenericProp = throwing };

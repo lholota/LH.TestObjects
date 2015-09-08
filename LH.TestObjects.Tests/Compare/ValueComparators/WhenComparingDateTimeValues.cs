@@ -5,7 +5,6 @@
     using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestObjects.Compare;
 
     [TestFixture]
     public class WhenComparingDateTimeValues
@@ -13,7 +12,7 @@
         [Test]
         public void ThenShouldPassIfValuesAreEqual()
         {
-            var comparator = new ObjectComparator<GenericDomain<DateTime>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<DateTime>>();
 
             var objA = new GenericDomain<DateTime> {GenericProp = DateTime.Parse("1/1/2001 14:55:33")};
             var objB = new GenericDomain<DateTime> {GenericProp = DateTime.Parse("1/1/2001 14:55:33")};
@@ -25,7 +24,7 @@
         [Test]
         public void ThenShouldFailIfValuesDiffer()
         {
-            var comparator = new ObjectComparator<GenericDomain<DateTime>>();
+            var comparator = Extensions.CreateComparator<GenericDomain<DateTime>>();
 
             var objA = new GenericDomain<DateTime> { GenericProp = DateTime.Parse("1/1/2001 14:55:33") };
             var objB = new GenericDomain<DateTime> { GenericProp = DateTime.Parse("1/1/2001 14:55:34") };

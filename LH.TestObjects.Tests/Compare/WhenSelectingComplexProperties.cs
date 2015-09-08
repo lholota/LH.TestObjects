@@ -14,7 +14,7 @@
         [SetUp]
         public void Setup()
         {
-            this.comparator = new ObjectComparator<ComplexDomain>();
+            this.comparator = Extensions.CreateComparator<ComplexDomain>();
         }
 
         [Test]

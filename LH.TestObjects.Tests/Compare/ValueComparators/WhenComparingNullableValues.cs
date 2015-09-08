@@ -18,7 +18,7 @@
         {
             this.objA = new GenericDomain<int?>();
             this.objB = new GenericDomain<int?>();
-            this.comparator = new ObjectComparator<GenericDomain<int?>>();
+            this.comparator = Extensions.CreateComparator<GenericDomain<int?>>();
         }
 
         [Test]

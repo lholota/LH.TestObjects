@@ -13,7 +13,7 @@
         [SetUp]
         public void Setup()
         {
-            this.comparator = new ObjectComparator<StructDomain>();
+            this.comparator = Extensions.CreateComparator<StructDomain>();
         }
 
         [Test]

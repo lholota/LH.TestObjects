@@ -4,7 +4,6 @@
     using System.Linq;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestObjects.Compare;
 
     [TestFixture]
     public class WhenComparingTimeSpan
@@ -12,7 +11,7 @@
         [Test]
         public void ThenShouldPassIfTimeSpansAreEqual()
         {
-            var comparator = new ObjectComparator<TimeSpanDomain>();
+            var comparator = Extensions.CreateComparator<TimeSpanDomain>();
             var objA = new TimeSpanDomain {TimeSpanProp = TimeSpan.FromDays(1)};
             var objB = new TimeSpanDomain {TimeSpanProp = TimeSpan.FromDays(1)};
 
@@ -23,7 +22,7 @@
         [Test]
         public void ThenShouldFailIfTimeSpansAreDifferent()
         {
-            var comparator = new ObjectComparator<TimeSpanDomain>();
+            var comparator = Extensions.CreateComparator<TimeSpanDomain>();
             var objA = new TimeSpanDomain { TimeSpanProp = TimeSpan.FromDays(1) };
             var objB = new TimeSpanDomain { TimeSpanProp = TimeSpan.FromDays(2) };
 

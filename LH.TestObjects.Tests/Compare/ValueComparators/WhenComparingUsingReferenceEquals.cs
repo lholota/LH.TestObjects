@@ -4,7 +4,6 @@
     using Domain;
     using FluentAssertions;
     using NUnit.Framework;
-    using TestObjects.Compare;
 
     [TestFixture]
     public class WhenComparingUsingReferenceEquals
@@ -12,7 +11,7 @@
         [Test]
         public void ThenShouldPassIfValuesAreTheSameInstance()
         {
-            var comparator = new ObjectComparator<ComplexDomain>();
+            var comparator = Extensions.CreateComparator<ComplexDomain>();
             comparator
                 .Property(x => x.Simple)
                 .UseReferenceEquals();
@@ -29,7 +28,7 @@
         [Test]
         public void ThenShouldFailIfValuesAreEqualButInstancesDiffer()
         {
-            var comparator = new ObjectComparator<ComplexDomain>();
+            var comparator = Extensions.CreateComparator<ComplexDomain>();
             comparator
                 .Property(x => x.Simple)
                 .UseReferenceEquals();
