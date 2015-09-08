@@ -21,7 +21,11 @@
             var areSame = this.customCompare.Invoke(comparison, context);
             if (!areSame)
             {
-                context.AddDifference(comparison, "Custom comparator returned false");
+                if (string.IsNullOrEmpty(comparison.Message))
+                {
+                    comparison.Message = "Custom comparator returned false";
+                }
+                context.AddDifference(comparison);
             }
 
             return areSame;

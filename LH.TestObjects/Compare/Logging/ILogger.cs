@@ -10,5 +10,7 @@ namespace LH.TestObjects.Compare.Logging
         /// <param name="message">Message or message format</param>
         /// <param name="args">Parameters to be applied in the string.Format</param>
         void Log(LogLevel level, IValueComparison context, string message, params object[] args);
+
+        void Log(LogLevel level, IValueComparison comparison);
     }
 }

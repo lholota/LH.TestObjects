@@ -48,6 +48,8 @@
             get { return this.PropertyPathItem.GetPathString(); }
         }
 
+        public string Message { get; set; }
+
         internal PropertyInfo PropertyInfo
         {
             get { return this.PropertyPathItem.PropertyInfo; }

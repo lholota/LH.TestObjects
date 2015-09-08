@@ -57,6 +57,27 @@
         }
 
         [Test]
+        public void ThenMessageShouldNotBeEmptyIfDifferenceIsFound()
+        {
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
+
+            objA.StringProp = "AAA";
+            objB.StringProp = "BBB";
+
+            var result = this.Comparator.Compare(objA, objB);
+
+            result.AreSame.Should().BeFalse();
+            result.Differences.Should().NotBeNull();
+            result.Differences.Count().Should().Be(1);
+
+            var difference = result.Differences.Single();
+            difference.Message.Should().NotBeNullOrEmpty();
+            difference.Message.Should().Contain(objA.StringProp);
+            difference.Message.Should().Contain(objB.StringProp);
+        }
+
+        [Test]
         public void ThenShouldFailIfOneValueIsNull()
         {
             var objA = SimpleDomain.CreateObjectWithValueSet1();

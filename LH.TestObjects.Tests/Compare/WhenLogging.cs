@@ -25,29 +25,30 @@
         }
 
         [Test]
-        public void ThenContextShouldHaveValuesWhenLoggingToCallback()
+        public void ThenComparisonShouldHaveValuesWhenLoggingToCallback()
         {
             var hasBeenCalled = false;
             var stringPropChecked = false;
             var objA = SimpleDomain.CreateObjectWithValueSet1();
             var objB = SimpleDomain.CreateObjectWithValueSet2();
 
-            Action<LogEvent> callback = ctx =>
+            Action<LogEvent> callback = evt =>
             {
                 hasBeenCalled = true;
 
-                ctx.Message.Should().NotBeNullOrEmpty();
-                ctx.Comparison.Should().NotBeNull();
-                ctx.Comparison.PropertyName.Should().NotBeNullOrEmpty();
-                ctx.Comparison.ActualValue.Should().NotBeNull();
-                ctx.Comparison.ExpectedValue.Should().NotBeNull();
+                evt.Message.Should().NotBeNullOrEmpty();
+                evt.Comparison.Should().NotBeNull();
+                evt.Comparison.PropertyName.Should().NotBeNullOrEmpty();
+                evt.Comparison.ActualValue.Should().NotBeNull();
+                evt.Comparison.ExpectedValue.Should().NotBeNull();
 
-                if (ctx.Comparison.PropertyName == nameof(objA.StringProp))
+                if (evt.Comparison.PropertyName == nameof(objA.StringProp))
                 {
                     stringPropChecked = true;
 
-                    ctx.Comparison.ExpectedValue.Should().Be(objA.StringProp);
-                    ctx.Comparison.ActualValue.Should().Be(objB.StringProp);
+                    evt.Message.Should().StartWith("StringProp:");
+                    evt.Comparison.ExpectedValue.Should().Be(objA.StringProp);
+                    evt.Comparison.ActualValue.Should().Be(objB.StringProp);
                 }
             };
 

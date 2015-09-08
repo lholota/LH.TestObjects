@@ -52,25 +52,25 @@
 
             foreach (var key in notInActual)
             {
-                var message = string.Format(
+                var keyComparison = this.CreateKeyNamedComparison(valueComparison, key.ToString());
+                keyComparison.Message = string.Format(
                         "The dictionaries at {0} differ, the key '{1}' is missing in the actual value.",
                         valueComparison.PropertyPath,
                         key);
 
-                var keyComparison = this.CreateKeyNamedComparison(valueComparison, key.ToString());
-                comparisonContext.AddDifference(keyComparison, message);
+                comparisonContext.AddDifference(keyComparison);
                 result = false;
             }
 
             foreach (var key in notInExpected)
-            {
-                var message = string.Format(
-                        "The dictionaries at {0} differ, there is an extra key '{1}' in the actual value.",
-                        valueComparison.PropertyPath,
-                        key);
-
+            {        
                 var keyComparison = this.CreateKeyNamedComparison(valueComparison, key.ToString());
-                comparisonContext.AddDifference(keyComparison, message);
+                keyComparison.Message = string.Format(
+                    "The dictionaries at {0} differ, there is an extra key '{1}' in the actual value.",
+                    valueComparison.PropertyPath,
+                    key);
+
+                comparisonContext.AddDifference(keyComparison);
                 result = false;
             }
 

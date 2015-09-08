@@ -68,5 +68,32 @@
             result.Differences.Single(x => x.PropertyName == "Simple").PropertyPath.Should().Be("Simple");
             result.Differences.Single(x => x.PropertyName == "StringProp").PropertyPath.Should().Be("Simple.StringProp");
         }
+
+        [Test]
+        public void ThenShouldReturnCustomMessageWhenCustomLogicSetsIt()
+        {
+            const string customMessage = "MyMessage";
+
+            var objA = SimpleDomain.CreateObjectWithValueSet1();
+            var objB = SimpleDomain.CreateObjectWithValueSet1();
+
+            objA.StringProp = "AAA";
+            objB.StringProp = "AAA";
+
+            this.Comparator
+                .Property(x => x.StringProp)
+                .CustomCompare(x =>
+                {
+                    x.AreSame = false;
+                    x.Message = customMessage;
+
+                    return x.AreSame;
+                });
+
+            var result = this.Comparator.Compare(objA, objB);
+
+            result.AreSame.Should().BeFalse();
+            result.Differences.Single().Message.Should().Be(customMessage);
+        }
     }
 }

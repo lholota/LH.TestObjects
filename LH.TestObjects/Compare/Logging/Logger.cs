@@ -19,6 +19,12 @@
             return this;
         }
 
+        public void Log(LogLevel level, IValueComparison comparison)
+        {
+            var message = string.Format("{0}: {1}", comparison.PropertyPath, comparison.Message);
+            this.Log(level, comparison, message);
+        }
+
         public void Log(LogLevel level, IValueComparison comparison, string message, params object[] args)
         {
             if (level < this.minimumLevel)

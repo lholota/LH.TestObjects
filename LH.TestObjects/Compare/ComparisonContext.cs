@@ -41,12 +41,12 @@
             // ReSharper disable once PossibleNullReferenceException
             else if (expected.GetType() != actual.GetType())
             {
-                var message = string.Format(
+                valueComparison.Message = string.Format(
                     "The types do not match, the expected type is {0} but the actual one is {1}.",
                     expected.GetType(),
                     actual.GetType());
 
-                this.AddDifference(valueComparison, message);
+                this.AddDifference(valueComparison);
                 areSame = false;
             }
             else
@@ -57,23 +57,17 @@
             return areSame;
         }
 
-        public void AddDifference(IValueComparison valueComparison, string message = null)
+        public void AddDifference(ValueComparison valueComparison)
         {
-            if (!string.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(valueComparison.Message))
             {
-                this.Log.Log(LogLevel.Error, valueComparison, message);
-            }
-            else
-            {
-                this.Log.Log(
-                            LogLevel.Error,
-                            valueComparison,
-                            "{0}: The property values do not match, expected is {1}, but the actual {2}.",
-                            valueComparison.PropertyPath,
-                            valueComparison.ExpectedValue ?? "[Null]",
-                            valueComparison.ActualValue ?? "[Null]");
+                valueComparison.Message = string.Format("{0}: The property values do not match, expected is {1}, but the actual {2}.",
+                        valueComparison.PropertyPath,
+                        valueComparison.ExpectedValue ?? "[Null]",
+                        valueComparison.ActualValue ?? "[Null]");
             }
 
+            this.Log.Log(LogLevel.Error, valueComparison);
             this.Result.DifferencesList.Add(valueComparison);
         }
 

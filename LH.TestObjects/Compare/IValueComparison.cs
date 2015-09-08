@@ -31,6 +31,11 @@
         /// Gets the dot delimited path to the property.
         /// </summary>
         string PropertyPath { get; }
+
+        /// <summary>
+        /// Gets the summary of the difference.
+        /// </summary>
+        string Message { get; }
     }
 
     /// <inheritdoc />
@@ -46,6 +51,11 @@
 
         /// <inheritdoc />s
         new TProp ActualValue { get; }
+
+        /// <summary>
+        /// Gets the summary of the difference.
+        /// </summary>
+        new string Message { get; set; }
 
         /// <summary>
         /// This is used to compare any nested values during a custom comparison

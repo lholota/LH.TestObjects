@@ -31,6 +31,12 @@ namespace LH.TestObjects.Compare
             get { return this.comparison.ActualValue; }
         }
 
+        string IValueComparison<TProp>.Message
+        {
+            get { return this.comparison.Message; }
+            set { this.comparison.Message = value; }
+        }
+
         public Type PropertyType
         {
             get { return this.comparison.PropertyType; }
@@ -39,12 +45,6 @@ namespace LH.TestObjects.Compare
         public string PropertyName
         {
             get { return this.comparison.PropertyName; }
-        }
-
-        public bool CompareItem(object expected, object actual, string propertyName)
-        {
-            var propertyPath = new PropertyPathItem(propertyName, this.comparison.PropertyPathItem, false);
-            return this.context.CompareItem(expected, actual, propertyPath);
         }
 
         public TProp ActualValue
@@ -60,6 +60,17 @@ namespace LH.TestObjects.Compare
         public string PropertyPath
         {
             get { return this.comparison.PropertyPath; }
+        }
+
+        public string Message
+        {
+            get { return this.comparison.Message; }
+        }
+
+        public bool CompareItem(object expected, object actual, string propertyName)
+        {
+            var propertyPath = new PropertyPathItem(propertyName, this.comparison.PropertyPathItem, false);
+            return this.context.CompareItem(expected, actual, propertyPath);
         }
     }
 }
