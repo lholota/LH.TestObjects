@@ -85,6 +85,7 @@
     <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingIDictionaryBase.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingNullableValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingNumberValues.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingObjects.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingStringValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingTimeSpan.cs" />
     <Compile Include="Compare\WhenComparingComplexObjects.cs" />

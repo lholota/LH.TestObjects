@@ -61,6 +61,7 @@
         private void AddDefaultRules(List<RuleBase> rules)
         {
             this.AddValueComparator<RecursivePropertyComparator>(rules);
+            this.AddValueComparator<ObjectValueComparator>(rules);
             this.AddValueComparator<StringValueComparator>(rules);
             this.AddValueComparator<NumberValueComparator>(rules);
             this.AddValueComparator<FloatValueComparator>(rules);
