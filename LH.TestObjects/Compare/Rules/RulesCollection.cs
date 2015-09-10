@@ -69,6 +69,7 @@
             this.AddValueComparator<FloatValueComparator>(rules);
             this.AddValueComparator<TimeSpanValueComparator>(rules);
             this.AddValueComparator<DateTimeValueComparator>(rules);
+            this.AddValueComparator<DynamicObjectValueComparator>(rules);
         }
 
         private void AddValueComparator<T>(List<RuleBase> rules)

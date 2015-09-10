@@ -1,7 +1,12 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Dynamic;
     using System.Linq;
+    using System.Linq.Expressions;
     using FluentAssertions;
+    using Microsoft.CSharp.RuntimeBinder;
     using NUnit.Framework;
     using TestObjects.Compare;
 
@@ -50,6 +55,6 @@
 
             result.AreSame.Should().BeFalse();
             result.Differences.Single().PropertyPath.Should().Be("[1]");
-        }
+        }        
     }
 }

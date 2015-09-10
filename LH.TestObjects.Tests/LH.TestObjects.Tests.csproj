@@ -83,6 +83,7 @@
     <Compile Include="Compare\ValueComparators\CollectionValueComparator\WhenComparingReadOnlyCollectionValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingDateTimeValues.cs" />
     <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingDictionaries.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingDynamicObjects.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingFloatValues.cs" />
     <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingIDictionaryBase.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingNullableValues.cs" />

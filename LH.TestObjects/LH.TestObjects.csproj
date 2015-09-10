@@ -71,6 +71,7 @@
     <Compile Include="Compare\ValueComparators\KnownTypes\CollectionValueComparatorOptions.cs" />
     <Compile Include="Compare\ValueComparators\KnownTypes\DateTimeValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\KnownTypes\DictionaryValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\DynamicObjectValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\KnownTypes\FloatValueComparator.cs" />
     <Compile Include="Compare\ValueComparators\KnownTypes\FloatValueComparatorOptions.cs" />
     <Compile Include="Compare\ValueComparators\IHasComparatorOptions.cs" />
