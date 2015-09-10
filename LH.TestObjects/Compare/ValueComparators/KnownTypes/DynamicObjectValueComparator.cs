@@ -83,10 +83,16 @@
                 return dictionary[propertyName];
             }
 
-            var binder = (GetMemberBinder)Binder.GetMember(0, propertyName, dynamicObj.GetType(), new[]
-                {
-                    CSharpArgumentInfo.Create(0, null)
-                });
+            var binderArguments = new[]
+            {
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+            };
+
+            var binder = (GetMemberBinder)Binder.GetMember(
+                CSharpBinderFlags.None,
+                propertyName,
+                dynamicObj.GetType(),
+                binderArguments);
 
             object value;
             dynamicObj.TryGetMember(binder, out value);

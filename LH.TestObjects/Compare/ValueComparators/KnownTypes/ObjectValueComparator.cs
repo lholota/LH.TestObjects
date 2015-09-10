@@ -11,7 +11,7 @@
 
         public bool Compare(ComparisonContext context, ValueComparison comparison)
         {
-            var areEqual = Equals(comparison.ExpectedValue, comparison.ActualValue);
+            var areEqual = object.Equals(comparison.ExpectedValue, comparison.ActualValue);
             if (!areEqual)
             {
                 context.AddDifference(comparison);

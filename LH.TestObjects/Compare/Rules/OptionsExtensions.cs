@@ -68,6 +68,14 @@ namespace LH.TestObjects.Compare
             return actions;
         }
 
+        /// <summary>
+        /// Sets an order expression which will be used to sort the collection before the comparison. This way the original order will not affect the comparison.
+        /// </summary>
+        /// <typeparam name="TCollection">Type of the collection</typeparam>
+        /// <typeparam name="TItem">Type of an item of the collection</typeparam>
+        /// <param name="selectionActions">Property selection on which the configuration action should be applied.</param>
+        /// <param name="orderAction">The sort function - for example x => x.OrderBy(y => y.Name)</param>
+        /// <returns><see cref="IComparatorTypeSpecificSelectionActions{TCollection}"/></returns>
         public static IComparatorTypeSpecificSelectionActions<TCollection> OrderBeforeComparison<TCollection, TItem>(
             this IComparatorTypeSpecificSelectionActions<TCollection> selectionActions,
             Func<TCollection, IEnumerable<TItem>> orderAction)
