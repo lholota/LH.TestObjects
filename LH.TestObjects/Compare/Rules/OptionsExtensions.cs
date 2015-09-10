@@ -6,6 +6,7 @@
 namespace LH.TestObjects.Compare
 {
     using System;
+    using System.Collections.Generic;
     using ValueComparators.KnownTypes;
 
     /// <summary>
@@ -63,6 +64,19 @@ namespace LH.TestObjects.Compare
             var options = EnsureOptions<FloatValueComparatorOptions>(opt => actions.Options.ValueComparatorOptions = opt);
 
             options.DoubleEpsilon = epsilon;
+
+            return actions;
+        }
+
+        public static IComparatorTypeSpecificSelectionActions<TCollection> OrderBeforeComparison<TCollection, TItem>(
+            this IComparatorTypeSpecificSelectionActions<TCollection> selectionActions,
+            Func<TCollection, IEnumerable<TItem>> orderAction)
+            where TCollection : IEnumerable<TItem>
+        {
+            var actions = (ComparatorTypeSpecificSelectionActions<TCollection>)selectionActions;
+            var options = EnsureOptions<CollectionValueComparatorOptions>(opt => actions.Options.ValueComparatorOptions = opt);
+
+            options.OrderFunction = x => orderAction.Invoke((TCollection)x);
 
             return actions;
         }

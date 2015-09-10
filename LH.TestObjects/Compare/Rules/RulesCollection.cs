@@ -62,12 +62,13 @@
         {
             this.AddValueComparator<RecursivePropertyComparator>(rules);
             this.AddValueComparator<ObjectValueComparator>(rules);
+            this.AddValueComparator<CollectionValueComparator>(rules);
+            this.AddValueComparator<DictionaryValueComparator>(rules);
             this.AddValueComparator<StringValueComparator>(rules);
             this.AddValueComparator<NumberValueComparator>(rules);
             this.AddValueComparator<FloatValueComparator>(rules);
             this.AddValueComparator<TimeSpanValueComparator>(rules);
             this.AddValueComparator<DateTimeValueComparator>(rules);
-            this.AddValueComparator<DictionaryValueComparator>(rules);
         }
 
         private void AddValueComparator<T>(List<RuleBase> rules)

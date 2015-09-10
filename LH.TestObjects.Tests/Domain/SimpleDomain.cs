@@ -22,6 +22,16 @@
             };
         }
 
+        public static SimpleDomain CreateObjectWithValueSet3()
+        {
+            return new SimpleDomain
+            {
+                StringProp = "CCC".EnsureUniqueInstance(),
+                StringProp2 = "CCC".EnsureUniqueInstance(),
+                IntProp = 3
+            };
+        }
+
         public string StringProp { get; set; }
 
         public string StringProp2 { get; set; }
