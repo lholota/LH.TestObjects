@@ -7,6 +7,8 @@
 
     internal class PropertySelection
     {
+        public bool AppliesToRoot { get; set; }
+
         public Func<IValueComparison, bool> Predicate { get; set; }
 
         public Expression PropertyExpression { get; set; }
@@ -19,7 +21,7 @@
         {
             if (valueComparison.PropertyPathItem.IsRoot)
             {
-                return false;
+                return this.AppliesToRoot;
             }
 
             if (this.PropertyType != null)

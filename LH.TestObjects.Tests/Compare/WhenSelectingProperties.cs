@@ -1,5 +1,6 @@
 ﻿namespace LH.TestObjects.Tests.Compare
 {
+    using System;
     using System.Linq;
     using Domain;
     using FluentAssertions;
@@ -210,6 +211,17 @@
             var result = comparator.Compare(objA, objB);
             result.AreSame.Should().BeFalse();
             result.Differences.Single().PropertyPath.Should().Be("ChildNode.Name");
+        }
+
+        [Test]
+        public void ThenShouldPassWhenValuesDifferByCaseAndRootPropertyOptionsAreApplied()
+        {
+            var stringComparator = new ObjectComparator<string>();
+            stringComparator.Root
+                .WithCaseSensitivity(StringComparison.OrdinalIgnoreCase);
+
+            var result = stringComparator.Compare("AAA", "aaa");
+            result.AreSame.Should().BeTrue();
         }
     }
 }

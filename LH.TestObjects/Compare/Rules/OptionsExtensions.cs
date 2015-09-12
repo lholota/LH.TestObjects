@@ -20,7 +20,7 @@ namespace LH.TestObjects.Compare
         /// <param name="selectionActions">The property selection the configuration will be applied on</param>
         /// <param name="comparisonType">The comparison type of <see cref="StringComparison"/></param>
         /// <returns>The property selection</returns>
-        public static IComparatorTypeSpecificSelectionActions<string> WithComparisonType(
+        public static IComparatorTypeSpecificSelectionActions<string> WithCaseSensitivity(
             this IComparatorTypeSpecificSelectionActions<string> selectionActions, 
             StringComparison comparisonType)
         {

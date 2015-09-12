@@ -13,7 +13,9 @@
     public class ObjectComparator<TUserType> : IComparatorTypeSpecificPropertySelector<TUserType>
     {
         private readonly ILogger log;
-        private readonly IList<PropertySelectionRule> propertyRules; 
+        private readonly IList<PropertySelectionRule> propertyRules;
+
+        private PropertySelectionRule rootPropertyRule;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectComparator{TUserType}" /> class.
@@ -22,6 +24,8 @@
         {
             this.propertyRules = new List<PropertySelectionRule>();
             this.log = new Logger();
+
+            this.AddRootPropertyRule();
         }
 
         /// <summary>
@@ -30,6 +34,17 @@
         public ILoggerConfiguration Log
         {
             get { return this.log; }
+        }
+
+        /// <summary>
+        /// Gets the options actions which can be applied to the root object comparison.
+        /// </summary>
+        public IComparatorTypeSpecificSelectionActions<TUserType> Root
+        {
+            get
+            {
+                return new ComparatorTypeSpecificSelectionActions<TUserType>(this.rootPropertyRule.Options);
+            }
         }
 
         /// <summary>
@@ -88,6 +103,13 @@
         {
             rule.OrderIndex = this.propertyRules.Count;
             this.propertyRules.Add(rule);
+        }
+
+        private void AddRootPropertyRule()
+        {
+            this.rootPropertyRule = new PropertySelectionRule();
+            this.rootPropertyRule.Selection.AppliesToRoot = true;
+            this.AddPropertyRule(this.rootPropertyRule);
         }
     }
 }

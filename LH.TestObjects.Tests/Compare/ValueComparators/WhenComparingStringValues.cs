@@ -61,7 +61,7 @@
             this.objB.StringProp = "aaa";
 
             this.Comparator.Property(x => x.StringProp)
-                .WithComparisonType(StringComparison.OrdinalIgnoreCase);
+                .WithCaseSensitivity(StringComparison.OrdinalIgnoreCase);
 
             var result = this.Comparator.Compare(this.objA, this.objB);
 
