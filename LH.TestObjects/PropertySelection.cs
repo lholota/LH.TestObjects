@@ -60,7 +60,7 @@
         {
             foreach (var propertyName in propertyNames)
             {
-                if (propertyPath.IsRoot || propertyPath.PropertyInfo.Name != propertyName)
+                if (propertyPath.IsRoot || propertyPath.PropertyInfo == null || propertyPath.PropertyInfo.Name != propertyName)
                 {
                     return false;
                 }
