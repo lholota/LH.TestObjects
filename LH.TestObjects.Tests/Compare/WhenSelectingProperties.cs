@@ -180,5 +180,36 @@
             var result = this.Comparator.Compare(objA, objB);
             result.AreSame.Should().BeTrue();
         }
+
+        [Test]
+        public void ThenShouldFailWhenExpressionRuleAndNestedPropertyDiffers()
+        {
+            var comparator = new ObjectComparator<HierarchyDomain>();
+            comparator
+                .Property(x => x.Name)
+                .Ignore();
+
+            var objA = new HierarchyDomain
+            {
+                Name = "AAA",
+                ChildNode = new HierarchyDomain
+                {
+                    Name = "BBB"
+                }
+            };
+
+            var objB = new HierarchyDomain
+            {
+                Name = "AAA",
+                ChildNode = new HierarchyDomain
+                {
+                    Name = "CCC"
+                }
+            };
+
+            var result = comparator.Compare(objA, objB);
+            result.AreSame.Should().BeFalse();
+            result.Differences.Single().PropertyPath.Should().Be("ChildNode.Name");
+        }
     }
 }

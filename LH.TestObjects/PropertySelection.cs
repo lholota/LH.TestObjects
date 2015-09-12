@@ -68,6 +68,11 @@
                 propertyPath = propertyPath.ParentProperty;
             }
 
+            if (!propertyPath.IsRoot)
+            {
+                return false;
+            }
+
             return true;
         }
     }
