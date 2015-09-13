@@ -63,6 +63,7 @@
             this.AddValueComparator<RecursivePropertyComparator>(rules);
             this.AddValueComparator<ObjectValueComparator>(rules);
             this.AddValueComparator<CollectionValueComparator>(rules);
+            this.AddValueComparator<MultidimensionArrayValueComparator>(rules);
             this.AddValueComparator<DictionaryValueComparator>(rules);
             this.AddValueComparator<StringValueComparator>(rules);
             this.AddValueComparator<NumberValueComparator>(rules);

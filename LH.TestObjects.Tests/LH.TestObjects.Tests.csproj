@@ -86,6 +86,7 @@
     <Compile Include="Compare\ValueComparators\WhenComparingDynamicObjects.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingFloatValues.cs" />
     <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingIDictionaryBase.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingMultiDimensionArrayValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingNullableValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingNumberValues.cs" />
     <Compile Include="Compare\ValueComparators\WhenComparingObjects.cs" />
