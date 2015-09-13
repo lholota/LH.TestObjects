@@ -21,11 +21,11 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <licenseUrl>http://testobjects.lholota.com/v$version$/license.txt</licenseUrl>
     <copyright>Copyright  2015</copyright>
-    <dependencies>
+    <!--<dependencies>
         <group targetFramework="net40">
           <dependency id="log4net" version="1.2.10" />
         </group>
-    </dependencies>
+    </dependencies>-->
     <references></references>
     <tags></tags>
   </metadata>

@@ -3,11 +3,15 @@ param(
 	[string]$Version
 )
 
+$ErrorActionPreference = "Stop"
+
 Write-Host "Building the NuGet package..."
-& "Nuget.exe" pack -Verbosity Detailed -Prop Configuration=$Configuration
+Start-Process -FilePath "$PSScriptRoot\Nuget.exe" -WorkingDirectory "..\LH.TestObjects\" -Wait -NoNewWindow -ArgumentList "pack -Verbosity Detailed -Prop Configuration=$Configuration"
+# & "$PSScriptRoot\Nuget.exe" pack -Verbosity Detailed -Prop Configuration=$Configuration
 
 Write-Host "Creating the website artifacts..."
-Create-Directory "_Website\v$Version"
+New-Item "..\_Artifacts\v$Version" -ItemType Directory
 
-Copy-Item "License" "_Website\v$Version\License.txt"
-Copy-Item "Logo_128.png" "_Website\v$Version\nuget-icon.png"
+Copy-Item "..\License" "..\_Artifacts\v$Version\License.txt"
+Copy-Item "..\Logo_128.png" "..\_Artifacts\v$Version\nuget-icon.png"
+Copy-Item "..\LH.TestObjects\*.nupkg" "..\_Artifacts\"
