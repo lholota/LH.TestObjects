@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LH.TestObjects</id>
-    <version>$Version$</version>
+    <version>$version$</version>
     <title>LH TestObjects</title>
     <authors>Lukas Holota</authors>
     <owners>Lukas Holota</owners>
@@ -16,10 +16,10 @@
       A simple comparator and generator of your domain objects in the tests.
     </summary>
     <language>en-US</language>
-    <projectUrl>https://github.com/lholota/LH.TestObjects</projectUrl>
-    <iconUrl>!!!TODO!!!https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <projectUrl>http://testobjects.lholota.com</projectUrl>
+    <iconUrl>http://testobjects.lholota.com/v$version$/nuget-icon.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <licenseUrl>!!!TODO!!! http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <licenseUrl>http://testobjects.lholota.com/v$version$/license.txt</licenseUrl>
     <copyright>Copyright  2015</copyright>
     <dependencies>
         <group targetFramework="net40">
@@ -29,9 +29,8 @@
     <references></references>
     <tags></tags>
   </metadata>
-  <files>
-    <file src="lib\" target="lib" />
-    <file src="tools\" target="tools" />
-    <file src="content\" target="content" />
-  </files>
+  <!--<files>
+    <file src="LH.TestObjects.dll" target="lib" />
+    <file src="LH.TestObjects.pdb" target="lib" />
+  </files>-->
 </package>
