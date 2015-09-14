@@ -3,6 +3,9 @@ param(
 	[string]$Version
 )
 
+Write-Host "Configuration: $Configuration"
+Write-Host "Version: $Version"
+
 $ErrorActionPreference = "Stop"
 
 Write-Host "Building the NuGet package..."

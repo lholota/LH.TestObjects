@@ -29,8 +29,10 @@
     <references></references>
     <tags></tags>
   </metadata>
-  <!--<files>
+  <!--
+  <files>
     <file src="LH.TestObjects.dll" target="lib" />
     <file src="LH.TestObjects.pdb" target="lib" />
-  </files>-->
+  </files>
+  -->
 </package>
