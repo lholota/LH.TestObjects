@@ -15,6 +15,6 @@ Start-Process -FilePath "$PSScriptRoot\Nuget.exe" -WorkingDirectory "..\LH.TestO
 Write-Host "Creating the website artifacts..."
 New-Item "..\_Artifacts\v$Version" -ItemType Directory
 
-Copy-Item "..\License" "..\_Artifacts\v$Version\License.txt"
+Copy-Item "..\License" "..\_Artifacts\v$Version\license.txt"
 Copy-Item "..\Logo_128.png" "..\_Artifacts\v$Version\nuget-icon.png"
 Copy-Item "..\LH.TestObjects\*.nupkg" "..\_Artifacts\"
