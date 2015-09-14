@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA6F481D-0D77-466C-A149-8C19AC366CC8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LH.TestObjects</RootNamespace>
+    <AssemblyName>LH.TestObjects</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile47</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Generate\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compare\ComparisonContext.cs" />
+    <Compile Include="Compare\ComparatorGenericSelectionActions.cs" />
+    <Compile Include="Compare\Logging\ILogger.cs" />
+    <Compile Include="Compare\Rules\PropertySelectionRule.cs" />
+    <Compile Include="Compare\ComparatorTypeSpecificSelectionActions.cs" />
+    <Compile Include="Compare\ComparisonResult.cs" />
+    <Compile Include="Compare\IValueComparison.cs" />
+    <Compile Include="Compare\IComparisonResult.cs" />
+    <Compile Include="Compare\Logging\ILoggerConfiguration.cs" />
+    <Compile Include="Compare\IComparatorTypeSpecificSelectionActions.cs" />
+    <Compile Include="Compare\IComparatorTypeSpecificPropertySelector.cs" />
+    <Compile Include="Compare\Logging\LogEvent.cs" />
+    <Compile Include="Compare\Logging\Logger.cs" />
+    <Compile Include="Compare\Logging\LogLevel.cs" />
+    <Compile Include="Compare\ObjectComparator.cs" />
+    <Compile Include="Compare\Rules\OptionsExtensions.cs" />
+    <Compile Include="Compare\Rules\PropertyOptions.cs" />
+    <Compile Include="Compare\PropertyPathItem.cs" />
+    <Compile Include="Compare\Rules\RuleBase.cs" />
+    <Compile Include="Compare\Rules\RulesCollection.cs" />
+    <Compile Include="Compare\Rules\ValueComparatorRule.cs" />
+    <Compile Include="Compare\ValueComparators\CustomValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\CollectionValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\CollectionValueComparatorOptions.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\DateTimeValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\DictionaryValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\DynamicObjectValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\FloatValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\FloatValueComparatorOptions.cs" />
+    <Compile Include="Compare\ValueComparators\IHasComparatorOptions.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\MultidimensionArrayValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\ObjectValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\TimeSpanValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\RecursivePropertyComparator.cs" />
+    <Compile Include="Compare\ValueComparators\ReferenceEqualsValueComparator.cs" />
+    <Compile Include="Compare\ValueComparison.cs" />
+    <Compile Include="Compare\ValueComparisonAdapter.cs" />
+    <Compile Include="ExpressionExtensions.cs" />
+    <Compile Include="PropertySelection.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\NumberValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\StringValueComparator.cs" />
+    <Compile Include="Compare\ValueComparators\KnownTypes\StringValueComparatorOptions.cs" />
+    <Compile Include="Compare\ValueComparators\IValueComparator.cs" />
+    <Compile Include="IGenericSelectionActions.cs" />
+    <Compile Include="IGenericPropertySelector.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LH.TestObjects.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

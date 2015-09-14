@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LH.TestObjects</id>
+    <version>$version$</version>
+    <title>LH TestObjects</title>
+    <authors>Lukas Holota</authors>
+    <owners>Lukas Holota</owners>
+    <description>
+      Comparator - value based and fluently configurable value comparator. Use whenever you need to recursively compare objects values.
+      Generator - TBA
+    </description>
+    <releaseNotes>
+    </releaseNotes>
+    <summary>
+      A simple comparator and generator of your domain objects in the tests.
+    </summary>
+    <language>en-US</language>
+    <projectUrl>http://testobjects.lholota.com</projectUrl>
+    <iconUrl>http://testobjects.lholota.com/v$version$/nuget-icon.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>http://testobjects.lholota.com/v$version$/license.txt</licenseUrl>
+    <copyright>Copyright  2015</copyright>
+    <!--<dependencies>
+        <group targetFramework="net40">
+          <dependency id="log4net" version="1.2.10" />
+        </group>
+    </dependencies>-->
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <!--
+  <files>
+    <file src="LH.TestObjects.dll" target="lib" />
+    <file src="LH.TestObjects.pdb" target="lib" />
+  </files>
+  -->
+</package>

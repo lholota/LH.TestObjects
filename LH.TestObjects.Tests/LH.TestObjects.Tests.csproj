@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{169B8AC5-F421-4ECF-AFC0-28C2F9D6DEA5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LH.TestObjects.Tests</RootNamespace>
+    <AssemblyName>LH.TestObjects.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentAssertions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.0.0\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.0.0\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.core.interfaces, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.util, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.util.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NUnit.VisualStudio.TestAdapter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4cb40d35494691ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compare\ComparatorTestsBase.cs" />
+    <Compile Include="Compare\Logging\Logger\WhenLogging.cs" />
+    <Compile Include="Compare\PropertyPathItem\WhenPropertyPathItemGettingPathString.cs" />
+    <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingHashtables.cs" />
+    <Compile Include="Compare\ValueComparators\CollectionValueComparator\WhenComparingArrayValues.cs" />
+    <Compile Include="Compare\ValueComparators\CollectionValueComparator\WhenComparingListValues.cs" />
+    <Compile Include="Compare\ValueComparators\CollectionValueComparator\WhenComparingReadOnlyCollectionValues.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingDateTimeValues.cs" />
+    <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingDictionaries.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingDynamicObjects.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingFloatValues.cs" />
+    <Compile Include="Compare\ValueComparators\DictionaryValueComparator\WhenComparingIDictionaryBase.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingMultiDimensionArrayValues.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingNullableValues.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingNumberValues.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingObjects.cs" />
+    <Compile Include="Compare\ValueComparators\CollectionValueComparator\WhenComparingCollectionValuesBase.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingStringValues.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingTimeSpan.cs" />
+    <Compile Include="Compare\WhenComparingComplexObjects.cs" />
+    <Compile Include="Compare\WhenComparingHierarchy.cs" />
+    <Compile Include="Compare\WhenComparingObjects.cs" />
+    <Compile Include="Compare\WhenComparingPrimitiveTypes.cs" />
+    <Compile Include="Compare\WhenComparingStructs.cs" />
+    <Compile Include="Compare\ValueComparators\WhenComparingUsingReferenceEquals.cs" />
+    <Compile Include="Compare\WhenComparingValueComparison.cs" />
+    <Compile Include="Compare\WhenIgnoringProperties.cs" />
+    <Compile Include="Compare\WhenLogging.cs" />
+    <Compile Include="Compare\WhenSelectingComplexProperties.cs" />
+    <Compile Include="Compare\WhenSelectingProperties.cs" />
+    <Compile Include="Compare\WhenUsingCustomComparator.cs" />
+    <Compile Include="Domain\ComplexDomainWithInheritor.cs" />
+    <Compile Include="Domain\DictionaryDomain.cs" />
+    <Compile Include="Domain\FloatDomain.cs" />
+    <Compile Include="Domain\HierarchyDomain.cs" />
+    <Compile Include="Domain\SimpleDomainInheritor.cs" />
+    <Compile Include="Domain\StructDomain.cs" />
+    <Compile Include="Domain\ThrowingDomain.cs" />
+    <Compile Include="ExpressionExtensions\WhenGettingPropertyNames.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertySelectorTestBase.cs" />
+    <Compile Include="Domain\ComplexDomain.cs" />
+    <Compile Include="Domain\SimpleDomain.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LH.TestObjects\LH.TestObjects.csproj">
+      <Project>{ea6f481d-0d77-466c-a149-8c19ac366cc8}</Project>
+      <Name>LH.TestObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
