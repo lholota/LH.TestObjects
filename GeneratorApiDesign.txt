@@ -1,0 +1,25 @@
+var generator = ObjectGenerator.CreateSingleObjectGenerator<MyType>();
+var generator = ObjectGenerator.CreateCollectionGenerator<MyType>();
+
+generator // By default all property values will be generated
+	.Properties(...delegate...)
+	.Ignore();
+
+generator
+	.Property(x => x.MyProp.AnotherProp)
+	.CustomGenerator(...delegate...)
+	.ExecutePostGeneration(...delegate...);
+
+generator
+	.CollectionProperty(x => x.MyList)
+	.First(10)   <--- same interface will appear on the collection generator directly
+	.Property(x => x.MyProp)
+	.CustomGenerator(x => "MyValue");
+
+var obj = generator.Generate();
+
+Notes
+===========================================
+- Collections vs a single object (different rules)
+- What about nested collections?
+- Support for custom constructors
