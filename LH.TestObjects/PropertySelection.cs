@@ -17,6 +17,8 @@
 
         public bool IncludeInheritedTypes { get; set; }
 
+        public Type DeclarationType { get; set; }
+
         public bool IsMatch(ValueComparison valueComparison)
         {
             if (valueComparison.PropertyPathItem.IsRoot)
@@ -40,7 +42,14 @@
                 }
             }
 
-            // TODO: What to do when PropInfo is null ???
+            if (this.DeclarationType != null && valueComparison.PropertyInfo != null)
+            {
+                if (valueComparison.PropertyInfo.DeclaringType != this.DeclarationType)
+                {
+                    return false;
+                }
+            }
+            
             if (this.Predicate != null && !this.Predicate.Invoke(valueComparison))
             {
                 return false;

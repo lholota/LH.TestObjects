@@ -158,6 +158,44 @@
         }
 
         [Test]
+        public void ThenShouldSucceedWhenIgnoringByDeclarationType()
+        {
+            var objA = SimpleDomainInheritor.CreateObjectWithValueSet1();
+            var objB = SimpleDomainInheritor.CreateObjectWithValueSet1();
+
+            objA.StringProp = "AAA";
+            objB.StringProp = "BBB";
+
+            var comparator = Extensions.CreateComparator<SimpleDomainInheritor>();
+            comparator
+                .PropertiesDeclaredInType(typeof(SimpleDomain))
+                .Ignore();
+
+            var result = comparator.Compare(objA, objB);
+            result.AreSame.Should().BeTrue();
+        }
+
+        [Test]
+        public void ThenShouldFailWhenIgnoringByDeclarationTypeAndOtherValuesDiffer()
+        {
+            var objA = SimpleDomainInheritor.CreateObjectWithValueSet1();
+            var objB = SimpleDomainInheritor.CreateObjectWithValueSet1();
+
+            objA.InheritorStringProp = "AAA";
+            objB.InheritorStringProp = "BBB";
+
+            var comparator = Extensions.CreateComparator<SimpleDomainInheritor>();
+            comparator
+                .PropertiesDeclaredInType(typeof(SimpleDomain))
+                .Ignore();
+
+            var result = comparator.Compare(objA, objB);
+            result.AreSame.Should().BeFalse();
+            result.Differences.Count().Should().Be(1);
+            result.Differences.Single().PropertyPath.Should().Be(nameof(objA.InheritorStringProp));
+        }
+
+        [Test]
         public void ThenShouldUseLastMatchingRule()
         {
             var objA = SimpleDomain.CreateObjectWithValueSet1();

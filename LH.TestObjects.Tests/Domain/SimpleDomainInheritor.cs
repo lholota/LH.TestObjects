@@ -8,8 +8,11 @@
             {
                 StringProp = "AAA",
                 StringProp2 = "AAA",
-                IntProp = 1
+                IntProp = 1,
+                InheritorStringProp = "AAA"
             };
         }
+
+        public string InheritorStringProp { get; set; }
     }
 }

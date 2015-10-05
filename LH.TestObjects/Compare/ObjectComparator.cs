@@ -74,6 +74,17 @@
         }
 
         /// <inheritdoc/>
+        public IGenericSelectionActions PropertiesDeclaredInType(Type declationType)
+        {
+            var rule = new PropertySelectionRule();
+            rule.Selection.DeclarationType = declationType;
+
+            this.AddPropertyRule(rule);
+
+            return new ComparatorGenericSelectionActions(rule.Options);
+        }
+
+        /// <inheritdoc/>
         public IComparatorTypeSpecificSelectionActions<TProp> Property<TProp>(Expression<Func<TUserType, TProp>> propertyExpression)
         {
             var rule = new PropertySelectionRule();
