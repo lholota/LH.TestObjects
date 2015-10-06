@@ -1,5 +1,7 @@
-var generator = ObjectGenerator.CreateSingleObjectGenerator<MyType>();
-var generator = ObjectGenerator.CreateCollectionGenerator<MyType>();
+var generator = new ObjectGenerator<MyType>();
+var generator = new ObjectCollectionGenerator<MyType>();
+
+// Same selectors as the comparator uses?
 
 generator // By default all property values will be generated
 	.Properties(...delegate...)
@@ -8,11 +10,13 @@ generator // By default all property values will be generated
 generator
 	.Property(x => x.MyProp.AnotherProp)
 	.CustomGenerator(...delegate...)
-	.ExecutePostGeneration(...delegate...);
+	.ExecutePostGeneration(...delegate...)
+	.CustomCtor(x => new Dummy(x.GetValue(typeof(string)));
 
 generator
 	.CollectionProperty(x => x.MyList)
 	.First(10)   <--- same interface will appear on the collection generator directly
+					// First, Last, Range, All
 	.Property(x => x.MyProp)
 	.CustomGenerator(x => "MyValue");
 
